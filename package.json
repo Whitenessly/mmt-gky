@@ -1,0 +1,17 @@
+{
+  "name": "mmt-gky",
+  "version": "1.0.0",
+  "description": "He Thong Trac Nghiem Mang May Tinh - PTIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "trac-nghiem",
+    "mang-may-tinh",
+    "ptit"
+  ],
+  "author": "Whitenessly",
+  "license": "MIT"
+}
