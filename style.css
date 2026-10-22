@@ -60,6 +60,16 @@ body {
   animation: fadeIn 0.25s ease-out forwards;
 }
 
+.main-quiz-area {
+  min-height: calc(100vh - 65px);
+  padding-bottom: 35vh;
+}
+
+#mainQuizContainer,
+[id^="q-card-"] {
+  scroll-margin-top: 76px;
+}
+
 /* Question Option States */
 .option-label {
   display: flex;

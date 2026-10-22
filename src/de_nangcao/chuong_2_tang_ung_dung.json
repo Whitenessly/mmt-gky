@@ -1,0 +1,597 @@
+[
+  {
+    "id": 201,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Kiến trúc Ứng dụng Mạng",
+    "difficulty": "Thông hiểu",
+    "question": "Trong kiến trúc mạng ngang hàng (P2P - Peer-to-Peer), tính chất 'khả năng tự mở rộng' (Self-scalability) có nghĩa là gì?",
+    "options": [
+      "Hệ thống tự động mua thêm băng thông từ nhà cung cấp dịch vụ mạng",
+      "Mỗi nút mạng (peer) khi tham gia vừa tiêu thụ dữ liệu (download) vừa đóng vai trò như một máy chủ đóng góp năng lực tải lên (upload) cho mạng",
+      "Máy chủ trung tâm tự động nhân bản CPU và RAM khi có đông người truy cập",
+      "Các máy tính tự động chuyển sang sử dụng giao thức UDP để tăng tốc"
+    ],
+    "correct": 1,
+    "explanation": "Trong mô hình P2P, khi có thêm người dùng mới tham gia hệ thống, họ không chỉ tạo ra nhu cầu tải dữ liệu (demand) mà còn đồng thời đóng góp năng lực lưu trữ và băng thông tải lên (service capacity). Nhờ đó, hệ thống có khả năng tự mở rộng quy mô (self-scalability) mà không bị phụ thuộc vào giới hạn băng thông của một máy chủ trung tâm."
+  },
+  {
+    "id": 202,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Tính toán RTT",
+    "difficulty": "Vận dụng",
+    "question": "Trang web gồm 1 file HTML cơ sở và 3 hình ảnh nhỏ nằm trên cùng một server. Giả sử thời gian truyền gói tin rất nhỏ và không có pipelining. Khi sử dụng kết nối HTTP/1.0 không duy trì (Non-persistent HTTP), tổng thời gian cần thiết tính từ lúc bắt đầu gửi yêu cầu đến khi nhận đủ toàn bộ trang là:",
+    "options": [
+      "2 RTT",
+      "4 RTT",
+      "8 RTT",
+      "1 RTT"
+    ],
+    "correct": 2,
+    "explanation": "Với Non-persistent HTTP (kết nối tuần tự không song song): Mỗi đối tượng yêu cầu 1 kết nối TCP riêng. Thiết lập TCP mất 1 RTT (SYN, SYN-ACK); gửi request HTTP và nhận đối tượng mất thêm 1 RTT. Như vậy mỗi đối tượng tốn 2 RTT. Trang có 1 file HTML + 3 ảnh = 4 đối tượng. Tổng thời gian = 4 * 2 RTT = 8 RTT."
+  },
+  {
+    "id": 203,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Tính toán RTT",
+    "difficulty": "Vận dụng",
+    "question": "Cũng với trang web gồm 1 file HTML cơ sở và 3 hình ảnh nhỏ trên cùng server, nếu sử dụng HTTP/1.1 có kết nối duy trì và có hỗ trợ đường ống (Persistent HTTP with Pipelining), tổng thời gian để nhận đủ dữ liệu là bao nhiêu RTT?",
+    "options": [
+      "3 RTT",
+      "2 RTT",
+      "4 RTT",
+      "8 RTT"
+    ],
+    "correct": 0,
+    "explanation": "Với Persistent HTTP có Pipelining: 1 RTT để thiết lập kết nối TCP duy nhất; 1 RTT để gửi request lấy file HTML và nhận về; sau khi phân tích thấy 3 ảnh, client gửi liên tiếp (pipelined) 3 request cùng lúc trong 1 RTT. Tổng cộng chỉ mất 1 + 1 + 1 = 3 RTT (tiết kiệm đáng kể so với 8 RTT của HTTP/1.0)."
+  },
+  {
+    "id": 204,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Mã trạng thái HTTP (Status Codes)",
+    "difficulty": "Nhận biết",
+    "question": "Mã trạng thái HTTP nào sau đây được máy chủ trả về khi trang web không có sự thay đổi so với bản sao đang lưu trong bộ nhớ đệm (Cache) của trình duyệt?",
+    "options": [
+      "200 OK",
+      "301 Moved Permanently",
+      "304 Not Modified",
+      "404 Not Found"
+    ],
+    "correct": 2,
+    "explanation": "Khi trình duyệt gửi yêu cầu có kèm header điều kiện 'If-Modified-Since', nếu tài nguyên trên server không thay đổi kể từ thời điểm đó, server sẽ trả về mã '304 Not Modified' (với thân thông điệp rỗng) để báo trình duyệt tái sử dụng bản sao trong cache, giúp tiết kiệm băng thông."
+  },
+  {
+    "id": 205,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Quản lý phiên",
+    "difficulty": "Thông hiểu",
+    "question": "Vì bản thân giao thức HTTP là giao thức phi trạng thái (Stateless protocol), công nghệ nào sau đây được sử dụng để nhận diện và theo dõi phiên làm việc (Session tracking) của người dùng giữa các lần gửi request?",
+    "options": [
+      "Sử dụng địa chỉ MAC của card mạng người dùng",
+      "Sử dụng Cookie kết hợp giữa header Set-Cookie của server và header Cookie của client",
+      "Tăng số thứ tự Sequence Number trong TCP header",
+      "Đổi số hiệu cổng nguồn của trình duyệt liên tục"
+    ],
+    "correct": 1,
+    "explanation": "Để theo dõi trạng thái (như giỏ hàng thương mại điện tử, đăng nhập), HTTP sử dụng Cookie gồm 4 thành phần: (1) Header Set-Cookie trong response từ server; (2) Header Cookie trong các request kế tiếp từ client; (3) File cookie lưu trên trình duyệt; (4) Cơ sở dữ liệu phiên (session DB) tại máy chủ."
+  },
+  {
+    "id": 206,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức truyền file FTP",
+    "difficulty": "Đánh lừa",
+    "question": "Tại sao giao thức FTP được gọi là giao thức điều khiển 'ngoài băng' (Out-of-band control)?",
+    "options": [
+      "FTP truyền dữ liệu qua đường truyền cáp quang riêng biệt",
+      "FTP tách riêng: truyền lệnh điều khiển trên cổng TCP 21, còn việc truyền dữ liệu thực sự diễn ra trên một kết nối TCP riêng biệt khác (cổng 20 hoặc cổng động)",
+      "FTP không sử dụng mô hình Client-Server",
+      "FTP sử dụng giao thức UDP để truyền dữ liệu và TCP để điều khiển"
+    ],
+    "correct": 1,
+    "explanation": "FTP sử dụng 2 kết nối TCP song song: Kết nối điều khiển (Control Connection) mở trên cổng 21 để gửi thông tin đăng nhập và câu lệnh (như USER, PASS, LIST, RETR); khi có yêu cầu truyền file, một kết nối dữ liệu (Data Connection) hoàn toàn tách biệt được mở (cổng 20 ở Active mode hoặc cổng động ở Passive mode). Việc tách biệt luồng điều khiển khỏi luồng dữ liệu gọi là 'Out-of-band'."
+  },
+  {
+    "id": 207,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức truyền file FTP",
+    "difficulty": "Thông hiểu",
+    "question": "Trong chế độ FTP Bị động (Passive Mode - PASV), phía nào là bên chủ động khởi tạo kết nối dữ liệu (Data Connection)?",
+    "options": [
+      "FTP Server chủ động kết nối tới cổng của Client",
+      "FTP Client chủ động kết nối tới một cổng ngẫu nhiên do Server thông báo",
+      "Cả hai bên cùng gửi gói SYN đồng thời",
+      "Router trung gian tự động mở cổng"
+    ],
+    "correct": 1,
+    "explanation": "Trong Active mode, Server chủ động kết nối vào Client (thường bị tường lửa Firewall/NAT phía Client chặn lại). Do đó, Passive mode (PASV) được tạo ra: Client gửi lệnh PASV, Server mở một cổng ngẫu nhiên và thông báo cho Client, sau đó Client chủ động kết nối tới cổng đó của Server, giúp vượt qua Firewall phía Client."
+  },
+  {
+    "id": 208,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức Thư điện tử (Email)",
+    "difficulty": "Nhận biết",
+    "question": "Giao thức SMTP (Simple Mail Transfer Protocol) được sử dụng trong giai đoạn nào của quá trình truyền thư điện tử?",
+    "options": [
+      "Đẩy thư (Push) từ máy khách gửi lên Mail Server của người gửi, và chuyển tiếp thư giữa các Mail Server với nhau",
+      "Kéo thư (Pull) từ Mail Server về hòm thư trên thiết bị của người nhận",
+      "Chỉ dùng để xóa thư rác trên máy chủ",
+      "Dùng để giải nén tệp đính kèm"
+    ],
+    "correct": 0,
+    "explanation": "SMTP (cổng 25 hoặc 587) là giao thức đẩy (Push protocol), được dùng để gửi thư từ Client lên Mail Server và chuyển tiếp thư giữa các Mail Server trung gian. Để lấy thư từ Mail Server về máy cá nhân, người dùng phải dùng giao thức kéo (Pull) như POP3 (port 110) hoặc IMAP (port 143)."
+  },
+  {
+    "id": 209,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức Thư điện tử (Email)",
+    "difficulty": "Thông hiểu",
+    "question": "Ưu điểm vượt trội của giao thức IMAP so với POP3 khi đọc thư điện tử là gì?",
+    "options": [
+      "IMAP không cần kết nối mạng vẫn gửi được thư",
+      "IMAP duy trì đồng bộ trạng thái hòm thư (đã đọc, gắn cờ, thư mục) trực tiếp trên máy chủ, cho phép người dùng truy cập nhất quán từ nhiều thiết bị khác nhau",
+      "IMAP sử dụng UDP thay vì TCP giúp tốc độ nhanh gấp 10 lần",
+      "IMAP tự động dịch nội dung email sang tiếng Việt"
+    ],
+    "correct": 1,
+    "explanation": "POP3 hoạt động theo cơ chế đơn giản 'tải về và xóa/giữ' trên máy cục bộ, không đồng bộ trạng thái giữa các thiết bị. Ngược lại, IMAP lưu trữ toàn bộ thư và cấu trúc thư mục trên server, ghi nhớ trạng thái đọc/chưa đọc, giúp người dùng đồng bộ trải nghiệm khi đọc thư trên cả điện thoại, laptop và webmail."
+  },
+  {
+    "id": 210,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức Thư điện tử (Email)",
+    "difficulty": "Thông hiểu",
+    "question": "Vì chuẩn SMTP nguyên bản chỉ cho phép truyền văn bản mã ASCII 7-bit, chuẩn nào sau đây được bổ sung vào tiêu đề email để hỗ trợ gửi văn bản tiếng Việt có dấu, hình ảnh và tệp đính kèm nhị phân?",
+    "options": [
+      "HTTP Header",
+      "MIME (Multipurpose Internet Mail Extensions)",
+      "SSL Certificate",
+      "DNS MX Record"
+    ],
+    "correct": 1,
+    "explanation": "MIME (Multipurpose Internet Mail Extensions) bổ sung các trường header vào email (như MIME-Version, Content-Type, Content-Transfer-Encoding: base64) để mã hóa dữ liệu nhị phân (hình ảnh, video, âm thanh, văn bản Unicode...) thành các ký tự ASCII 7-bit an toàn khi truyền qua hạ tầng SMTP."
+  },
+  {
+    "id": 211,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Hệ thống Tên miền (DNS)",
+    "difficulty": "Nhận biết",
+    "question": "Máy chủ tên miền có thẩm quyền (Authoritative DNS Server) có trách nhiệm gì?",
+    "options": [
+      "Lưu trữ bản đồ ánh xạ IP chính thức cho các máy chủ thuộc phạm vi quản lý của một tổ chức (ví dụ ptit.edu.vn)",
+      "Chỉ lưu trữ danh sách các tên miền cấp cao nhất như .com, .net, .vn",
+      "Chỉ đóng vai trò cache trung gian cho các hộ gia đình",
+      "Quản lý 13 cụm máy chủ gốc của toàn thế giới"
+    ],
+    "correct": 0,
+    "explanation": "Authoritative DNS Server là máy chủ sở hữu các bản ghi DNS gốc chính thức (A, MX, CNAME...) cho các tên miền thuộc quyền quản trị của một tổ chức/công ty. Ví dụ máy chủ DNS có thẩm quyền của PTIT quản lý thông tin IP của trang chủ ptit.edu.vn và qldt.ptit.edu.vn."
+  },
+  {
+    "id": 212,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Hệ thống Tên miền (DNS)",
+    "difficulty": "Thông hiểu",
+    "question": "Sự khác biệt cốt lõi giữa truy vấn DNS đệ quy (Recursive Query) và truy vấn DNS lặp (Iterative Query) là gì?",
+    "options": [
+      "Truy vấn đệ quy dùng TCP, truy vấn lặp dùng UDP",
+      "Trong truy vấn đệ quy, máy chủ được hỏi có nghĩa vụ tự đi tìm đến cùng kết quả rồi trả về cho bên hỏi; trong truy vấn lặp, máy chủ chỉ trả về địa chỉ của máy chủ DNS tiếp theo cần liên hệ",
+      "Truy vấn lặp chỉ dùng cho mạng quân sự",
+      "Truy vấn đệ quy không thể lưu trữ bản ghi vào bộ đệm cache"
+    ],
+    "correct": 1,
+    "explanation": "Trong truy vấn đệ quy (Recursive): Client đẩy toàn bộ gánh nặng tìm kiếm cho Local DNS, Local DNS phải tìm bằng được IP cuối cùng rồi trả về. Trong truy vấn lặp (Iterative): Nếu máy chủ DNS không biết IP đích, nó sẽ trả lời 'Tôi không biết, nhưng hãy đi hỏi máy chủ X này' (kèm theo IP của Root, TLD hoặc Authoritative tiếp theo)."
+  },
+  {
+    "id": 213,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Bản ghi tài nguyên DNS (Resource Records)",
+    "difficulty": "Nhận biết",
+    "question": "Bản ghi tài nguyên DNS loại nào được sử dụng để chỉ định máy chủ tiếp nhận thư điện tử (Mail Server) cho một tên miền?",
+    "options": [
+      "Bản ghi loại A",
+      "Bản ghi loại NS",
+      "Bản ghi loại MX (Mail Exchange)",
+      "Bản ghi loại CNAME (Canonical Name)"
+    ],
+    "correct": 2,
+    "explanation": "Các loại bản ghi DNS cơ bản: Loại A (Name -> IPv4); Loại AAAA (Name -> IPv6); Loại NS (Tên miền -> Tên máy chủ DNS có thẩm quyền); Loại CNAME (Tên bí danh alias -> Tên chính thức canonical); Loại MX (Tên miền -> Tên máy chủ tiếp nhận Email)."
+  },
+  {
+    "id": 214,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức DNS & Tầng Giao vận",
+    "difficulty": "Đánh lừa",
+    "question": "Giao thức DNS thông thường sử dụng giao thức truyền vận nào và qua cổng dịch vụ (port) số mấy?",
+    "options": [
+      "TCP cổng 80",
+      "UDP cổng 53 (và dùng TCP cổng 53 khi thông điệp phản hồi vượt quá 512 byte hoặc đồng bộ vùng Zone Transfer)",
+      "UDP cổng 67",
+      "TCP cổng 443"
+    ],
+    "correct": 1,
+    "explanation": "DNS chủ yếu sử dụng UDP cổng 53 vì tốc độ nhanh, không tốn thời gian bắt tay 3 bước. Tuy nhiên, khi kích thước thông điệp vượt quá 512 byte (như DNSSEC) hoặc khi đồng bộ cơ sở dữ liệu giữa máy chủ DNS chính và phụ (Zone Transfer), DNS sẽ tự động chuyển sang sử dụng TCP cổng 53."
+  },
+  {
+    "id": 215,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Mạng phân phối nội dung (CDN)",
+    "difficulty": "Thông hiểu",
+    "question": "Mạng phân phối nội dung CDN (Content Distribution Network) giúp tăng tốc độ tải trang và video cho người dùng toàn cầu chủ yếu bằng cách nào?",
+    "options": [
+      "Thay thế toàn bộ giao thức TCP bằng UDP trên Internet",
+      "Đặt các cụm máy chủ đệm (Edge Servers) phân tán về mặt địa lý gần với vị trí của người dùng cuối và chuyển hướng yêu cầu tới máy chủ gần nhất",
+      "Nén dung lượng tất cả các video về độ phân giải thấp nhất",
+      "Miễn phí cước Internet cho người dùng truy cập video"
+    ],
+    "correct": 1,
+    "explanation": "CDN (như Akamai, Cloudflare, Google Cloud CDN) triển khai hàng nghìn máy chủ bản sao (replica/cache) tại các ISP trên toàn cầu. Khi người dùng yêu cầu nội dung, cơ chế định tuyến thông minh (thường qua DNS) sẽ dẫn hướng người dùng đến máy chủ CDN ở gần nhất (về mặt địa lý hoặc RTT), giảm đáng kể độ trễ truyền dẫn."
+  },
+  {
+    "id": 216,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Lập trình Socket (Socket Programming)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong lập trình Socket mạng máy tính, một Socket giao tiếp được định danh duy nhất bởi các thông tin nào?",
+    "options": [
+      "Địa chỉ MAC và tên của máy tính",
+      "Địa chỉ IP và Số hiệu cổng (Port Number)",
+      "Đường dẫn URL và tên trình duyệt",
+      "Địa chỉ Gateway và Subnet Mask"
+    ],
+    "correct": 1,
+    "explanation": "Socket là giao diện lập trình (API) giữa tầng ứng dụng và tầng giao vận. Một socket được định danh bởi cặp: [Địa chỉ IP, Số hiệu cổng Port]. Đối với TCP, một kết nối được định danh chính xác bởi bộ 4 thông số: (Source IP, Source Port, Dest IP, Dest Port)."
+  },
+  {
+    "id": 217,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Lập trình Socket (Socket Programming)",
+    "difficulty": "Đánh lừa",
+    "question": "Sự khác biệt căn bản trong mã nguồn giữa lập trình Socket TCP (SOCK_STREAM) và Socket UDP (SOCK_DGRAM) ở phía Server là gì?",
+    "options": [
+      "Socket UDP yêu cầu phải gọi hàm listen() và accept(), còn TCP thì không cần",
+      "Server TCP cần một socket chào đón (Welcome socket) để lắng nghe kết nối và một socket mới được tạo ra cho mỗi client kết nối tới; trong khi UDP Server chỉ dùng 1 socket duy nhất và dùng sendto()/recvfrom()",
+      "UDP Server bắt buộc phải chạy trên hệ điều hành Linux",
+      "TCP không thể truyền được xâu ký tự chuỗi"
+    ],
+    "correct": 1,
+    "explanation": "Trong lập trình TCP server: có 1 Welcome Socket (lắng nghe bằng listen()), khi client kết nối tới hàm accept() sẽ tạo ra 1 Connection Socket mới riêng cho client đó. Trong khi ở UDP: server không thiết lập kết nối, không có accept(), chỉ dùng 1 socket duy nhất để nhận và gửi các datagram độc lập bằng hàm recvfrom() và sendto()."
+  },
+  {
+    "id": 218,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP/2 & Cải tiến",
+    "difficulty": "Thông hiểu",
+    "question": "Cải tiến lớn nhất của giao thức HTTP/2 so với HTTP/1.1 nhằm giải quyết hiện tượng tắc nghẽn đầu hàng (Head-of-Line Blocking) ở tầng ứng dụng là gì?",
+    "options": [
+      "Chuyển sang dùng cáp quang chuyên dụng",
+      "Đa ghép kênh (Multiplexing) các luồng (Streams) dữ liệu dạng nhị phân (Binary Framing) trên một kết nối TCP duy nhất",
+      "Xóa bỏ hoàn toàn mã hóa TLS/HTTPS",
+      "Giới hạn dung lượng trang web không vượt quá 100 KB"
+    ],
+    "correct": 1,
+    "explanation": "Trong HTTP/1.1, pipelining vẫn bị nghẽn Head-of-Line: nếu request đầu tiên bị chậm, các response sau phải xếp hàng đợi. HTTP/2 giải quyết triệt để vấn đề này bằng tầng đóng khung nhị phân (Binary Framing Layer), chia nhỏ các request/response thành các khung (frames) độc lập và xen kẽ (multiplex) trên cùng một kết nối TCP duy nhất."
+  },
+  {
+    "id": 219,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Máy chủ Ủy quyền (Web Cache / Proxy)",
+    "difficulty": "Vận dụng",
+    "question": "Một mạng cơ quan kết nối Internet qua đường truyền truy nhập 15 Mbps. Tỉ lệ yêu cầu web được tìm thấy tại Web Cache cục bộ (Hit rate) là 40%. Điều này mang lại lợi ích trực tiếp nào?",
+    "options": [
+      "Tăng gấp đôi địa chỉ IP của cơ quan",
+      "Giảm 40% lưu lượng truy cập phải đi qua đường truyền Internet bên ngoài, giảm tải và giảm độ trễ phản hồi trang web đáng kể",
+      "Ngăn chặn 100% các loại virus từ Internet",
+      "Chuyển đổi các trang web HTTP thành HTTPS tự động"
+    ],
+    "correct": 1,
+    "explanation": "Khi Cache hit rate = 40%, có nghĩa là 40% các yêu cầu web được đáp ứng ngay lập tức từ máy chủ proxy nội bộ (mạng LAN tốc độ cao, trễ gần như bằng 0) mà không cần gửi ra đường truyền ngoài. Đường truyền Internet 15 Mbps được giảm 40% tải, giải tỏa tình trạng nghẽn cổ chai."
+  },
+  {
+    "id": 220,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Mã trạng thái HTTP (Status Codes)",
+    "difficulty": "Thông hiểu",
+    "question": "Khi người dùng truy cập vào một tài nguyên nhưng máy chủ từ chối phục vụ do người dùng không có quyền truy cập (mặc dù đã xác thực danh tính), mã lỗi HTTP nào sẽ được trả về?",
+    "options": [
+      "401 Unauthorized",
+      "403 Forbidden",
+      "404 Not Found",
+      "500 Internal Server Error"
+    ],
+    "correct": 1,
+    "explanation": "Phân biệt: 401 Unauthorized yêu cầu phải đăng nhập/xác thực; còn 403 Forbidden có nghĩa là máy chủ hiểu yêu cầu và danh tính người dùng nhưng kiên quyết từ chối cấp quyền truy cập (bị cấm truy cập thư mục hoặc không đủ đặc quyền)."
+  },
+  {
+    "id": 221,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức Thư điện tử (Email)",
+    "difficulty": "Đánh lừa",
+    "question": "Phát biểu nào sau đây so sánh ĐÚNG giữa giao thức HTTP và giao thức SMTP?",
+    "options": [
+      "Cả hai đều là giao thức kéo (Pull protocols)",
+      "HTTP là giao thức kéo (Pull - người nhận lấy dữ liệu từ server), còn SMTP là giao thức đẩy (Push - người gửi đẩy dữ liệu sang server)",
+      "HTTP truyền dữ liệu qua UDP còn SMTP truyền dữ liệu qua TCP",
+      "SMTP đóng gói mỗi đối tượng trong một thông điệp TCP riêng, còn HTTP gộp chung"
+    ],
+    "correct": 1,
+    "explanation": "Khác biệt cốt lõi: HTTP là giao thức KÉO (Pull) - người dùng dùng trình duyệt để kéo nội dung từ Web server về; còn SMTP là giao thức ĐẨY (Push) - máy gửi đẩy thư sang máy nhận. Cả hai giao thức này đều hoạt động ở tầng ứng dụng và đều sử dụng dịch vụ tin cậy TCP ở tầng giao vận."
+  },
+  {
+    "id": 222,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Hệ thống Tên miền (DNS)",
+    "difficulty": "Thông hiểu",
+    "question": "Khi ta gõ lệnh 'ping ptit.edu.vn', điều gì xảy ra ở tầng ứng dụng TRƯỚC TIÊN trước khi gói tin ICMP Echo Request được phát đi?",
+    "options": [
+      "Trình điều khiển gửi ngay gói tin ICMP tới router",
+      "Hệ thống gọi hàm phân giải DNS (DNS Resolver) để truy vấn địa chỉ IP tương ứng với tên miền ptit.edu.vn",
+      "Trình duyệt tự động mở cổng 80",
+      "Card mạng tự sinh ra địa chỉ MAC ngẫu nhiên"
+    ],
+    "correct": 1,
+    "explanation": "Gói tin ở tầng mạng chỉ có thể định tuyến dựa trên địa chỉ IP đích dạng số. Do đó, trước khi có thể tạo và gửi gói tin IP/ICMP, hệ điều hành phải thực hiện quá trình phân giải tên miền (DNS lookup) để chuyển đổi 'ptit.edu.vn' thành địa chỉ IP cụ thể."
+  },
+  {
+    "id": 223,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Header",
+    "difficulty": "Nhận biết",
+    "question": "Trong thông điệp HTTP Request, phương thức (Method) nào được thiết kế để gửi dữ liệu từ form biểu mẫu người dùng lên máy chủ kèm theo thân thông điệp (Entity Body)?",
+    "options": [
+      "GET",
+      "POST",
+      "HEAD",
+      "TRACE"
+    ],
+    "correct": 1,
+    "explanation": "Phương thức GET đưa dữ liệu vào chuỗi truy vấn trên URL (Query String), trong khi phương thức POST truyền dữ liệu trong phần thân thông điệp (Entity Body) của HTTP Request, phù hợp để gửi mật khẩu, dữ liệu biểu mẫu dài hoặc tải lên tệp tin."
+  },
+  {
+    "id": 224,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Header",
+    "difficulty": "Thông hiểu",
+    "question": "Header nào sau đây là BẮT BUỘC phải có trong mọi thông điệp HTTP/1.1 Request?",
+    "options": [
+      "User-Agent",
+      "Host",
+      "Cookie",
+      "Accept-Encoding"
+    ],
+    "correct": 1,
+    "explanation": "Theo chuẩn RFC 2616 (HTTP/1.1), header 'Host:' (ví dụ Host: www.ptit.edu.vn) là bắt buộc. Header này cho phép một máy chủ web có một địa chỉ IP duy nhất có thể lưu trữ và phân biệt nhiều website khác nhau (Virtual Hosting)."
+  },
+  {
+    "id": 225,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức BitTorrent (P2P)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong giao thức chia sẻ file P2P BitTorrent, thuật toán 'Tit-for-Tat' (Ăn miếng trả miếng) nhằm mục đích gì?",
+    "options": [
+      "Phạt những người dùng tải xuống bằng cách xóa file trên ổ cứng của họ",
+      "Khuyến khích các peer tích cực đóng góp băng thông tải lên (Upload) bằng cách ưu tiên gửi dữ liệu cho 4 peer đang cho mình tốc độ download cao nhất",
+      "Chặn không cho máy tính cài đặt phần mềm diệt virus",
+      "Bắt buộc người dùng phải trả phí qua thẻ tín dụng"
+    ],
+    "correct": 1,
+    "explanation": "Chiến lược 'Tit-for-Tat' trong BitTorrent chống lại hiện tượng 'Free-riding' (chỉ tải về mà không chia sẻ). Cứ mỗi 10 giây, một peer sẽ đánh giá và chỉ mở luồng gửi dữ liệu (unchoke) cho 4 peer đang cung cấp tốc độ truyền tốt nhất cho nó; kèm theo 1 peer thử nghiệm ngẫu nhiên (Optimistic unchoke) sau mỗi 30 giây."
+  },
+  {
+    "id": 226,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức DNS & Tấn công DNS",
+    "difficulty": "Thông hiểu",
+    "question": "Tấn công 'DNS Cache Poisoning' (Đầu độc bộ đệm DNS) gây ra hậu quả gì nghiêm trọng cho người dùng Internet?",
+    "options": [
+      "Làm đứt cáp quang biển",
+      "Kẻ tấn công chèn các bản ghi IP giả mạo vào bộ nhớ đệm của DNS Server khiến người dùng bị chuyển hướng lén lút sang website lừa đảo (Phishing)",
+      "Làm hỏng hệ điều hành Windows trên máy trạm",
+      "Xóa sạch toàn bộ email trong hòm thư"
+    ],
+    "correct": 1,
+    "explanation": "DNS Cache Poisoning chèn các bản ghi ánh xạ IP sai lệch vào Local DNS cache của nhà mạng hoặc tổ chức. Khi người dùng gõ tên miền ngân hàng hợp pháp, DNS cache đã bị đầu độc trả về IP của máy chủ giả mạo do hacker kiểm soát để đánh cắp tài khoản đăng nhập."
+  },
+  {
+    "id": 227,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Bảo mật HTTPS",
+    "difficulty": "Nhận biết",
+    "question": "Giao thức HTTPS bản chất là sự kết hợp giữa giao thức HTTP và tầng bảo mật nào?",
+    "options": [
+      "Giao thức IPsec ở tầng mạng",
+      "Giao thức TLS / SSL (Transport Layer Security) nằm giữa tầng Ứng dụng và tầng Giao vận",
+      "Mã kiểm tra CRC ở tầng liên kết dữ liệu",
+      "Hệ thống tường lửa phần cứng"
+    ],
+    "correct": 1,
+    "explanation": "HTTPS (cổng 443) chạy giao thức HTTP tiêu chuẩn trên nền một kênh truyền được mã hóa và xác thực bởi giao thức TLS/SSL. TLS cung cấp 3 tính năng an ninh: Bảo mật dữ liệu (Confidentiality), Toàn vẹn dữ liệu (Integrity) và Xác thực danh tính máy chủ (Authentication)."
+  },
+  {
+    "id": 228,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Bản ghi tài nguyên DNS (Resource Records)",
+    "difficulty": "Đánh lừa",
+    "question": "Một tên miền có bản ghi CNAME là 'mail.company.com IN CNAME server10.backup.com'. Điều này có nghĩa là gì?",
+    "options": [
+      "server10.backup.com là địa chỉ IP của máy chủ mail",
+      "mail.company.com là tên bí danh (Alias), còn tên miền chính thức (Canonical Name) là server10.backup.com",
+      "mail.company.com là máy chủ DNS có thẩm quyền của backup.com",
+      "Đây là bản ghi chỉ định giao thức gửi thư của Google"
+    ],
+    "correct": 1,
+    "explanation": "Bản ghi CNAME (Canonical Name) dùng để ánh xạ một tên miền phụ/bí danh (Alias) về một tên máy tính chính thức (Canonical name). Để tìm được địa chỉ IP cuối cùng, trình phân giải DNS sẽ tiếp tục tra cứu bản ghi loại A của 'server10.backup.com'."
+  },
+  {
+    "id": 229,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức Video Streaming (DASH)",
+    "difficulty": "Thông hiểu",
+    "question": "Giao thức truyền phát video thích ứng qua HTTP (DASH - Dynamic Adaptive Streaming over HTTP) hoạt động theo nguyên lý nào?",
+    "options": [
+      "Bắt buộc người xem phải tải xong toàn bộ video mới được xem",
+      "Video được chia thành nhiều đoạn nhỏ (Chunks), mỗi đoạn được mã hóa ở nhiều mức chất lượng (bitrate) khác nhau; máy khách tự động chọn mức chất lượng phù hợp với băng thông tức thời",
+      "Sử dụng giao thức UDP không kiểm soát tắc nghẽn",
+      "Chỉ phát video đơn sắc để tiết kiệm dung lượng"
+    ],
+    "correct": 1,
+    "explanation": "DASH (chuẩn được YouTube, Netflix sử dụng) chia video thành các đoạn nhỏ vài giây (chunks) với các mức phân giải khác nhau (1080p, 720p, 480p...). Dựa trên băng thông đo được liên tục, máy khách linh hoạt gửi HTTP GET để tải các đoạn tiếp theo ở chất lượng cao nhất mà không bị giật/lag (buffering)."
+  },
+  {
+    "id": 230,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức HTTP & Header",
+    "difficulty": "Nhận biết",
+    "question": "Phương thức HTTP HEAD thường được sử dụng cho mục đích nào?",
+    "options": [
+      "Tải về phần đầu và phần thân của tệp tin HTML",
+      "Xóa một tệp tin trên máy chủ web",
+      "Yêu cầu máy chủ chỉ trả về các dòng header phản hồi (Response Headers) mà không gửi phần thân nội dung (Entity Body)",
+      "Đổi tên miền của trang web"
+    ],
+    "correct": 2,
+    "explanation": "Phương thức HEAD hoạt động giống hệt như GET nhưng máy chủ không bao giờ trả về thân thông điệp (Entity Body). Lập trình viên và web crawler dùng HEAD để kiểm tra tính hợp lệ của đường link, kích thước tệp (Content-Length) hoặc thời gian chỉnh sửa mới nhất mà không tốn băng thông tải toàn bộ nội dung."
+  },
+  {
+    "id": 231,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Hệ thống Tên miền (DNS)",
+    "difficulty": "Thông hiểu",
+    "question": "Trường TTL (Time to Live) trong một bản ghi tài nguyên DNS quy định điều gì?",
+    "options": [
+      "Số bước nhảy (hop) qua các router tối đa trước khi gói tin bị hủy",
+      "Khoảng thời gian (tính bằng giây) mà bản ghi DNS này được phép lưu tạm trong bộ nhớ cache của các máy chủ DNS trung gian trước khi bị coi là hết hạn và phải hỏi lại",
+      "Thời gian tồn tại của tên miền trước khi phải đóng phí duy trì",
+      "Tốc độ tối đa của kết nối mạng"
+    ],
+    "correct": 1,
+    "explanation": "Trong DNS, TTL (Time to Live) đo bằng giây (ví dụ 86400 giây = 24 giờ). Nó hướng dẫn các máy chủ DNS trung gian và máy khách được phép lưu bản ghi này trong cache bao lâu. Khi quản trị viên chuẩn bị đổi IP máy chủ, họ thường giảm TTL xuống thấp (ví dụ 300s) để thông tin IP mới cập nhật nhanh chóng."
+  },
+  {
+    "id": 232,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Mô hình Client-Server",
+    "difficulty": "Nhận biết",
+    "question": "Đặc trưng nào sau đây KHÔNG PHẢI là đặc trưng của một máy chủ (Server) trong mô hình Client-Server truyền thống?",
+    "options": [
+      "Luôn luôn bật và trực tuyến 24/7 (Always-on host)",
+      "Có địa chỉ IP tĩnh cố định (Permanent IP address)",
+      "Chủ động khởi tạo kết nối gửi yêu cầu tới máy khách (Client)",
+      "Thường được triển khai trong các trung tâm dữ liệu (Data centers) chuyên dụng"
+    ],
+    "correct": 2,
+    "explanation": "Trong mô hình Client-Server, máy chủ là bên thụ động chờ đợi yêu cầu (Passive wait). Phía máy khách (Client) mới là bên chủ động khởi tạo liên lạc và gửi yêu cầu tới máy chủ trước. Máy chủ không bao giờ chủ động gọi tới client khi client chưa kết nối."
+  },
+  {
+    "id": 233,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Mã trạng thái HTTP (Status Codes)",
+    "difficulty": "Nhận biết",
+    "question": "Khi người dùng truy cập một website và nhận được mã trạng thái 502 Bad Gateway hoặc 503 Service Unavailable, lỗi này xuất phát từ đâu?",
+    "options": [
+      "Do người dùng gõ sai cú pháp tên miền",
+      "Do card mạng của máy người dùng bị ngắt cáp",
+      "Do sự cố từ phía máy chủ hoặc hệ thống máy chủ cổng/proxy trung gian phía server bị quá tải",
+      "Do trình duyệt web không hỗ trợ mã màu CSS"
+    ],
+    "correct": 2,
+    "explanation": "Các mã lỗi nhóm 5xx (Server Error) chỉ ra sự cố thuộc về phía máy chủ: 502 Bad Gateway xuất hiện khi proxy/load-balancer nhận phản hồi không hợp lệ từ máy chủ backend; 503 Service Unavailable phản ánh máy chủ đang quá tải hoặc đang trong quá trình bảo trì tạm thời."
+  },
+  {
+    "id": 234,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Giao thức Thư điện tử (Email)",
+    "difficulty": "Đánh lừa",
+    "question": "Tại sao một người dùng gửi email từ tài khoản Gmail (@gmail.com) đến một người dùng Outlook (@outlook.com) lại không thể sử dụng kết nối HTTP trực tiếp giữa hai máy tính người dùng?",
+    "options": [
+      "Vì hai người dùng không bật máy cùng một thời điểm, cần hệ thống Mail Server trung gian có địa chỉ IP cố định luôn online để tiếp nhận và lưu trữ thư",
+      "Vì giao thức HTTP cấm truyền văn bản tiếng Anh",
+      "Vì mạng Internet chặn tất cả lưu lượng gửi thư giữa hai máy cá nhân",
+      "Vì người dùng Outlook bắt buộc phải dùng cáp quang"
+    ],
+    "correct": 0,
+    "explanation": "Máy tính cá nhân của người gửi và người nhận không có IP tĩnh công cộng và không thể bật trực tuyến 24/7. Vì vậy, kiến trúc email yêu cầu các Mail Server luôn trực tuyến để tiếp nhận thư bất cứ lúc nào, lưu vào hòm thư (Mailbox), sau đó người nhận bật máy lên sẽ dùng POP3/IMAP/Webmail để lấy thư về."
+  },
+  {
+    "id": 235,
+    "exam_type": "nang_cao",
+    "chapter": 2,
+    "chapter_title": "Chương 2: Tầng Ứng dụng (Application Layer)",
+    "category": "Hệ thống Tên miền (DNS)",
+    "difficulty": "Vận dụng",
+    "question": "Một quản trị viên vừa thay đổi địa chỉ IP của web server và cập nhật bản ghi DNS loại A, nhưng nhiều người dùng vẫn vào địa chỉ IP cũ trong suốt vài giờ sau đó. Nguyên nhân kỹ thuật chính là gì?",
+    "options": [
+      "Đường truyền cáp quang bị nghẽn",
+      "Bản ghi DNS cũ vẫn còn tồn tại trong bộ nhớ đệm (Cache) của các máy chủ DNS trung gian và trình duyệt của người dùng cho đến khi hết hạn TTL (Time-to-Live)",
+      "Do máy chủ web chưa khởi động lại hệ điều hành",
+      "Do chuẩn mạng IPv4 không hỗ trợ thay đổi địa chỉ IP"
+    ],
+    "correct": 1,
+    "explanation": "Các máy chủ DNS của nhà mạng và bộ phân giải DNS trên máy người dùng lưu cache bản ghi DNS để giảm tải truy vấn. Chừng nào thời gian TTL của bản ghi cũ chưa đếm ngược về 0, hệ thống vẫn sẽ trả về địa chỉ IP cũ từ bộ nhớ đệm mà không hỏi lại máy chủ tên miền có thẩm quyền."
+  }
+]

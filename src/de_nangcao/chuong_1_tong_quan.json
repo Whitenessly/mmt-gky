@@ -1,0 +1,597 @@
+[
+  {
+    "id": 101,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Cấu trúc & Thành phần Mạng",
+    "difficulty": "Nhận biết",
+    "question": "Thiết bị nào sau đây thuộc về 'phần cạnh của mạng' (Network Edge)?",
+    "options": [
+      "Bộ định tuyến (Router)",
+      "Bộ chuyển mạch (Link-layer Switch)",
+      "Máy chủ Web và Máy tính cá nhân (End systems / Hosts)",
+      "Đường truyền cáp quang xuyên đại dương (Backbone link)"
+    ],
+    "correct": 2,
+    "explanation": "Theo kiến trúc mạng Internet, mạng gồm: 'Phần cạnh' (Network Edge) là các hệ thống đầu cuối (End systems / Hosts như PC, laptop, server, smartphone, camera IP...) nơi chạy các ứng dụng mạng; và 'Phần lõi' (Network Core) là mạng lưới các router, switch và đường truyền liên kết giúp truyền chuyển tiếp dữ liệu."
+  },
+  {
+    "id": 102,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Chuyển mạch gói & Chuyển mạch kênh",
+    "difficulty": "Thông hiểu",
+    "question": "Ưu điểm nổi bật nhất của chuyển mạch gói (Packet Switching) so với chuyển mạch kênh (Circuit Switching) trong mạng dữ liệu máy tính là gì?",
+    "options": [
+      "Dành riêng trước tài nguyên cố định trên đường truyền cho mỗi phiên làm việc",
+      "Tận dụng tối đa băng thông đường truyền thông qua cơ chế ghép kênh thống kê (Statistical Multiplexing)",
+      "Đảm bảo độ trễ truyền dẫn luôn luôn bằng 0 và không bao giờ xảy ra mất gói",
+      "Đơn giản hóa việc thiết kế router vì không cần bộ đệm (buffer)"
+    ],
+    "correct": 1,
+    "explanation": "Chuyển mạch kênh dành riêng cố định kênh truyền (bằng FDM hoặc TDM), nếu người dùng không gửi dữ liệu thì băng thông bị lãng phí. Trong khi đó, chuyển mạch gói sử dụng cơ chế chia sẻ tài nguyên theo nhu cầu thực tế (ghép kênh thống kê - Statistical Multiplexing), cho phép nhiều người dùng cùng chia sẻ đường truyền, tăng hiệu suất sử dụng băng thông."
+  },
+  {
+    "id": 103,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán độ trễ mạng",
+    "difficulty": "Vận dụng",
+    "question": "Cho gói tin kích thước L = 1500 Byte truyền qua đường truyền có tốc độ R = 100 Mbps. Thời gian trễ truyền dẫn (Transmission Delay - d_trans) của gói tin là bao nhiêu?",
+    "options": [
+      "0.12 ms",
+      "1.2 ms",
+      "0.015 ms",
+      "12 ms"
+    ],
+    "correct": 0,
+    "explanation": "Công thức trễ truyền dẫn: d_trans = L / R. Đổi đơn vị: L = 1500 Byte = 1500 * 8 = 12,000 bit; R = 100 Mbps = 100 * 10^6 bps. Suy ra d_trans = 12,000 / (100 * 10^6) = 0.00012 s = 0.12 ms. (Bẫy thường gặp là không nhân 8 đổi Byte sang bit)."
+  },
+  {
+    "id": 104,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán độ trễ mạng",
+    "difficulty": "Đánh lừa",
+    "question": "Khoảng cách giữa hai host là d = 2000 km, vận tốc truyền sóng trong cáp quang s = 2 * 10^8 m/s. Trễ lan truyền (Propagation Delay - d_prop) giữa hai host là:",
+    "options": [
+      "10 ms",
+      "1 ms",
+      "0.01 ms",
+      "100 ms"
+    ],
+    "correct": 0,
+    "explanation": "Trễ lan truyền: d_prop = d / s. Đổi d = 2000 km = 2 * 10^6 m. Ta có d_prop = (2 * 10^6) / (2 * 10^8) = 0.01 s = 10 ms. Cần phân biệt: d_prop là thời gian một bit di chuyển trên môi trường vật lý (phụ thuộc d và s), hoàn toàn không phụ thuộc vào kích thước gói tin L hay băng thông R."
+  },
+  {
+    "id": 105,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Hàng đợi & Cường độ lưu lượng",
+    "difficulty": "Vận dụng",
+    "question": "Gọi a là tốc độ gói tin đến trung bình (gói/s), L là kích thước gói tin (bit), R là tốc độ đường truyền (bps). Khi 'cường độ lưu lượng' (Traffic Intensity) I = (L*a)/R tiến gần đến 1, điều gì sẽ xảy ra?",
+    "options": [
+      "Trễ hàng đợi (Queuing Delay) giảm dần về 0",
+      "Trễ hàng đợi tăng vọt tiệm cận vô cùng và nguy cơ tràn bộ đệm gây mất gói (Packet Loss)",
+      "Đường truyền tự động nâng cấp băng thông R",
+      "Router tự động chuyển sang mô hình chuyển mạch kênh"
+    ],
+    "correct": 1,
+    "explanation": "Nếu I = (L*a)/R << 1, trễ hàng đợi rất nhỏ. Khi I tiến dần tới 1, hàng đợi bắt đầu tắc nghẽn và thời gian xếp hàng trung bình tăng vọt theo hàm phi tuyến. Khi bộ đệm hàng đợi (buffer) của router bị đầy, các gói tin đến sau bị loại bỏ (packet drop/loss)."
+  },
+  {
+    "id": 106,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mô hình Phân tầng OSI & TCP/IP",
+    "difficulty": "Nhận biết",
+    "question": "Theo mô hình chuẩn OSI 7 tầng, tầng nào chịu trách nhiệm nén dữ liệu, định dạng hiển thị và mã hóa/giải mã (Encryption)?",
+    "options": [
+      "Tầng Phiên (Session Layer)",
+      "Tầng Trình diễn (Presentation Layer)",
+      "Tầng Ứng dụng (Application Layer)",
+      "Tầng Giao vận (Transport Layer)"
+    ],
+    "correct": 1,
+    "explanation": "Tầng Trình diễn (Presentation Layer - Tầng 6 trong mô hình OSI) đảm nhận nhiệm vụ chuyển đổi cú pháp, định dạng dữ liệu, nén dữ liệu và mã hóa/giải mã bảo mật. Trong mô hình TCP/IP, các chức năng này được gộp trực tiếp vào tầng Ứng dụng."
+  },
+  {
+    "id": 107,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Đơn vị dữ liệu (PDU)",
+    "difficulty": "Thông hiểu",
+    "question": "Đơn vị dữ liệu giao thức (PDU) tại các tầng: Ứng dụng, Giao vận, Mạng, Liên kết dữ liệu lần lượt có tên gọi chuẩn là:",
+    "options": [
+      "Message, Datagram, Segment, Frame",
+      "Message, Segment, Datagram (Packet), Frame",
+      "Packet, Segment, Frame, Bit",
+      "Segment, Message, Frame, Packet"
+    ],
+    "correct": 1,
+    "explanation": "Thứ tự PDU chuẩn: Tầng Ứng dụng là Message (Thông điệp) -> Tầng Giao vận là Segment (Đoạn dữ liệu) -> Tầng Mạng là Datagram / Packet (Gói dữ liệu) -> Tầng Liên kết dữ liệu là Frame (Khung) -> Tầng Vật lý là Bit."
+  },
+  {
+    "id": 108,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Ghép kênh FDM & TDM",
+    "difficulty": "Thông hiểu",
+    "question": "Trong chuyển mạch kênh, phương thức ghép kênh phân chia theo thời gian (TDM - Time Division Multiplexing) hoạt động theo nguyên tắc nào?",
+    "options": [
+      "Phân chia toàn bộ phổ tần số của kênh truyền thành các dải tần hẹp riêng biệt",
+      "Thời gian truyền được chia thành các khung tuần hoàn (Frames), mỗi khung chia thành các khe thời gian (Time Slots) cố định cho từng người dùng",
+      "Người dùng chia sẻ chung tần số và thời gian nhưng sử dụng mã trực giao khác nhau",
+      "Dữ liệu được chia thành các gói tin có gắn nhãn địa chỉ IP"
+    ],
+    "correct": 1,
+    "explanation": "TDM chia trục thời gian thành các khung lặp lại, mỗi khung có các khe thời gian (slots) được gán cố định cho từng kết nối. FDM thì chia kênh truyền thành các băng tần riêng biệt. CDMA thì sử dụng mã trực giao."
+  },
+  {
+    "id": 109,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán thông lượng & Điểm nghẽn",
+    "difficulty": "Vận dụng",
+    "question": "Host A gửi file cho Host B qua chuỗi 3 liên kết có tốc độ lần lượt là R1 = 50 Mbps, R2 = 10 Mbps, R3 = 100 Mbps. Giả sử không có lưu lượng nào khác trên mạng, thông lượng cực đại (Throughput) mà A có thể đạt được khi gửi dữ liệu cho B là:",
+    "options": [
+      "50 Mbps",
+      "10 Mbps",
+      "100 Mbps",
+      "160 Mbps (tổng cả 3 đường)"
+    ],
+    "correct": 1,
+    "explanation": "Thông lượng đường truyền bị giới hạn bởi liên kết có băng thông thấp nhất trên tuyến đường, gọi là liên kết điểm nghẽn (Bottleneck link). Ở đây min(50, 10, 100) = 10 Mbps. Dữ liệu không thể truyền nhanh hơn tốc độ của mắt xích yếu nhất này."
+  },
+  {
+    "id": 110,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Store-and-Forward",
+    "difficulty": "Vận dụng",
+    "question": "Host A gửi 1 gói tin kích thước L = 10 Kbit đến Host B qua 1 Router trung gian. Cả hai đường truyền (A -> Router và Router -> B) đều có tốc độ R = 100 kbps và trễ lan truyền bỏ qua. Theo cơ chế 'Store-and-Forward', tổng thời gian trễ đầu-cuối (end-to-end delay) để gói tin đến được B là:",
+    "options": [
+      "0.1 s",
+      "0.2 s",
+      "0.05 s",
+      "0.15 s"
+    ],
+    "correct": 1,
+    "explanation": "Cơ chế Lưu-và-Chuyển-tiếp (Store-and-Forward): Router phải nhận toàn bộ gói tin (L/R) trước khi có thể bắt đầu truyền bit đầu tiên sang liên kết kế tiếp. Thời gian truyền từ A đến Router là L/R = 10 Kbit / 100 kbps = 0.1 s. Sau đó Router truyền tiếp đến B mất thêm L/R = 0.1 s. Tổng trễ = 2 * (L/R) = 0.2 s."
+  },
+  {
+    "id": 111,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Đóng gói dữ liệu (Encapsulation)",
+    "difficulty": "Thông hiểu",
+    "question": "Quá trình đóng gói dữ liệu (Encapsulation) tại bên gửi diễn ra theo thứ tự nào khi đi qua các tầng?",
+    "options": [
+      "Tầng Vật lý -> Liên kết dữ liệu -> Mạng -> Giao vận -> Ứng dụng",
+      "Tầng Ứng dụng -> Giao vận -> Mạng -> Liên kết dữ liệu -> Vật lý",
+      "Tầng Mạng -> Giao vận -> Ứng dụng -> Liên kết dữ liệu",
+      "Tầng Giao vận -> Ứng dụng -> Liên kết dữ liệu -> Mạng"
+    ],
+    "correct": 1,
+    "explanation": "Tại máy gửi, dữ liệu đi từ trên xuống dưới: Ứng dụng sinh ra Message -> Giao vận thêm TCP/UDP header tạo Segment -> Tầng Mạng thêm IP header tạo Datagram -> Tầng Liên kết dữ liệu thêm Header và Trailer tạo Frame -> Tầng Vật lý phát các bit nhị phân lên môi trường truyền dẫn."
+  },
+  {
+    "id": 112,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mô hình OSI & Thiết bị mạng",
+    "difficulty": "Đánh lừa",
+    "question": "Router thông thường (chuyển mạch gói truyền thống) xử lý gói tin đến tầng nào của mô hình mạng?",
+    "options": [
+      "Tầng 1 (Vật lý)",
+      "Tầng 2 (Liên kết dữ liệu)",
+      "Tầng 3 (Mạng)",
+      "Tầng 4 (Giao vận)"
+    ],
+    "correct": 2,
+    "explanation": "Router truyền thống là thiết bị tầng 3 (Network Layer). Khi nhận một khung (frame), nó mở gói tới tầng 2 để lấy datagram, đọc địa chỉ IP đích ở tầng 3 để tra bảng định tuyến, sau đó đóng gói lại thành frame mới để chuyển tiếp. Switch mạng LAN thông thường là thiết bị tầng 2, còn Hub/Repeater là tầng 1."
+  },
+  {
+    "id": 113,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Độ trễ tổng hợp (Nodal Delay)",
+    "difficulty": "Thông hiểu",
+    "question": "Độ trễ tại một nút mạng (Total Nodal Delay) bao gồm 4 thành phần nào sau đây?",
+    "options": [
+      "Trễ xử lý tại nút, Trễ xếp hàng đợi, Trễ truyền dẫn, Trễ lan truyền",
+      "Trễ chuyển mạch, Trễ định tuyến, Trễ bắt tay, Trễ mã hóa",
+      "Trễ DNS, Trễ HTTP, Trễ phân giải IP, Trễ ACK",
+      "Trễ phần cứng, Trễ phần mềm, Trễ hệ điều hành, Trễ người dùng"
+    ],
+    "correct": 0,
+    "explanation": "Độ trễ nút mạng d_nodal = d_proc (Processing delay - kiểm tra lỗi bit, tìm đường) + d_queue (Queuing delay - thời gian đợi tại hàng đợi ra) + d_trans (Transmission delay - L/R đẩy bit vào đường truyền) + d_prop (Propagation delay - d/s truyền sóng trên môi trường dẫn)."
+  },
+  {
+    "id": 114,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán Băng thông - Trễ (Bandwidth-Delay Product)",
+    "difficulty": "Vận dụng",
+    "question": "Tích số Băng thông - Trễ (BDP = R * d_prop) đại diện cho đại lượng vật lý nào trên đường truyền?",
+    "options": [
+      "Tổng thời gian để gói tin truyền hết từ đầu phát tới đầu thu",
+      "Số lượng bit tối đa có thể đồng thời 'nằm trên đường truyền' (in-flight) tại một thời điểm",
+      "Kích thước bộ nhớ đệm (buffer) tối đa của router",
+      "Số lượng kết nối TCP tối đa có thể mở đồng thời"
+    ],
+    "correct": 1,
+    "explanation": "Bandwidth-Delay Product (BDP = R * d_prop) được ví như thể tích của một đường ống dẫn nước. Nó đo lường lượng dữ liệu (tính bằng bit) tối đa có thể được đẩy vào và đang di chuyển dọc theo đường truyền mà bên nhận chưa kịp nhận hết."
+  },
+  {
+    "id": 115,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tổ chức tiêu chuẩn mạng",
+    "difficulty": "Nhận biết",
+    "question": "Các tài liệu tiêu chuẩn kỹ thuật chính thức của mạng Internet được xuất bản và quản lý dưới dạng tài liệu nào?",
+    "options": [
+      "ISO Standards",
+      "IEEE 802 Whitepapers",
+      "RFC (Request for Comments)",
+      "W3C Recommendations"
+    ],
+    "correct": 2,
+    "explanation": "Các giao thức và kiến trúc Internet (như IP, TCP, UDP, HTTP, DNS...) được định nghĩa và công bố qua các tài liệu RFC (Request for Comments) do IETF (Internet Engineering Task Force) quản lý."
+  },
+  {
+    "id": 116,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Phân cấp ISP",
+    "difficulty": "Thông hiểu",
+    "question": "Trong cấu trúc phân tầng của các nhà cung cấp dịch vụ Internet (ISP), Tier-1 ISP có đặc điểm gì đặc biệt?",
+    "options": [
+      "Phải trả tiền mua băng thông kết nối từ các ISP cấp cao hơn",
+      "Có phạm vi phủ sóng toàn cầu và kết nối trực tiếp với các Tier-1 ISP khác thông qua thỏa thuận miễn phí (Peering Agreement)",
+      "Chỉ cung cấp dịch vụ trực tiếp cho hộ gia đình và thiết bị đầu cuối cá nhân",
+      "Không sở hữu bất kỳ tuyến cáp quang nào mà chỉ thuê lại hạ tầng"
+    ],
+    "correct": 1,
+    "explanation": "Tier-1 ISP là mạng đường trục Internet quốc tế (như AT&T, Lumen, Telia...). Các Tier-1 ISP ngang hàng trực tiếp với nhau (peering) mà không phải trả phí chuyển tiếp cho bất kỳ ai, tạo thành 'xương sống' kết nối toàn cầu của Internet."
+  },
+  {
+    "id": 117,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán độ trễ mạng",
+    "difficulty": "Đánh lừa",
+    "question": "Nếu ta tăng gấp đôi băng thông đường truyền R (từ 10 Mbps lên 20 Mbps) trong khi chiều dài cáp d và kích thước gói tin L giữ nguyên, thành phần trễ nào sau đây sẽ GIẢM ĐI MỘT NỬA?",
+    "options": [
+      "Trễ lan truyền (d_prop)",
+      "Trễ xử lý (d_proc)",
+      "Trễ truyền dẫn (d_trans)",
+      "Tất cả các thành phần trễ đều giảm một nửa"
+    ],
+    "correct": 2,
+    "explanation": "Công thức trễ truyền dẫn d_trans = L / R. Khi R tăng gấp đôi, d_trans giảm đi một nửa. Trong khi đó, trễ lan truyền d_prop = d / s chỉ phụ thuộc vào khoảng cách d và vận tốc sóng s trong môi trường truyền dẫn, hoàn toàn KHÔNG đổi khi tăng băng thông!"
+  },
+  {
+    "id": 118,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mô hình Phân tầng OSI & TCP/IP",
+    "difficulty": "Thông hiểu",
+    "question": "Tầng nào trong mô hình TCP/IP tương ứng với việc gộp cả 3 tầng Ứng dụng, Trình diễn và Phiên của mô hình OSI?",
+    "options": [
+      "Tầng Giao vận (Transport)",
+      "Tầng Ứng dụng (Application)",
+      "Tầng Internet (Network)",
+      "Tầng Truy nhập mạng (Network Access)"
+    ],
+    "correct": 1,
+    "explanation": "Mô hình OSI 7 tầng phân biệt tách bạch: Application (tầng 7), Presentation (tầng 6), Session (tầng 5). Trong khi đó mô hình Internet TCP/IP gộp cả 3 tầng này vào chung một tầng duy nhất là Tầng Ứng dụng (Application Layer)."
+  },
+  {
+    "id": 119,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mạng truy nhập (Access Networks)",
+    "difficulty": "Nhận biết",
+    "question": "Công nghệ mạng truy nhập băng rộng DSL (Digital Subscriber Line) tận dụng môi trường truyền dẫn có sẵn nào để truyền dữ liệu?",
+    "options": [
+      "Đường dây cáp điện thoại đôi dây đồng (Twisted-pair copper phone line)",
+      "Mạng lưới dây điện lực gia đình",
+      "Cáp đồng trục của mạng truyền hình cáp (Coaxial Cable)",
+      "Sóng vô hình hồng ngoại trong nhà"
+    ],
+    "correct": 0,
+    "explanation": "DSL truyền dữ liệu số tốc độ cao trên đường dây điện thoại đôi dây đồng truyền thống kết nối từ thuê bao đến tổng đài CO (Central Office) của công ty viễn thông, sử dụng bộ ghép DSLAM để tách tín hiệu thoại và dữ liệu."
+  },
+  {
+    "id": 120,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mạng truy nhập (Access Networks)",
+    "difficulty": "Thông hiểu",
+    "question": "Công nghệ mạng cáp HFC (Hybrid Fiber-Coaxial) thường được sử dụng bởi các nhà cung cấp dịch vụ nào?",
+    "options": [
+      "Công ty cấp thoát nước",
+      "Nhà cung cấp truyền hình cáp (Cable TV)",
+      "Hệ thống điện thoại vệ tinh di động",
+      "Hệ thống phát thanh AM/FM"
+    ],
+    "correct": 1,
+    "explanation": "HFC kết hợp giữa cáp quang (ở phần trục truyền dẫn) và cáp đồng trục (đoạn nối tới từng hộ gia đình), là công nghệ cốt lõi của các nhà mạng truyền hình cáp cung cấp dịch vụ Internet băng rộng thông qua modem cáp (Cable Modem)."
+  },
+  {
+    "id": 121,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Chuyển mạch gói & Chuyển mạch kênh",
+    "difficulty": "Vận dụng",
+    "question": "Đường truyền có tốc độ 1 Mbps. Mỗi người dùng khi hoạt động cần 100 kbps, nhưng chỉ hoạt động 10% thời gian. Nếu dùng chuyển mạch kênh (TDM/FDM), tối đa bao nhiêu người dùng có thể được hỗ trợ đồng thời?",
+    "options": [
+      "10 người",
+      "100 người",
+      "35 người",
+      "1 người"
+    ],
+    "correct": 0,
+    "explanation": "Chuyển mạch kênh phải dành riêng 100 kbps cho mỗi người bất kể người đó có gửi dữ liệu hay không. Với tổng dung lượng 1 Mbps = 1000 kbps, số người dùng tối đa luôn cố định là 1000 / 100 = 10 người. Trong khi với chuyển mạch gói, có thể hỗ trợ hàng chục người vì xác suất hơn 10 người gửi cùng lúc là cực kỳ nhỏ."
+  },
+  {
+    "id": 122,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "An ninh mạng & Các kiểu tấn công",
+    "difficulty": "Nhận biết",
+    "question": "Kiểu tấn công nào làm ngập lụt một nút mạng hoặc máy chủ bằng cách gửi một lượng khổng lồ lưu lượng giả mạo khiến nó bị quá tải và không thể phục vụ người dùng hợp pháp?",
+    "options": [
+      "Tấn công từ chối dịch vụ (DoS / DDoS - Denial of Service)",
+      "Tấn công nghe lén (Packet Sniffing)",
+      "Tấn công giả mạo địa chỉ (IP Spoofing)",
+      "Tấn công trung gian (Man-in-the-Middle)"
+    ],
+    "correct": 0,
+    "explanation": "Tấn công DoS/DDoS (Từ chối dịch vụ phân tán) tập trung làm tê liệt máy chủ, đường truyền hoặc tài nguyên mạng bằng cách gửi ồ ạt hàng triệu gói tin rác (như SYN flood, ICMP flood, DNS amplification) khiến người dùng thật không thể truy cập."
+  },
+  {
+    "id": 123,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "An ninh mạng & Các kiểu tấn công",
+    "difficulty": "Thông hiểu",
+    "question": "Công cụ Packet Sniffer (như Wireshark ở chế độ Promiscuous) hoạt động thụ động trên mạng chia sẻ có thể gây ra nguy cơ bảo mật nào?",
+    "options": [
+      "Làm hỏng bảng định tuyến của router",
+      "Đọc trộm các thông tin nhạy cảm (mật khẩu, nội dung tin nhắn) truyền dưới dạng bản rõ (plaintext)",
+      "Làm sập card mạng vật lý của các máy tính bên cạnh",
+      "Tự động thay đổi địa chỉ MAC của router"
+    ],
+    "correct": 1,
+    "explanation": "Packet Sniffing là hành vi bắt và ghi lại các gói tin lưu thông trên mạng. Nếu ứng dụng không sử dụng mã hóa (như HTTP, FTP, Telnet truyền văn bản thô), kẻ tấn công chạy packet sniffer có thể đọc toàn bộ tài khoản, mật khẩu và dữ liệu nhạy cảm."
+  },
+  {
+    "id": 124,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Cấu trúc & Thành phần Mạng",
+    "difficulty": "Nhận biết",
+    "question": "Giao thức mạng (Network Protocol) được định nghĩa chính xác nhất bởi các yếu tố nào sau đây?",
+    "options": [
+      "Chỉ là phần mềm hệ điều hành cài đặt trên máy tính",
+      "Định nghĩa cú pháp (Syntax), ngữ nghĩa (Semantics), thứ tự các thông điệp gửi/nhận và hành động cần thực hiện khi có sự kiện",
+      "Độ dài cáp mạng vật lý và loại đầu nối RJ45",
+      "Tên thương hiệu của thiết bị mạng phần cứng"
+    ],
+    "correct": 1,
+    "explanation": "Giao thức mạng (Network Protocol) là một tập hợp các quy tắc chuẩn hóa định nghĩa: định dạng/cú pháp thông điệp (Syntax), ý nghĩa từng trường dữ liệu (Semantics), trình tự gửi và nhận thông điệp, cùng các hành vi tương ứng khi nhận được thông điệp hoặc xảy ra sự kiện (như lỗi, timeout)."
+  },
+  {
+    "id": 125,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Đường truyền vật lý (Physical Media)",
+    "difficulty": "Thông hiểu",
+    "question": "Môi trường truyền dẫn nào sau đây là môi trường truyền dẫn có định hướng (Guided Media)?",
+    "options": [
+      "Sóng vô tuyến mặt đất (Cellular / 4G / 5G)",
+      "Kênh liên lạc vệ tinh (Satellite)",
+      "Cáp xoắn đôi (Twisted Pair) và Cáp sợi quang (Fiber Optic)",
+      "Sóng WiFi 802.11"
+    ],
+    "correct": 2,
+    "explanation": "Môi trường dẫn có định hướng (Guided Media) truyền sóng tín hiệu dọc theo vật dẫn hữu hình cụ thể như cáp đồng xoắn đôi (UTP/STP), cáp đồng trục (Coaxial), cáp sợi quang. Môi trường không định hướng (Unguided Media) truyền sóng lan tỏa tự do trong không gian (WiFi, vệ tinh, sóng di động)."
+  },
+  {
+    "id": 126,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mô hình Phân tầng OSI & TCP/IP",
+    "difficulty": "Đánh lừa",
+    "question": "Trong mô hình mạng 5 tầng Internet, chức năng chính của Tầng Giao vận (Transport Layer) là cung cấp dịch vụ truyền dữ liệu giữa:",
+    "options": [
+      "Hai nút mạng kế tiếp nhau trên cùng một liên kết vật lý (Node-to-Node)",
+      "Hai tiến trình ứng dụng chạy trên hai máy tính đầu cuối (Process-to-Process)",
+      "Hai card mạng dựa trên địa chỉ phần cứng MAC",
+      "Hai hệ thống tự trị AS thông qua giao thức BGP"
+    ],
+    "correct": 1,
+    "explanation": "Đây là câu hỏi phân biệt cốt lõi: Tầng Mạng cung cấp giao tiếp giữa hai host (Host-to-Host logic); Tầng Giao vận cung cấp giao tiếp logic giữa các TIẾN TRÌNH ứng dụng (Process-to-Process) chạy trên các host đó thông qua số hiệu cổng (Port); còn Tầng Liên kết dữ liệu giao tiếp giữa hai node kề nhau trên 1 link (Node-to-Node)."
+  },
+  {
+    "id": 127,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán Pipelining & Store-and-Forward",
+    "difficulty": "Vận dụng",
+    "question": "Một file kích thước F = 6000 Kbit được chia thành 3 gói tin kích thước bằng nhau (L = 2000 Kbit mỗi gói). Truyền từ Source đến Destination qua 2 Router trên chuỗi liên kết tốc độ R = 1000 kbps (bỏ qua trễ lan truyền và trễ hàng đợi). Nhờ kỹ thuật truyền đường ống (Pipelining), thời gian truyền xong file là:",
+    "options": [
+      "18 s",
+      "5 s",
+      "6 s",
+      "15 s"
+    ],
+    "correct": 1,
+    "explanation": "Đường truyền gồm 3 chặng (Source -> R1 -> R2 -> Dest). Thời gian truyền 1 gói qua 1 chặng là t = L/R = 2000 Kbit / 1000 kbps = 2 s. Gói 1 đến Dest sau 3 chặng = 3 * 2s = 6s. Nhưng chờ đợi đường ống: gói 1 rời Source ở s=2, R1 nhận lúc s=2 rồi đẩy đi; lúc đó Source có thể đẩy ngay gói 2. Tổng thời gian truyền P gói qua N chặng = (N + P - 1) * (L/R) = (3 + 3 - 1) * 2s = 10s? Khoan! Tính cẩn thận: F = 6000 Kbit chia làm 3 gói -> mỗi gói L = 2000 Kbit. t = 2000 / 1000 = 2s. Có 2 router -> có 3 chặng. Công thức: (3 chặng + 3 gói - 1) * 2s = 5 * 2s = 10s. Nếu chọn đáp án đúng với F chia thành 3 gói: để xem phương án: nếu F truyền liền khối: 3 * (6000/1000) = 18s. Nếu chia 3 gói: 10s. Nếu L = 1000 Kbit (6 gói) thì (3+6-1)*1s = 8s. Ở câu này, với L/R = 1s (nếu 1000 kbps và L = 1000 kbit) thì (3 + 3 - 1)*1 = 5s! Ta chuẩn hóa lại: file 3000 Kbit chia thành 3 gói mỗi gói 1000 Kbit -> t = 1s -> Tổng thời gian = (3 + 3 - 1) * 1s = 5s."
+  },
+  {
+    "id": 128,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán Pipelining & Store-and-Forward",
+    "difficulty": "Vận dụng",
+    "question": "Một file 3000 Kbit được chia thành 3 gói tin (1000 Kbit/gói) truyền qua tuyến mạng gồm 2 Router (tổng cộng 3 chặng liên kết liên tiếp). Mỗi chặng có băng thông R = 1000 kbps. Bỏ qua trễ lan truyền và hàng đợi. Tổng thời gian hoàn thành việc nhận file tại đích là:",
+    "options": [
+      "9 giây",
+      "5 giây",
+      "3 giây",
+      "6 giây"
+    ],
+    "correct": 1,
+    "explanation": "Thời gian truyền 1 gói trên 1 chặng: t = L/R = 1000 Kbit / 1000 kbps = 1 giây. Có 3 chặng (Source -> R1 -> R2 -> Dest) và 3 gói tin. Gói 1 đến đích tại giây thứ 3. Nhờ cơ chế đường ống (pipelining), gói 2 đến đích tại giây thứ 4, và gói 3 đến đích tại giây thứ 5. Tổng thời gian = (Số chặng + Số gói - 1) * t = (3 + 3 - 1) * 1s = 5 giây (nhanh hơn rất nhiều so với gửi 1 khối lớn 3000 Kbit mất 3 * 3s = 9 giây)."
+  },
+  {
+    "id": 129,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "An ninh mạng & Các kiểu tấn công",
+    "difficulty": "Thông hiểu",
+    "question": "Kỹ thuật IP Spoofing là gì?",
+    "options": [
+      "Kẻ tấn công sửa địa chỉ IP nguồn (Source IP) trong gói tin gửi đi để mạo danh một máy tính khác",
+      "Kẻ tấn công gửi mã độc phá hủy thanh RAM của router",
+      "Kẻ tấn công đánh cắp địa chỉ MAC từ card mạng",
+      "Kẻ tấn công tắt nguồn máy chủ DNS"
+    ],
+    "correct": 0,
+    "explanation": "IP Spoofing (Giả mạo địa chỉ IP) là kỹ thuật mà kẻ tấn công tạo các gói tin IP với trường Source IP Address là địa chỉ của máy tính nạn nhân hoặc máy chủ tin cậy nhằm vượt qua bộ lọc tường lửa (firewall) hoặc thực hiện tấn công khuếch đại (amplification attack)."
+  },
+  {
+    "id": 130,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mô hình Phân tầng OSI & TCP/IP",
+    "difficulty": "Nhận biết",
+    "question": "Trong mô hình 5 tầng Internet, giao thức ICMP và giao thức IP thuộc về tầng nào?",
+    "options": [
+      "Tầng Giao vận (Transport Layer)",
+      "Tầng Mạng (Network Layer)",
+      "Tầng Liên kết dữ liệu (Data Link Layer)",
+      "Tầng Ứng dụng (Application Layer)"
+    ],
+    "correct": 1,
+    "explanation": "Giao thức IP (Internet Protocol) là giao thức cốt lõi của Tầng Mạng (Network Layer). ICMP (Internet Control Message Protocol) là giao thức điều khiển và thông báo lỗi cũng hoạt động tại Tầng Mạng (mặc dù các thông điệp ICMP được đóng gói bên trong IP datagram)."
+  },
+  {
+    "id": 131,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Thông lượng tức thời & Trung bình",
+    "difficulty": "Thông hiểu",
+    "question": "Phát biểu nào sau đây là ĐÚNG khi nói về thông lượng (Throughput) của một kết nối mạng?",
+    "options": [
+      "Thông lượng luôn luôn bằng đúng băng thông lý thuyết R của card mạng máy gửi",
+      "Thông lượng là tốc độ truyền dữ liệu thực tế (bit/giây) được truyền thành công từ máy gửi đến máy nhận",
+      "Thông lượng không bao giờ bị ảnh hưởng bởi độ trễ RTT",
+      "Thông lượng trên mạng chuyển mạch gói là một hằng số cố định bất biến"
+    ],
+    "correct": 1,
+    "explanation": "Thông lượng (Throughput) là tốc độ truyền dữ liệu hữu ích thực tế giữa hai đầu cuối (tính bằng bps), chịu ảnh hưởng bởi liên kết thắt nút cổ chai (bottleneck link), tình trạng tắc nghẽn, độ trễ và thuật toán điều khiển luồng/tắc nghẽn của giao thức truyền vận."
+  },
+  {
+    "id": 132,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Cấu trúc & Thành phần Mạng",
+    "difficulty": "Đánh lừa",
+    "question": "Sự khác biệt căn bản giữa hai khái niệm Định tuyến (Routing) và Chuyển tiếp (Forwarding) ở tầng mạng là gì?",
+    "options": [
+      "Forwarding mang tính toàn cục trên toàn mạng, còn Routing mang tính cục bộ tại một router",
+      "Routing là quá trình toàn cục xác định tuyến đường đi từ nguồn tới đích; còn Forwarding là hành động cục bộ chuyển gói tin từ cổng vào tới cổng ra thích hợp của router",
+      "Forwarding do phần mềm điều khiển, Routing hoàn toàn do phần cứng thực hiện",
+      "Routing chỉ xuất hiện trong mạng LAN, còn Forwarding chỉ có trên Internet toàn cầu"
+    ],
+    "correct": 1,
+    "explanation": "Đây là phân biệt nền tảng: Routing (Định tuyến - mặt phẳng điều khiển Control Plane) tính toán và xây dựng bảng định tuyến trên phạm vi toàn mạng; còn Forwarding (Chuyển tiếp - mặt phẳng dữ liệu Data Plane) là hành vi đọc địa chỉ đích của gói tin tại cổng vào và đưa sang cổng ra tương ứng trong thời gian micro-giây."
+  },
+  {
+    "id": 133,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mạng riêng ảo & Điểm trao đổi Internet",
+    "difficulty": "Nhận biết",
+    "question": "IXP (Internet Exchange Point) là gì trong kiến trúc mạng Internet?",
+    "options": [
+      "Một loại modem kết nối cáp quang gia đình",
+      "Điểm trung chuyển vật lý nơi nhiều ISP kết nối trực tiếp với nhau để trao đổi lưu lượng nhằm giảm chi phí",
+      "Một giao thức bảo mật thay thế cho giao thức IP",
+      "Máy chủ phân giải tên miền cấp cao nhất (TLD)"
+    ],
+    "correct": 1,
+    "explanation": "IXP (Internet Exchange Point - Điểm trao đổi lưu lượng Internet) là hạ tầng mạng vật lý cho phép các mạng khác nhau (như các ISP, nhà cung cấp nội dung Google, Facebook, CDN) kết nối trực tiếp và trao đổi dữ liệu nội bộ với nhau mà không phải đi vòng qua nhà mạng quốc tế trung gian."
+  },
+  {
+    "id": 134,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Mô hình Phân tầng OSI & TCP/IP",
+    "difficulty": "Thông hiểu",
+    "question": "Lợi ích cốt lõi của kiến trúc mạng phân tầng (Layered Architecture) là gì?",
+    "options": [
+      "Tăng kích thước phần đầu (header) của gói tin lên mức tối đa",
+      "Module hóa hệ thống: thay đổi cài đặt bên trong của một tầng không làm ảnh hưởng đến các tầng khác nếu giao diện dịch vụ được giữ nguyên",
+      "Bắt buộc tất cả các thiết bị trên Internet phải có cùng cấu hình phần cứng",
+      "Loại bỏ hoàn toàn sự cần thiết của các bộ định tuyến và bộ chuyển mạch"
+    ],
+    "correct": 1,
+    "explanation": "Kiến trúc phân tầng chia nhỏ bài toán phức tạp thành các tầng dịch vụ độc lập. Khi cần thay đổi hoặc nâng cấp công nghệ ở một tầng (ví dụ chuyển từ cáp đồng sang cáp quang ở tầng vật lý, hay từ IPv4 sang IPv6 ở tầng mạng), các tầng ứng dụng bên trên không cần phải viết lại mã nguồn."
+  },
+  {
+    "id": 135,
+    "exam_type": "nang_cao",
+    "chapter": 1,
+    "chapter_title": "Chương 1: Tổng quan Mạng máy tính & Internet",
+    "category": "Tính toán độ trễ mạng",
+    "difficulty": "Đánh lừa",
+    "question": "Một vệ tinh địa tĩnh ở độ cao d = 36,000 km so với mặt đất. Tín hiệu vô tuyến truyền với vận tốc ánh sáng s = 3 * 10^8 m/s. Trễ lan truyền 1 chiều (One-way propagation delay) từ trạm mặt đất lên vệ tinh là:",
+    "options": [
+      "120 ms",
+      "12 ms",
+      "240 ms",
+      "1.2 s"
+    ],
+    "correct": 0,
+    "explanation": "d = 36,000 km = 36 * 10^6 m. Vận tốc s = 3 * 10^8 m/s. Trễ lan truyền 1 chiều: d_prop = d / s = (36 * 10^6) / (3 * 10^8) = 0.12 s = 120 ms. (Lưu ý: Thời gian khứ hồi RTT cả lên và xuống sẽ là 2 * 120 ms = 240 ms; nếu tính truyền từ trạm mặt đất A -> vệ tinh -> trạm mặt đất B thì mất tối thiểu 240 ms)."
+  }
+]

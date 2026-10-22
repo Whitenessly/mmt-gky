@@ -1,0 +1,682 @@
+[
+  {
+    "id": 401,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Mặt phẳng Dữ liệu & Điều khiển",
+    "difficulty": "Thông hiểu",
+    "question": "Trong kiến trúc tầng mạng hiện đại (bao gồm mô hình SDN - Software-Defined Networking), sự phân tách giữa 'Mặt phẳng Dữ liệu' (Data Plane) và 'Mặt phẳng Điều khiển' (Control Plane) được hiểu là:",
+    "options": [
+      "Data Plane chạy trên máy tính người dùng, Control Plane chạy trên router",
+      "Data Plane xử lý cục bộ việc chuyển tiếp gói tin từ cổng vào sang cổng ra (Forwarding) dựa trên bảng luồng/bảng chuyển tiếp; Control Plane chịu trách nhiệm toàn cục về thuật toán định tuyến (Routing) để xây dựng bảng chuyển tiếp",
+      "Data Plane sử dụng giao thức UDP, Control Plane sử dụng giao thức TCP",
+      "Data Plane chỉ xử lý các gói tin bị lỗi"
+    ],
+    "correct": 1,
+    "explanation": "Kiến trúc mạng phân chia rõ: Data Plane (Mặt phẳng dữ liệu) thực hiện chức năng Forwarding cục bộ tốc độ cao ở phần cứng router. Control Plane (Mặt phẳng điều khiển) thực hiện chức năng Routing logic toàn mạng, có thể chạy phân tán trên các router (như OSPF, BGP truyền thống) hoặc tập trung tại một bộ điều khiển SDN Controller."
+  },
+  {
+    "id": 402,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Kiến trúc Bộ định tuyến (Router)",
+    "difficulty": "Đánh lừa",
+    "question": "Hiện tượng 'Nghẽn đầu hàng' (Head-of-Line - HOL Blocking) bên trong một bộ định tuyến (Router) xảy ra tại vị trí nào?",
+    "options": [
+      "Tại hàng đợi của Cổng vào (Input Port Queue) khi ma trận chuyển mạch bị nghẽn",
+      "Tại hàng đợi của Cổng ra (Output Port Queue)",
+      "Trên dây cáp quang kết nối giữa các router",
+      "Bên trong thanh ghi CPU của router"
+    ],
+    "correct": 0,
+    "explanation": "HOL Blocking xảy ra tại hàng đợi của CỔNG VÀO (Input Port): Khi gói tin đứng đầu hàng đợi muốn đi tới một cổng ra đang bận, nó buộc phải dừng lại chờ; điều này vô tình chặn tất cả các gói tin xếp sau nó, mặc dù các cổng ra của những gói xếp sau hoàn toàn đang rảnh rỗi."
+  },
+  {
+    "id": 403,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tiêu đề IPv4 (IPv4 Header)",
+    "difficulty": "Nhận biết",
+    "question": "Trường Time to Live (TTL) trong tiêu đề gói tin IPv4 có mục đích chính là gì?",
+    "options": [
+      "Đo thời gian truyền gói tin tính bằng mili-giây",
+      "Quy định số bước nhảy (Hop) tối đa mà gói tin được phép đi qua các router, ngăn ngừa gói tin bị lặp vô tận (Routing Loop) trên mạng",
+      "Xác định thời điểm gói tin hết hạn sử dụng để xóa khỏi ổ cứng",
+      "Báo cho máy nhận biết thời gian cần gửi ACK"
+    ],
+    "correct": 1,
+    "explanation": "Mỗi khi gói tin IPv4 đi qua một router, router sẽ giảm giá trị TTL đi 1 đơn vị. Nếu giá trị TTL giảm về 0, router sẽ loại bỏ gói tin ngay lập tức và gửi thông điệp ICMP Type 11 (Time Exceeded) về cho máy nguồn. Cơ chế này đảm bảo các gói tin bị lạc do vòng lặp định tuyến không bị quay vòng mãi mãi làm tắc nghẽn Internet."
+  },
+  {
+    "id": 404,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tiêu đề IPv4 (IPv4 Header)",
+    "difficulty": "Thông hiểu",
+    "question": "Trường Protocol trong tiêu đề IPv4 có giá trị thập phân bằng 6 và bằng 17 lần lượt chỉ ra rằng dữ liệu tầng trên được đóng gói bên trong gói tin IP là giao thức nào?",
+    "options": [
+      "6 là UDP, 17 là TCP",
+      "6 là TCP, 17 là UDP",
+      "6 là ICMP, 17 là OSPF",
+      "6 là HTTP, 17 là DNS"
+    ],
+    "correct": 1,
+    "explanation": "Trong IPv4 Header, trường Protocol (1 byte) xác định giao thức tầng trên: 1 = ICMP; 6 = TCP; 17 = UDP; 89 = OSPF. Đây là cơ chế giải ghép kênh (Demultiplexing) của tầng mạng để chuyển dữ liệu lên đúng giao thức ở tầng giao vận."
+  },
+  {
+    "id": 405,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tính toán Phân mảnh IPv4 (Fragmentation)",
+    "difficulty": "Vận dụng",
+    "question": "Một gói tin IPv4 có kích thước tổng cộng 4000 byte (gồm 20 byte header IP và 3980 byte dữ liệu). Gói tin cần đi qua một liên kết mạng có MTU = 1500 byte. Gói tin sẽ bị phân thành bao nhiêu mảnh và trường Fragment Offset của mảnh thứ hai (mảnh index 1) có giá trị bằng bao nhiêu?",
+    "options": [
+      "3 mảnh; Fragment Offset = 185",
+      "3 mảnh; Fragment Offset = 1480",
+      "2 mảnh; Fragment Offset = 1500",
+      "4 mảnh; Fragment Offset = 370"
+    ],
+    "correct": 0,
+    "explanation": "MTU = 1500B -> Mỗi mảnh có tối đa 20B IP header + 1480B dữ liệu (lưu ý 1480 chia hết cho 8). Tổng dữ liệu = 3980 byte: Mảnh 1 mang 1480B dữ liệu (byte 0 đến 1479), Offset = 0, cờ MF = 1. Mảnh 2 mang 1480B dữ liệu (byte 1480 đến 2959), Offset = 1480 / 8 = 185, cờ MF = 1. Mảnh 3 mang 3980 - 2960 = 1020B dữ liệu (byte 2960 đến 3979), Offset = 2960 / 8 = 370, cờ MF = 0. Tổng cộng có 3 mảnh; Offset của mảnh thứ hai là 185 (đơn vị 8 byte)."
+  },
+  {
+    "id": 406,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Phân mảnh và Tái hợp IPv4",
+    "difficulty": "Thông hiểu",
+    "question": "Khi một gói tin IPv4 bị phân mảnh thành nhiều mảnh tại các router trung gian trên đường đi, quá trình tái hợp (Reassembly) các mảnh này thành gói tin gốc được thực hiện ở đâu?",
+    "options": [
+      "Tại ngay router trung gian kế tiếp",
+      "Tại thiết bị đầu cuối nhận cuối cùng (Destination Host)",
+      "Tại router biên (Gateway) của mạng nguồn",
+      "Tại máy chủ DNS của nhà mạng"
+    ],
+    "correct": 1,
+    "explanation": "Trong kiến trúc Internet, để giảm tối đa độ phức tạp và độ trễ xử lý cho các router mạng lõi, các router trung gian chỉ phân mảnh nếu gặp đường truyền có MTU nhỏ hơn mà KHÔNG BAO GIỜ tái hợp mảnh. Việc ghép nối lại các mảnh chỉ được thực hiện một lần duy nhất tại máy trạm đích cuối cùng (Destination Host)."
+  },
+  {
+    "id": 407,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Phân lớp Địa chỉ IP (Classful IP)",
+    "difficulty": "Nhận biết",
+    "question": "Địa chỉ IP nào sau đây thuộc về Lớp B (Class B) theo cách phân lớp địa chỉ truyền thống?",
+    "options": [
+      "10.20.30.40",
+      "172.25.10.1",
+      "192.168.1.1",
+      "224.0.0.1"
+    ],
+    "correct": 1,
+    "explanation": "Quy tắc phân lớp theo byte đầu tiên: Lớp A: 1 – 126 (0xxxxxxx); Lớp B: 128 – 191 (10xxxxxx); Lớp C: 192 – 223 (110xxxxx); Lớp D (Multicast): 224 – 239 (1110xxxx); Lớp E: 240 – 255. Địa chỉ 172.25.10.1 có octet đầu là 172 nằm trong khoảng 128-191 nên thuộc Lớp B."
+  },
+  {
+    "id": 408,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Dải địa chỉ IP Riêng (Private IP - RFC 1918)",
+    "difficulty": "Nhận biết",
+    "question": "Địa chỉ IP nào sau đây là địa chỉ IP công cộng (Public IP) có thể định tuyến trực tiếp trên mạng Internet toàn cầu?",
+    "options": [
+      "10.0.50.1",
+      "172.16.20.1",
+      "192.168.100.1",
+      "8.8.8.8"
+    ],
+    "correct": 3,
+    "explanation": "Theo RFC 1918, các dải địa chỉ Private IP (dùng nội bộ, không được định tuyến ra Internet) gồm: 10.0.0.0/8 (10.x.x.x); 172.16.0.0/12 (172.16.x.x đến 172.31.x.x); 192.168.0.0/16 (192.168.x.x). Địa chỉ 8.8.8.8 là địa chỉ IP công cộng (Public DNS của Google)."
+  },
+  {
+    "id": 409,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tính toán Mạng con CIDR (Subnetting)",
+    "difficulty": "Vận dụng",
+    "question": "Cho địa chỉ mạng 192.168.1.0/26. Mặt nạ mạng (Subnet Mask) tương ứng dạng thập phân và số lượng địa chỉ máy chủ (Host) khả dụng tối đa trong mạng này là:",
+    "options": [
+      "255.255.255.128 và 126 hosts",
+      "255.255.255.192 và 62 hosts",
+      "255.255.255.224 và 30 hosts",
+      "255.255.255.240 và 14 hosts"
+    ],
+    "correct": 1,
+    "explanation": "Ký hiệu /26 có nghĩa là 26 bit đầu là 1, 6 bit sau là 0. Octet thứ tư: 11000000_2 = 128 + 64 = 192 -> Subnet mask: 255.255.255.192. Số bit dành cho host là 32 - 26 = 6 bit. Tổng số địa chỉ = 2^6 = 64. Trừ 1 địa chỉ mạng và 1 địa chỉ broadcast -> Số host sử dụng được = 64 - 2 = 62 hosts."
+  },
+  {
+    "id": 410,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tính toán Mạng con CIDR (Subnetting)",
+    "difficulty": "Vận dụng",
+    "question": "Một máy tính có địa chỉ IP là 172.16.10.45 với Subnet Mask là 255.255.255.240. Địa chỉ Mạng (Network Address) và địa chỉ Quảng bá (Broadcast Address) của mạng con này là:",
+    "options": [
+      "Mạng: 172.16.10.0; Broadcast: 172.16.10.255",
+      "Mạng: 172.16.10.32; Broadcast: 172.16.10.47",
+      "Mạng: 172.16.10.40; Broadcast: 172.16.10.55",
+      "Mạng: 172.16.10.45; Broadcast: 172.16.10.240"
+    ],
+    "correct": 1,
+    "explanation": "Subnet mask 255.255.255.240 tương ứng /28. Bước nhảy khối mạng con = 256 - 240 = 16. Các mạng con gồm: .0, .16, .32, .48... Địa chỉ host 45 nằm trong khoảng [32, 47]. Suy ra: Địa chỉ mạng = 172.16.10.32; Địa chỉ broadcast = 172.16.10.47; Dải IP gán cho máy: 172.16.10.33 đến 172.16.10.46."
+  },
+  {
+    "id": 411,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Chia mạng con VLSM (Variable Length)",
+    "difficulty": "Vận dụng",
+    "question": "Cần thiết kế một đường liên kết điểm-điểm (Point-to-Point link) chỉ kết nối trực tiếp giữa hai cổng của 2 Router. Tiền tố mạng con (Prefix) nào sau đây là tối ưu nhất để vừa đủ dùng cho 2 cổng router mà không gây lãng phí địa chỉ IP?",
+    "options": [
+      "/28",
+      "/29",
+      "/30",
+      "/31"
+    ],
+    "correct": 2,
+    "explanation": "Đường point-to-point giữa 2 router cần đúng 2 địa chỉ host. Subnet /30 có 32 - 30 = 2 bit host, cung cấp 2^2 = 4 địa chỉ (1 địa chỉ mạng, 1 địa chỉ broadcast, và đúng 2 địa chỉ gán cho 2 cổng router). Đây là chuẩn kinh điển trong thiết kế mạng IPv4 (lưu ý: RFC 3021 cho phép /31 nhưng chỉ trên thiết bị chuyên dụng hỗ trợ)."
+  },
+  {
+    "id": 412,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "So khớp tiền tố dài nhất (Longest Prefix Match)",
+    "difficulty": "Đánh lừa",
+    "question": "Một router có bảng định tuyến gồm các mục sau:\n- Mục 1: 192.168.1.0/24 -> Cổng xuất eth0\n- Mục 2: 192.168.1.128/25 -> Cổng xuất eth1\n- Mục 3: 192.168.1.192/26 -> Cổng xuất eth2\n- Mục 4: 0.0.0.0/0 -> Cổng xuất eth3\nKhi gói tin có IP đích 192.168.1.200 đến router, gói tin sẽ được chuyển tiếp ra cổng nào?",
+    "options": [
+      "eth0",
+      "eth1",
+      "eth2",
+      "eth3"
+    ],
+    "correct": 2,
+    "explanation": "Nguyên tắc 'Longest Prefix Match' (Khớp tiền tố dài nhất): IP 192.168.1.200 khớp với cả mục 1 (/24), mục 2 (/25, dải 128-255), mục 3 (/26, dải 192-255) và default route (/0). Trong số các mục khớp, mục 3 có tiền tố dài nhất (/26 dài hơn /25 và /24) mang tính cụ thể cao nhất, do đó router bắt buộc chuyển tiếp gói tin ra cổng eth2."
+  },
+  {
+    "id": 413,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức NAT (Network Address Translation)",
+    "difficulty": "Thông hiểu",
+    "question": "Cơ chế NAPT (Network Address Port Translation - PAT) cho phép hàng trăm máy tính trong mạng nội bộ cùng chia sẻ một địa chỉ IP công cộng (Public IP) duy nhất ra Internet bằng cách nào?",
+    "options": [
+      "Chia sẻ địa chỉ MAC của router cho tất cả các máy",
+      "Duy trì một Bảng dịch NAT (NAT Translation Table) ánh xạ giữa bộ [IP nội bộ, Cổng nguồn] với bộ [IP công cộng, Cổng NAT ngẫu nhiên]",
+      "Chuyển đổi toàn bộ gói tin IP thành dạng chuỗi ký tự text",
+      "Chỉ cho phép 1 máy truy cập Internet tại một thời điểm"
+    ],
+    "correct": 1,
+    "explanation": "Router NAT sử dụng số hiệu cổng (Port - 16 bit, hơn 60,000 cổng khả dụng) ở tầng giao vận để định danh các phiên liên lạc: Mỗi kết nối từ [IP nội bộ, Port nội bộ] được ánh xạ sang [IP công cộng của router, Port NAT mới]. Khi có gói tin phản hồi từ Internet về, router tra bảng NAT để khôi phục đúng IP và Port nội bộ của máy trạm."
+  },
+  {
+    "id": 414,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức NAT & Port Forwarding",
+    "difficulty": "Thông hiểu",
+    "question": "Nếu một người dùng đặt một máy chủ Web (cổng 80) bên trong mạng LAN gia đình sử dụng IP Private (192.168.1.100), để người ngoài Internet có thể truy cập được website này qua IP Public của modem, quản trị viên bắt buộc phải cấu hình tính năng gì trên router?",
+    "options": [
+      "Bật tính năng DHCP Relay",
+      "Mở chuyển tiếp cổng (Port Forwarding / Virtual Server) trên router, trỏ cổng 80 công cộng về IP 192.168.1.100",
+      "Tắt tường lửa của máy chủ web",
+      "Đổi cáp mạng sang loại cáp chéo"
+    ],
+    "correct": 1,
+    "explanation": "Bình thường NAT chỉ cho phép kết nối khởi tạo từ trong mạng nội bộ đi ra ngoài. Nếu bên ngoài Internet muốn chủ động kết nối vào một máy chủ nội bộ mang IP Private, router NAT không biết phải gửi cho máy nào. Cấu hình Port Forwarding tạo một quy tắc tĩnh trên bảng NAT: mọi kết nối đến cổng 80 của IP Public sẽ được chuyển tiếp thẳng vào IP 192.168.1.100."
+  },
+  {
+    "id": 415,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức Cấu hình Động DHCP",
+    "difficulty": "Nhận biết",
+    "question": "Quá trình cấp phát địa chỉ IP tự động của giao thức DHCP diễn ra theo trình tự 4 bước (tiến trình DORA) gồm các thông điệp nào?",
+    "options": [
+      "Discover -> Offer -> Request -> Acknowledge",
+      "Download -> Open -> Read -> Accept",
+      "DNS -> OSPF -> RIP -> ARP",
+      "Detect -> Order -> Receive -> Authenticate"
+    ],
+    "correct": 0,
+    "explanation": "Quy trình DORA của DHCP: (1) DHCP Discover: Client phát quảng bá tìm DHCP Server; (2) DHCP Offer: Server gửi đề xuất địa chỉ IP; (3) DHCP Request: Client gửi thông báo chính thức chọn đề xuất đó; (4) DHCP ACK (Acknowledge): Server xác nhận hoàn tất việc cho thuê địa chỉ IP."
+  },
+  {
+    "id": 416,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức Cấu hình Động DHCP",
+    "difficulty": "Đánh lừa",
+    "question": "Trong thông điệp DHCP Discover đầu tiên mà một máy tính vừa cắm dây mạng gửi đi để xin IP, địa chỉ IP nguồn (Source IP) và địa chỉ IP đích (Destination IP) trong tiêu đề IP là gì?",
+    "options": [
+      "Source IP: 127.0.0.1; Destination IP: 192.168.1.1",
+      "Source IP: 0.0.0.0; Destination IP: 255.255.255.255",
+      "Source IP: 255.255.255.255; Destination IP: 0.0.0.0",
+      "Source IP: Địa chỉ MAC của máy; Destination IP: Địa chỉ broadcast"
+    ],
+    "correct": 1,
+    "explanation": "Vì máy khách chưa có địa chỉ IP nên nó bắt buộc phải dùng địa chỉ 0.0.0.0 (chưa xác định) làm Source IP. Do máy khách cũng chưa biết máy chủ DHCP nằm ở đâu trên mạng, nó phải phát quảng bá tới địa chỉ giới hạn 255.255.255.255 làm Destination IP trên cổng UDP 67."
+  },
+  {
+    "id": 417,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức Cấu hình Động DHCP",
+    "difficulty": "Thông hiểu",
+    "question": "Ngoài địa chỉ IP của máy khách, một máy chủ DHCP tiêu chuẩn thường cung cấp thêm các thông số cấu hình mạng thiết yếu nào sau đây?",
+    "options": [
+      "Subnet Mask, Địa chỉ Default Gateway (Router), và Địa chỉ máy chủ DNS",
+      "Mật khẩu tài khoản ngân hàng và mã khóa WiFi",
+      "Danh sách tất cả các trang web bị cấm truy cập",
+      "Địa chỉ MAC mới cho card mạng"
+    ],
+    "correct": 0,
+    "explanation": "Một gói DHCP ACK hoàn chỉnh không chỉ cấp IP mà còn cung cấp đủ bộ thông số để máy tính có thể lướt web: (1) Địa chỉ IP được gán; (2) Subnet Mask để xác định mạng nội bộ; (3) Default Gateway (IP cổng ra của router để đến Internet); (4) DNS Server để phân giải tên miền; (5) Thời gian thuê (Lease time)."
+  },
+  {
+    "id": 418,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Địa chỉ Tự gán APIPA",
+    "difficulty": "Thông hiểu",
+    "question": "Khi kiểm tra bằng lệnh ipconfig, người dùng thấy máy tính của mình nhận địa chỉ IP dạng 169.254.x.x và không thể vào mạng Internet. Hiện tượng này phản ánh điều gì?",
+    "options": [
+      "Máy tính bị nhiễm mã độc tống tiền",
+      "Máy tính được cấu hình nhận IP tự động qua DHCP nhưng không liên lạc được với bất kỳ máy chủ DHCP nào, hệ điều hành tự gán địa chỉ APIPA (Automatic Private IP Addressing)",
+      "Đường truyền Internet đã được nâng cấp lên tốc độ gigabit",
+      "Máy chủ Google đang bảo trì"
+    ],
+    "correct": 1,
+    "explanation": "Dải địa chỉ 169.254.0.0/16 là dải APIPA (Link-local address). Khi máy tính yêu cầu IP qua DHCP mà DHCP server bị sập, tuột dây mạng hoặc quá thời gian chờ (timeout), Windows sẽ tự động gán một IP ngẫu nhiên trong dải này. Địa chỉ này chỉ giao tiếp được trong mạng cục bộ nhỏ không có router và hoàn toàn không thể ra Internet."
+  },
+  {
+    "id": 419,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức Báo lỗi ICMP",
+    "difficulty": "Nhận biết",
+    "question": "Chương trình 'ping' sử dụng cặp thông điệp ICMP Type/Code nào để kiểm tra kết nối mạng giữa hai nút?",
+    "options": [
+      "Type 8 Code 0 (Echo Request) và Type 0 Code 0 (Echo Reply)",
+      "Type 3 Code 3 (Port Unreachable)",
+      "Type 11 Code 0 (Time Exceeded)",
+      "Type 5 Code 0 (Redirect)"
+    ],
+    "correct": 0,
+    "explanation": "Chương trình ping gửi thông điệp ICMP Type 8 Code 0 (Echo Request) tới máy đích. Nếu máy đích còn hoạt động và không chặn ICMP, nó sẽ phản hồi lại thông điệp ICMP Type 0 Code 0 (Echo Reply)."
+  },
+  {
+    "id": 420,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Nguyên lý Công cụ Traceroute",
+    "difficulty": "Thông hiểu",
+    "question": "Chương trình traceroute (hoặc tracert trên Windows) xác định danh sách các router trung gian trên đường đi tới máy đích bằng kỹ thuật nào?",
+    "options": [
+      "Gửi truy vấn DNS hỏi máy chủ tên miền",
+      "Gửi các gói tin với giá trị TTL tăng dần (bắt đầu từ TTL = 1, 2, 3...) và lắng nghe các thông điệp báo lỗi ICMP Type 11 (Time-to-Live Exceeded in Transit) trả về từ mỗi router trên đường",
+      "Đọc bảng định tuyến nội bộ của các nhà mạng viễn thông",
+      "Khai thác lỗ hổng bảo mật của router"
+    ],
+    "correct": 1,
+    "explanation": "Traceroute gửi gói tin với TTL = 1; router đầu tiên trừ TTL còn 0, hủy gói và gửi về ICMP Type 11 giúp xác định IP router 1. Tiếp đó traceroute gửi gói với TTL = 2, router thứ hai gửi về ICMP Type 11 giúp xác định IP router 2... Quá trình lặp lại cho đến khi gói tin chạm tới đích cuối cùng (khiến đích phản hồi Echo Reply hoặc Port Unreachable)."
+  },
+  {
+    "id": 421,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức IPv6",
+    "difficulty": "Nhận biết",
+    "question": "Địa chỉ IPv6 có độ dài bao nhiêu bit và được biểu diễn theo định dạng tiêu chuẩn nào?",
+    "options": [
+      "64 bit, biểu diễn dưới dạng 8 số thập phân",
+      "128 bit, biểu diễn dưới dạng 8 nhóm số Thập lục phân (Hexadecimal), ngăn cách bằng dấu hai chấm (:)",
+      "32 bit, ngăn cách bằng dấu chấm (.)",
+      "256 bit, biểu diễn dưới dạng chuỗi nhị phân 0 và 1"
+    ],
+    "correct": 1,
+    "explanation": "IPv6 mở rộng không gian địa chỉ từ 32 bit của IPv4 lên 128 bit (khoảng 3.4 * 10^38 địa chỉ). Địa chỉ IPv6 được biểu diễn bởi 8 nhóm số Hexadecimal 16-bit, ngăn cách nhau bằng dấu hai chấm, ví dụ: 2001:0db8:85a3:0000:0000:8a2e:0370:7334."
+  },
+  {
+    "id": 422,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Rút gọn Địa chỉ IPv6",
+    "difficulty": "Vận dụng",
+    "question": "Địa chỉ IPv6 sau đây: 2001:0db8:0000:0000:0000:0000:1428:57ab có thể được viết rút gọn chuẩn xác nhất là:",
+    "options": [
+      "2001:db8::1428:57ab",
+      "2001:db8:0:0:0:0:1428:57ab",
+      "2001:db8::0::1428:57ab",
+      "2001:0db8::1428:57ab"
+    ],
+    "correct": 0,
+    "explanation": "Quy tắc rút gọn IPv6: (1) Bỏ các số 0 đứng đầu mỗi nhóm: 0db8 -> db8; (2) Thay thế chuỗi các nhóm chứa toàn số 0 liên tiếp bằng một dấu hai chấm kép '::' DUY NHẤT. Do đó địa chỉ được rút gọn tối giản thành: 2001:db8::1428:57ab. Lưu ý: Dấu '::' chỉ được xuất hiện đúng một lần trong toàn bộ địa chỉ."
+  },
+  {
+    "id": 423,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Cải tiến trong Tiêu đề IPv6",
+    "difficulty": "Thông hiểu",
+    "question": "Những thành phần nào sau đây trong tiêu đề IPv4 đã bị LOẠI BỎ HOÀN TOÀN trong tiêu đề cố định 40 byte của IPv6 nhằm tăng tốc độ xử lý tại các router?",
+    "options": [
+      "Địa chỉ IP nguồn và IP đích",
+      "Trường Header Checksum và các trường phục vụ phân mảnh gói tin (Identification, Flags, Fragment Offset)",
+      "Trường Version",
+      "Trường Payload Length"
+    ],
+    "correct": 1,
+    "explanation": "IPv6 tối ưu hóa vượt bậc: (1) Bỏ trường Checksum (vì tầng 2 và tầng 4 đã kiểm tra lỗi, bỏ checksum giúp router không phải tính lại sau mỗi hop); (2) Bỏ các trường phân mảnh ở tiêu đề chính (IPv6 cấm router trung gian phân mảnh, nếu gói quá lớn router gửi ICMPv6 Packet Too Big yêu cầu máy nguồn tự giảm kích thước gói)."
+  },
+  {
+    "id": 424,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Địa chỉ IPv6 Đặc biệt",
+    "difficulty": "Nhận biết",
+    "question": "Trong không gian địa chỉ IPv6, loại địa chỉ nào sau đây đã KHÔNG CÒN TỒN TẠI mà được thay thế hoàn toàn bằng địa chỉ Multicast?",
+    "options": [
+      "Địa chỉ Unicast (Đơn hướng)",
+      "Địa chỉ Anycast (Bất kỳ hướng)",
+      "Địa chỉ Broadcast (Quảng bá)",
+      "Địa chỉ Link-local"
+    ],
+    "correct": 2,
+    "explanation": "IPv6 đã khai tử hoàn toàn khái niệm địa chỉ Broadcast (Quảng bá) - thủ phạm gây bão gói tin (Broadcast storm) làm nghẽn mạng trong IPv4. Thay vào đó, IPv6 sử dụng địa chỉ Multicast chuyên biệt (ví dụ FF02::1 gửi cho tất cả các node) và Anycast."
+  },
+  {
+    "id": 425,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Chuyển đổi IPv4 sang IPv6",
+    "difficulty": "Thông hiểu",
+    "question": "Kỹ thuật 'Đường hầm' (Tunneling) trong quá trình chuyển đổi từ IPv4 sang IPv6 hoạt động như thế nào?",
+    "options": [
+      "Đào đường hầm ngầm dưới lòng đất để đặt cáp mới",
+      "Đóng gói toàn bộ gói tin IPv6 vào bên trong phần dữ liệu (Payload) của một gói tin IPv4 để truyền xuyên qua mạng IPv4 trung gian",
+      "Dịch ngược địa chỉ IPv6 thành địa chỉ MAC",
+      "Chỉ cho phép kết nối vào ban đêm"
+    ],
+    "correct": 1,
+    "explanation": "Kỹ thuật Tunneling (như 6to4, Teredo) giải quyết bài toán khi hai mạng IPv6 cần liên lạc với nhau nhưng ở giữa là mạng IPv4 của nhà mạng chưa hỗ trợ IPv6. Router biên sẽ đóng gói trọn vẹn gói tin IPv6 vào bên trong trường dữ liệu của một IPv4 datagram tiêu chuẩn để 'chui qua' hạ tầng IPv4."
+  },
+  {
+    "id": 426,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Thuật toán Định tuyến Trạng thái Liên kết (LS)",
+    "difficulty": "Thông hiểu",
+    "question": "Thuật toán định tuyến Trạng thái liên kết (Link-State Routing Algorithm) sử dụng thuật toán toán học nào để tính đường đi ngắn nhất từ một nút nguồn tới tất cả các nút khác trên mạng?",
+    "options": [
+      "Thuật toán Bellman-Ford",
+      "Thuật toán Dijkstra",
+      "Thuật toán Prim",
+      "Thuật toán Floyd-Warshall"
+    ],
+    "correct": 1,
+    "explanation": "Thuật toán Trạng thái liên kết (Link-State, điển hình là giao thức OSPF) yêu cầu mỗi router gửi thông điệp LSA ngập lụt toàn mạng để mọi router đều có bản đồ topology hoàn chỉnh. Sau đó, mỗi router tự chạy thuật toán Dijkstra để tính cây đường đi ngắn nhất (Shortest Path Tree) từ chính nó đến tất cả các đích."
+  },
+  {
+    "id": 427,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức Định tuyến OSPF",
+    "difficulty": "Nhận biết",
+    "question": "Giao thức OSPF (Open Shortest Path First) là giao thức định tuyến thuộc loại nào và đóng gói trực tiếp vào đâu?",
+    "options": [
+      "Giao thức định tuyến ngoài AS (EGP), chạy trên TCP cổng 179",
+      "Giao thức định tuyến nội bộ AS (IGP) thuộc họ Trạng thái liên kết (Link-State), đóng gói trực tiếp trong gói tin IP với trường Protocol = 89",
+      "Giao thức Vectơ khoảng cách, chạy trên UDP cổng 520",
+      "Giao thức tầng liên kết dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "OSPF là giao thức định tuyến nội vùng (Intra-AS / IGP) chuẩn mở phổ biến nhất. OSPF không dùng TCP hay UDP mà chạy trực tiếp trên tầng mạng (IP Protocol = 89). OSPF hỗ trợ phân chia mạng thành các vùng phân cấp (Hierarchical Areas) với vùng xương sống trung tâm bắt buộc là Area 0 (Backbone Area)."
+  },
+  {
+    "id": 428,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Thuật toán Định tuyến Vectơ Khoảng cách (DV)",
+    "difficulty": "Thông hiểu",
+    "question": "Phương trình Bellman-Ford trong thuật toán định tuyến Vectơ khoảng cách (Distance Vector) được biểu diễn bằng công thức nào?",
+    "options": [
+      "d_x(y) = min_v { c(x,v) + d_v(y) }",
+      "d_x(y) = c(x,y) * RTT",
+      "d_x(y) = sum { c(x,v) }",
+      "d_x(y) = max { d_v(y) - c(x,v) }"
+    ],
+    "correct": 0,
+    "explanation": "Phương trình Bellman-Ford: Chi phí đường đi ngắn nhất từ x đến y qua tất cả các hàng xóm v của x là: d_x(y) = min_v { c(x,v) + d_v(y) }, trong đó c(x,v) là chi phí đường truyền trực tiếp từ x đến v, và d_v(y) là ước lượng chi phí từ v đến y do hàng xóm v thông báo."
+  },
+  {
+    "id": 429,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Đếm đến vô cùng trong Distance Vector",
+    "difficulty": "Đánh lừa",
+    "question": "Vấn đề nghiêm trọng nhất của thuật toán Vectơ khoảng cách khi xảy ra sự cố đứt đường truyền là hiện tượng 'Vòng lặp định tuyến' dẫn tới hiện tượng gì?",
+    "options": [
+      "Router tự động bốc cháy phần cứng",
+      "Hiện tượng 'Đếm đến vô cùng' (Count-to-Infinity) khiến chi phí định tuyến tăng dần từng bước một chậm chạp trước khi mạng hội tụ",
+      "Tất cả các router tự động đổi sang giao thức OSPF",
+      "Băng thông mạng tăng lên gấp 100 lần"
+    ],
+    "correct": 1,
+    "explanation": "Khi một liên kết bị đứt, thông tin xấu lan truyền rất chậm trong Distance Vector. Hai router hàng xóm liên tục gửi thông tin khoảng cách sai lệch cho nhau qua lại (A nghĩ B có đường, B lại nghĩ A có đường), làm chi phí ước lượng cứ tăng dần 2, 3, 4... cho đến khi chạm mốc vô cùng (Infinity). Hiện tượng này gọi là 'Count-to-Infinity'."
+  },
+  {
+    "id": 430,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Kỹ thuật Poison Reverse",
+    "difficulty": "Thông hiểu",
+    "question": "Kỹ thuật Poison Reverse (Đảo ngược độc) được thiết kế để ngăn ngừa vòng lặp định tuyến giữa hai nút liền kề trong Distance Vector bằng cách nào?",
+    "options": [
+      "Nếu router Z định tuyến đến đích X thông qua hàng xóm Y, thì Z sẽ thông báo chi phí từ nó đến X cho Y là VÔ CÙNG (d_Z(X) = vô cùng)",
+      "Ngắt toàn bộ nguồn điện của router Z",
+      "Cấm router Y không được gửi bất kỳ gói tin nào cho Z",
+      "Tự động xóa bảng định tuyến sau mỗi 5 giây"
+    ],
+    "correct": 0,
+    "explanation": "Poison Reverse ngăn Y định tuyến ngược lại qua Z: Khi Z gửi gói tin cho X thông qua Y, Z sẽ 'nói dối' với Y rằng 'chi phí từ tôi tới X là vô cùng'. Nhờ đó, nếu đường nối từ Y đến X bị đứt, Y sẽ không bao giờ mắc bẫy định tuyến ngược qua Z."
+  },
+  {
+    "id": 431,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Định tuyến Internet & Giao thức BGP",
+    "difficulty": "Nhận biết",
+    "question": "Giao thức định tuyến liên miền giữa các Hệ thống Tự trị (Inter-AS Routing) duy nhất đóng vai trò keo dán kết nối toàn bộ mạng Internet toàn cầu là giao thức nào?",
+    "options": [
+      "RIP (Routing Information Protocol)",
+      "OSPF (Open Shortest Path First)",
+      "BGP (Border Gateway Protocol, phiên bản BGP-4)",
+      "ICMP"
+    ],
+    "correct": 2,
+    "explanation": "BGP (Border Gateway Protocol) là giao thức định tuyến giữa các AS (Hệ thống tự trị độc lập như Viettel, VNPT, FPT, Google, AT&T). BGP là giao thức Vectơ đường đi (Path Vector), chạy trên nền kết nối TCP đáng tin cậy cổng 179."
+  },
+  {
+    "id": 432,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức BGP (Border Gateway Protocol)",
+    "difficulty": "Thông hiểu",
+    "question": "Thuộc tính AS-PATH trong một thông điệp định tuyến BGP mang thông tin gì và có tác dụng cốt lõi nào?",
+    "options": [
+      "Chứa danh sách tất cả các số hiệu AS (Autonomous System Numbers) mà bản tin quảng bá đã đi qua, giúp phát hiện và loại bỏ ngay lập tức vòng lặp định tuyến (Loop Prevention)",
+      "Chứa địa chỉ MAC của router gửi",
+      "Chứa mật khẩu đăng nhập của kỹ sư mạng",
+      "Chứa tốc độ băng thông của cáp quang"
+    ],
+    "correct": 0,
+    "explanation": "Thuộc tính AS-PATH liệt kê tuần tự các AS mà thông điệp quảng bá định tuyến đã đi qua (ví dụ AS-PATH: [AS 100, AS 200, AS 300]). Khi một router biên nhận được bản tin BGP mà nhìn thấy số hiệu AS của chính mình đã nằm trong AS-PATH, nó lập tức loại bỏ bản tin đó để triệt tiêu hoàn toàn vòng lặp định tuyến."
+  },
+  {
+    "id": 433,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Giao thức BGP (eBGP vs iBGP)",
+    "difficulty": "Đánh lừa",
+    "question": "Sự khác biệt giữa eBGP (External BGP) và iBGP (Internal BGP) là gì?",
+    "options": [
+      "eBGP chạy trên UDP, iBGP chạy trên TCP",
+      "eBGP trao đổi thông tin định tuyến giữa các router thuộc hai Hệ thống Tự trị (AS) KHÁC NHAU; trong khi iBGP phân phối các thông tin định tuyến bên ngoài đó cho các router nằm trong CÙNG MỘT HỆ THỐNG TỰ TRỊ (AS)",
+      "iBGP là giao thức thay thế cho OSPF",
+      "eBGP chỉ dùng cho mạng vệ tinh"
+    ],
+    "correct": 1,
+    "explanation": "eBGP (External BGP) kết nối 2 router biên thuộc 2 AS độc lập (ví dụ giữa AS của VNPT và AS của Viettel). iBGP (Internal BGP) được dùng để truyền bá các tuyến đường học được từ eBGP cho tất cả các router khác bên trong nội bộ cùng một AS biết để chuyển tiếp lưu lượng ra ngoài."
+  },
+  {
+    "id": 434,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Định tuyến Dựa trên Chính sách (Policy-Based Routing)",
+    "difficulty": "Thông hiểu",
+    "question": "Tại sao trong định tuyến BGP giữa các nhà mạng Internet (Inter-AS), yếu tố 'Chính sách thương mại và chính trị' (Policy) lại quan trọng hơn yếu tố 'Đường đi ngắn nhất về mặt kỹ thuật'?",
+    "options": [
+      "Vì router của các nhà mạng không đủ RAM để chạy thuật toán Dijkstra",
+      "Vì các AS là các thực thể kinh doanh độc lập, một ISP không bao giờ muốn chuyển tiếp lưu lượng miễn phí cho đối thủ cạnh tranh nếu không có thỏa thuận kinh tế",
+      "Vì giao thức BGP bị cấm tính toán số bước nhảy",
+      "Do luật viễn thông quốc tế cấm dùng thuật toán ngắn nhất"
+    ],
+    "correct": 1,
+    "explanation": "Định tuyến nội bộ (Intra-AS) tập trung vào hiệu năng kỹ thuật (đường ngắn nhất, trễ nhỏ nhất). Nhưng định tuyến liên AS (Inter-AS) là bài toán kinh tế: Một nhà mạng chỉ chuyển tiếp lưu lượng cho khách hàng trả tiền (Customer-Provider) hoặc đối tác ngang hàng bình đẳng (Peering), và sẽ áp đặt chính sách từ chối chuyển tiếp lưu lượng của bên thứ ba qua mạng của mình."
+  },
+  {
+    "id": 435,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Phân chia Vùng OSPF (Areas)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong mạng doanh nghiệp lớn sử dụng OSPF, tại sao quản trị viên lại chia mạng thành các Vùng (Areas) thay vì để một vùng phẳng duy nhất?",
+    "options": [
+      "Để giới hạn phạm vi ngập lụt gói tin LSA, giảm kích thước cơ sở dữ liệu trạng thái liên kết và giảm tải tính toán thuật toán Dijkstra cho các router",
+      "Để chuyển đổi từ IPv4 sang IPv6 dễ dàng hơn",
+      "Vì một vùng OSPF chỉ chứa được tối đa 10 máy tính",
+      "Để bắt buộc người dùng phải đổi mật khẩu mạng"
+    ],
+    "correct": 0,
+    "explanation": "Khi mạng OSPF có hàng nghìn router, bản tin LSA ngập lụt toàn mạng sẽ làm quá tải băng thông và thuật toán Dijkstra ngốn cạn bộ nhớ CPU router. Phân chia Areas giúp: Router chỉ cần biết topology chi tiết trong Area của mình; router biên vùng (Area Border Router - ABR) sẽ tóm tắt thông tin tuyến đường (Route Summarization) gửi sang các Area khác."
+  },
+  {
+    "id": 436,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tính toán Mạng con CIDR (Subnetting)",
+    "difficulty": "Vận dụng",
+    "question": "Công ty được cấp dải mạng 192.168.10.0/24 và muốn chia thành các mạng con, mỗi mạng con cần tối thiểu 28 địa chỉ IP cho các máy trạm. Tiền tố mạng con tối ưu và số lượng mạng con tối đa tạo được là:",
+    "options": [
+      "/27 và 8 mạng con",
+      "/28 và 16 mạng con",
+      "/26 và 4 mạng con",
+      "/29 và 32 mạng con"
+    ],
+    "correct": 0,
+    "explanation": "Cần 28 host -> 2^h - 2 >= 28 -> 2^h >= 30 -> Cần h = 5 bit cho host (cung cấp 2^5 - 2 = 30 host khả dụng). Số bit mạng = 32 - 5 = 27 (tiền tố /27). Từ mạng ban đầu /24 mượn thêm 3 bit (27 - 24 = 3 bit) để chia mạng con. Số lượng mạng con tạo được = 2^3 = 8 mạng con (mỗi mạng con có 30 host khả dụng)."
+  },
+  {
+    "id": 437,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Thuật toán Định tuyến Dijkstra",
+    "difficulty": "Vận dụng",
+    "question": "Độ phức tạp tính toán thời gian của thuật toán Dijkstra cơ bản tìm đường đi ngắn nhất trên đồ thị có N nút mạng là bao nhiêu?",
+    "options": [
+      "O(N)",
+      "O(N^2) (hoặc O(E log N) khi cài đặt bằng cấu trúc hàng đợi ưu tiên Min-Heap)",
+      "O(N^3)",
+      "O(1)"
+    ],
+    "correct": 1,
+    "explanation": "Với cài đặt mảng thông thường, thuật toán lặp qua N bước, mỗi bước duyệt tìm nút có khoảng cách nhỏ nhất mất O(N), do đó tổng độ phức tạp là O(N^2). Nếu sử dụng cấu trúc đống nhị phân (Binary Min-Heap / Fibonacci Heap), độ phức tạp tối ưu xuống còn O(E log N) với E là số lượng cạnh liên kết."
+  },
+  {
+    "id": 438,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Định tuyến Khoai tây Nóng (Hot Potato Routing)",
+    "difficulty": "Thông hiểu",
+    "question": "Nguyên lý 'Định tuyến khoai tây nóng' (Hot Potato Routing) trong kiến trúc BGP được mô tả như thế nào?",
+    "options": [
+      "Router gửi gói tin qua đường truyền có nhiệt độ cao nhất",
+      "Router bên trong một AS sẽ chuyển gói tin tới router biên xuất ra khỏi AS với chi phí đường đi nội bộ (Intra-AS cost) nhỏ nhất có thể, nhằm tống khứ gói tin ra khỏi mạng của mình càng nhanh càng tốt",
+      "Router từ chối chuyển tiếp gói tin vào mùa hè",
+      "Gói tin bị hủy nếu không nhận được ACK trong 5 giây"
+    ],
+    "correct": 1,
+    "explanation": "Hot Potato Routing (Định tuyến củ khoai nóng): Giống như cầm củ khoai nóng bỏng tay muốn ném đi ngay, router lựa chọn router cổng ra (Exit Gateway) gần nhất bên trong AS của mình để đẩy gói tin ra khỏi mạng của mình nhanh nhất với chi phí nội bộ thấp nhất, bất kể quãng đường đi ngoài Internet sau đó có xa hay không."
+  },
+  {
+    "id": 439,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Tóm tắt Tuyến đường (Route Aggregation / CIDR)",
+    "difficulty": "Vận dụng",
+    "question": "Một router có 4 tuyến đường mạng con liên tiếp:\n- 192.168.16.0/24\n- 192.168.17.0/24\n- 192.168.18.0/24\n- 192.168.19.0/24\nRouter có thể tóm tắt (Supernetting / Aggregation) 4 mạng trên thành một tuyến đường duy nhất nào?",
+    "options": [
+      "192.168.0.0/16",
+      "192.168.16.0/22",
+      "192.168.16.0/23",
+      "192.168.16.0/21"
+    ],
+    "correct": 1,
+    "explanation": "Xét octet thứ ba ở dạng nhị phân:\n16 = 00010000_2\n17 = 00010001_2\n18 = 00010010_2\n19 = 00010011_2\nCả 4 mạng đều có chung 6 bit đầu tiên (000100). Do đó phần mạng chung gồm 8 bit (octet 1) + 8 bit (octet 2) + 6 bit (octet 3) = 22 bit. Tuyến tóm tắt duy nhất là: 192.168.16.0/22. Kỹ thuật này giúp thu gọn bảng định tuyến Internet toàn cầu."
+  },
+  {
+    "id": 440,
+    "exam_type": "nang_cao",
+    "chapter": 4,
+    "chapter_title": "Chương 4: Tầng Mạng (Network Layer)",
+    "category": "Thuật toán Lập lịch Hàng đợi (Scheduling)",
+    "difficulty": "Thông hiểu",
+    "question": "Thuật toán lập lịch hàng đợi Weighted Fair Queuing (WFQ) tại cổng ra của router đảm bảo điều gì cho các luồng lưu lượng khác nhau?",
+    "options": [
+      "Tất cả các luồng đều nhận băng thông bằng 0",
+      "Mỗi lớp lưu lượng (traffic class) được cấp một trọng số w_i và được đảm bảo một phần băng thông tối thiểu tỉ lệ thuận với trọng số w_i / (Tổng trọng số) trong suốt thời gian tắc nghẽn",
+      "Luồng nào gửi gói tin to hơn thì được truyền trước",
+      "Gói tin nào đến trước luôn được phục vụ trước bất kể dịch vụ"
+    ],
+    "correct": 1,
+    "explanation": "WFQ (Weighted Fair Queuing - Xếp hàng công bằng có trọng số) là cơ chế QoS (Chất lượng dịch vụ) quan trọng: Router chia gói tin vào các hàng đợi theo lớp dịch vụ (ví dụ VoIP, Video, Web) và gán trọng số ưu tiên. Cơ chế này đảm bảo luồng quan trọng (như thoại) có tỷ lệ băng thông cam kết mà không làm các luồng độ ưu tiên thấp bị bỏ đói (starvation)."
+  }
+]

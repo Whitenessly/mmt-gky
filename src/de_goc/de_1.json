@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "exam": 1,
+    "category": "Tầng Giao Vận (Transport Layer)",
+    "question": "Checksum trong gói dữ liệu UDP có độ dài bao nhiêu?",
+    "options": [
+      "8 bit",
+      "4 bit",
+      "16 bit",
+      "32 bit"
+    ],
+    "correct": 2,
+    "explanation": "Trong tiêu đề (header) của UDP (RFC 768), trường Checksum có độ dài cố định là 16 bit (2 byte), được sử dụng để phát hiện lỗi bit trong quá trình truyền gói tin UDP."
+  },
+  {
+    "id": 2,
+    "exam": 1,
+    "category": "Tổng quan & Mô hình Mạng",
+    "question": "Đơn vị dữ liệu ở tầng Liên kết dữ liệu (Data Link Layer) là gì?",
+    "options": [
+      "Segment",
+      "Frame",
+      "Datagram",
+      "Message"
+    ],
+    "correct": 1,
+    "explanation": "Đơn vị dữ liệu giao thức (PDU) theo từng tầng: Tầng Ứng dụng là Message; Tầng Giao vận là Segment; Tầng Mạng là Datagram / Packet; Tầng Liên kết dữ liệu là Frame; Tầng Vật lý là Bit."
+  },
+  {
+    "id": 3,
+    "exam": 1,
+    "category": "Tầng Giao Vận (Transport Layer)",
+    "question": "Trong gói dữ liệu UDP (UDP segment), vùng dữ liệu thực sự bắt đầu từ byte thứ mấy?",
+    "options": [
+      "4",
+      "9",
+      "8",
+      "5"
+    ],
+    "correct": 1,
+    "explanation": "Header của UDP gồm 4 trường (Source Port 2B, Destination Port 2B, Length 2B, Checksum 2B) với tổng kích thước cố định là 8 byte (đánh số byte 1 đến 8). Do đó vùng dữ liệu (payload) thực sự bắt đầu từ byte thứ 9."
+  },
+  {
+    "id": 4,
+    "exam": 1,
+    "category": "Tầng Giao Vận (Transport Layer)",
+    "question": "Trường số thứ tự (Sequence number) trong phần tiêu đề của TCP segment là gì?",
+    "options": [
+      "Số ACK tích lũy",
+      "Số thứ tự của byte đầu tiên trong segment",
+      "Số thứ tự lần lượt của segment từ 1 đến N",
+      "Số thứ tự của byte tiếp theo được mong đợi từ phía bên kia"
+    ],
+    "correct": 1,
+    "explanation": "TCP coi luồng dữ liệu là một dòng byte (byte stream) có thứ tự. Sequence Number của TCP segment mang giá trị là số thứ tự của byte dữ liệu đầu tiên nằm trong segment đó."
+  },
+  {
+    "id": 5,
+    "exam": 1,
+    "category": "Tầng Giao Vận (Transport Layer)",
+    "question": "Độ phức tạp của giao thức truyền tin cậy (rdt - Reliable Data Transfer protocol) phụ thuộc vào yếu tố nào?",
+    "options": [
+      "Các đặc tính của kênh truyền",
+      "Các thiết bị mạng (router, switch, hub, ...)",
+      "Kiến trúc mạng",
+      "Khoảng cách giữa các host"
+    ],
+    "correct": 0,
+    "explanation": "Theo lý thuyết rdt (rdt 1.0, 2.0, 2.1, 2.2, 3.0), độ phức tạp của giao thức truyền tin cậy phụ thuộc hoàn toàn vào các đặc tính của kênh truyền bên dưới (kênh hoàn hảo rdt 1.0; kênh có lỗi bit rdt 2.x; kênh có lỗi bit và mất gói rdt 3.0)."
+  },
+  {
+    "id": 6,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng (Application Layer)",
+    "question": "Quan sát một người đang truy nhập một trang web, thấy người này gõ đường dẫn như sau: http://gaia.cs.umass.edu:8080/kurose_ross/... Máy chủ web sử dụng là:",
+    "options": [
+      "Số hiệu cổng mặc định",
+      "Số hiệu cổng tùy ý",
+      "Số hiệu cổng dành riêng cho máy chủ web",
+      "Số hiệu cổng theo chuẩn chung"
+    ],
+    "correct": 1,
+    "explanation": "Cổng mặc định theo chuẩn của HTTP là 80. Khi URL ghi rõ số cổng như :8080, máy chủ web đang sử dụng số hiệu cổng tùy ý (không theo mặc định chuẩn chung)."
+  },
+  {
+    "id": 7,
+    "exam": 1,
+    "category": "Tầng Giao Vận & Ứng Dụng",
+    "question": "Các ứng dụng nào sau đây đều sử dụng giao thức truyền vận TCP?",
+    "options": [
+      "Hội thảo từ xa, điện thoại Internet, streaming media",
+      "Telnet, DNS, Email",
+      "Web, truyền file, Email",
+      "Web, DNS, điện thoại Internet"
+    ],
+    "correct": 2,
+    "explanation": "Web (HTTP/HTTPS), Truyền file (FTP), và Email (SMTP, POP3, IMAP) đều đòi hỏi tính toàn vẹn và độ tin cậy tuyệt đối về dữ liệu nên đều sử dụng TCP."
+  },
+  {
+    "id": 8,
+    "exam": 1,
+    "category": "Tầng Mạng (Network Layer)",
+    "question": "Tầng mạng (Network layer) thực hiện các chức năng chính nào?",
+    "options": [
+      "Vận chuyển dữ liệu giữa các máy chủ (end to end)",
+      "Tạo khung dữ liệu (frame)",
+      "Chọn đường và chuyển tiếp gói tin",
+      "Chạy chương trình ứng dụng người dùng"
+    ],
+    "correct": 2,
+    "explanation": "Hai chức năng cốt lõi quan trọng nhất của tầng Mạng là: Định tuyến / Chọn đường (Routing - xác định lộ trình gói tin từ nguồn đến đích) và Chuyển tiếp (Forwarding - chuyển gói tin từ cổng vào tới cổng ra thích hợp)."
+  },
+  {
+    "id": 9,
+    "exam": 1,
+    "category": "Tổng quan & Mô hình Mạng",
+    "question": "Thứ tự đúng của các đơn vị dữ liệu trong mô hình TCP/IP từ tầng ứng dụng xuống tầng vật lý là:",
+    "options": [
+      "Data, Segment, Packet, Frame, Bit",
+      "Data, Segment, Frame, Packet, Bit",
+      "Data, Packet, Frame, Segment, Bit",
+      "Data, Frame, Segment, Packet, Bit"
+    ],
+    "correct": 0,
+    "explanation": "Thứ tự PDU từ trên xuống: Tầng Ứng dụng (Data/Message) -> Tầng Giao vận (Segment) -> Tầng Mạng (Packet/Datagram) -> Tầng Liên kết dữ liệu (Frame) -> Tầng Vật lý (Bit)."
+  },
+  {
+    "id": 10,
+    "exam": 1,
+    "category": "Kiến trúc Mạng & Tô-pô",
+    "question": "Mô tả nào sau đây dành cho mạng tô-pô hình sao (Star topology)?",
+    "options": [
+      "Có một nút trung tâm và các nút mạng khác kết nối đến",
+      "Mỗi nút mạng đều kết nối trực tiếp với tất cả các nút khác",
+      "Truyền dữ liệu qua cáp đồng trục",
+      "Các nút mạng sử dụng chung một đường cáp"
+    ],
+    "correct": 0,
+    "explanation": "Mạng hình sao bao gồm một nút trung tâm (Hub hoặc Switch) và tất cả các trạm làm việc khác kết nối trực tiếp qua liên kết riêng tới nút trung tâm này."
+  },
+  {
+    "id": 11,
+    "exam": 1,
+    "category": "Tổng quan & Mô hình Mạng",
+    "question": "Quá trình dữ liệu di chuyển từ hệ thống máy tính này sang hệ thống máy tính khác phải trải qua giai đoạn nào tại các tầng gửi?",
+    "options": [
+      "Đóng gói dữ liệu",
+      "Lọc dữ liệu",
+      "Phân tích dữ liệu",
+      "Kiểm thử dữ liệu"
+    ],
+    "correct": 0,
+    "explanation": "Tại máy gửi, dữ liệu đi từ tầng Ứng dụng xuống các tầng thấp hơn qua quá trình Đóng gói dữ liệu (Encapsulation), mỗi tầng sẽ bổ sung thêm tiêu đề (header) của tầng đó."
+  },
+  {
+    "id": 12,
+    "exam": 1,
+    "category": "Tầng Giao Vận (Transport Layer)",
+    "question": "Một UDP socket được xác định (định danh) bởi cặp thông tin nào?",
+    "options": [
+      "Địa chỉ IP nguồn, địa chỉ IP đích",
+      "Địa chỉ IP đích, số port đích",
+      "Địa chỉ IP nguồn, số port nguồn",
+      "Địa chỉ IP nguồn, địa chỉ IP đích, số port nguồn, số port đích"
+    ],
+    "correct": 1,
+    "explanation": "UDP là giao thức phi kết nối. Hệ điều hành chuyển gói tin UDP đến ứng dụng dựa trên bộ 2 thành phần: (Địa chỉ IP đích, số hiệu cổng đích). Trong khi TCP socket cần bộ 4 thành phần (IP nguồn, port nguồn, IP đích, port đích)."
+  },
+  {
+    "id": 13,
+    "exam": 1,
+    "category": "Kiến trúc Ứng Dụng",
+    "question": "Trong kiến trúc ứng dụng dạng P2P (peer-to-peer):",
+    "options": [
+      "Các peer không kết nối liên tục và có thể thay đổi địa chỉ IP; mỗi peer yêu cầu dịch vụ từ các peer khác và ngược lại cung cấp dịch vụ cho các peer khác",
+      "Các peer không kết nối liên tục và có thể thay đổi địa chỉ IP; mỗi peer sẽ chỉ yêu cầu dịch vụ từ một số peer khác",
+      "Các peer kết nối liên tục và có địa chỉ IP cố định; mỗi peer sẽ chỉ yêu cầu dịch vụ từ một số peer khác",
+      "Các peer kết nối liên tục và có địa chỉ IP cố định; mỗi peer yêu cầu dịch vụ từ một peer nào đó"
+    ],
+    "correct": 0,
+    "explanation": "Đặc trưng của kiến trúc P2P là không có server luôn bật cố định, các peer kết nối ngắt quãng, có thể thay đổi địa chỉ IP, và mỗi peer vừa là client nhận dịch vụ, vừa là server cung cấp dịch vụ (self-scalability)."
+  },
+  {
+    "id": 14,
+    "exam": 1,
+    "category": "Tổng quan & Mô hình Mạng",
+    "question": "Thứ tự các tầng từ cao đến thấp trong mô hình TCP/IP là:",
+    "options": [
+      "Transport, Internet, Application, Network Access",
+      "Application, Internet, Transport, Network Access",
+      "Application, Network Access, Transport, Internet",
+      "Application, Transport, Internet, Network Access"
+    ],
+    "correct": 3,
+    "explanation": "Thứ tự từ trên xuống dưới trong mô hình TCP/IP: Tầng Ứng dụng (Application) -> Tầng Giao vận (Transport) -> Tầng Internet -> Tầng Truy cập mạng (Network Access)."
+  },
+  {
+    "id": 15,
+    "exam": 1,
+    "category": "Tổng quan & Hiệu năng Mạng",
+    "question": "Trễ truyền (Transmission delay) phụ thuộc vào yếu tố nào?",
+    "options": [
+      "Chiều dài của liên kết vật lý",
+      "Chiều dài của gói tin và băng thông của liên kết",
+      "Việc kiểm tra lỗi và xác định liên kết ra cho gói tin",
+      "Mức độ tắc nghẽn của bộ định tuyến"
+    ],
+    "correct": 1,
+    "explanation": "Trễ truyền được tính bằng d_trans = L / R, trong đó L là kích thước gói tin (bit) và R là băng thông đường truyền (bps). (Khác với trễ lan truyền d_prop = d / s phụ thuộc chiều dài d của liên kết)."
+  },
+  {
+    "id": 16,
+    "exam": 1,
+    "category": "Tổng quan & Hiệu năng Mạng",
+    "question": "RTT (Round Trip Time) là:",
+    "options": [
+      "Thời gian truyền file",
+      "Thời gian để gửi một gói nhỏ đi từ client đến server và quay trở về",
+      "Thời gian để gửi một gói nhỏ đi từ client đến server",
+      "Thời gian khởi tạo kết nối TCP"
+    ],
+    "correct": 1,
+    "explanation": "RTT (Round Trip Time - Thời gian khứ hồi) là thời gian để một gói tin nhỏ đi từ máy gửi đến máy nhận và quay trở về máy gửi."
+  },
+  {
+    "id": 17,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng & Cổng Dịch Vụ",
+    "question": "Trong số các cặp giao thức và cổng dịch vụ sau, cặp nào là SAI?",
+    "options": [
+      "SMTP: TCP Port 25",
+      "DNS: UDP Port 53",
+      "HTTP: TCP Port 80",
+      "FTP: UDP Port 22"
+    ],
+    "correct": 3,
+    "explanation": "Giao thức FTP sử dụng giao thức truyền vận TCP trên 2 cổng: cổng 20 (dữ liệu) và cổng 21 (điều khiển). Cổng 22 là dành cho giao thức SSH qua TCP. Do đó cặp 'FTP: UDP Port 22' là sai."
+  },
+  {
+    "id": 18,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng (Application Layer)",
+    "question": "Đâu là một URL (Uniform Resource Locator) hoàn chỉnh?",
+    "options": [
+      "www.someschool.edu",
+      "/someDept/pic.gif",
+      "www.someschool.edu/someDept/pic.gif",
+      "192.168.1.1"
+    ],
+    "correct": 2,
+    "explanation": "Một URL hoàn chỉnh bao gồm tên máy chủ lưu trữ (hostname: www.someschool.edu) và đường dẫn đến tài nguyên (pathname: /someDept/pic.gif)."
+  },
+  {
+    "id": 19,
+    "exam": 1,
+    "category": "Tầng Giao Vận (Transport Layer)",
+    "question": "Điều khiển luồng (Flow Control) có nghĩa là gì?",
+    "options": [
+      "Bên gửi điều khiển bên nhận để bên nhận có thể nhận liên tục dữ liệu",
+      "Bên nhận điều khiển bên gửi để bên gửi sẽ không làm tràn bộ đệm của bên nhận do việc gửi dữ liệu quá nhanh",
+      "Bên gửi gửi dữ liệu theo nhu cầu của người dùng",
+      "Bên nhận điều khiển bên gửi để bên gửi có thể gửi liên tục dữ liệu nhanh nhất cho bên nhận"
+    ],
+    "correct": 1,
+    "explanation": "Điều khiển luồng là cơ chế bên nhận kiểm soát tốc độ gửi dữ liệu của bên gửi, nhằm đảm bảo bên gửi không truyền dữ liệu quá nhanh làm tràn bộ đệm của bên nhận (buffer overflow)."
+  },
+  {
+    "id": 20,
+    "exam": 1,
+    "category": "Tổng quan & Kiến trúc Internet",
+    "question": "Cấu trúc chung của mạng Internet là:",
+    "options": [
+      "Mạng của các mạng, tất cả các ISP được kết nối ngang hàng với nhau",
+      "Mạng của các mạng, bao gồm rất nhiều các ISP lần lượt được kết nối với nhau theo cấu trúc phân tầng",
+      "Phân cấp tất cả các phần tử của mạng theo cấp độ của cơ quan, tổ chức, công ty đăng ký",
+      "Tất cả các phần tử của mạng được kết nối ngang hàng với nhau"
+    ],
+    "correct": 1,
+    "explanation": "Mạng Internet là mạng của các mạng kết nối theo cấu trúc thứ bậc phân tầng (hierarchical structure), gồm Tier-1 ISPs toàn cầu, Regional ISPs khu vực và Access ISPs cục bộ."
+  },
+  {
+    "id": 21,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng (Application Layer)",
+    "question": "Mã 404 trong thông điệp trả lời từ Web server cho Web client có ý nghĩa gì?",
+    "options": [
+      "Yêu cầu của Client không hợp lệ",
+      "Đối tượng client yêu cầu không có",
+      "Server không hiểu yêu cầu của client",
+      "Không có câu trả lời nào đúng"
+    ],
+    "correct": 1,
+    "explanation": "Mã trạng thái 404 Not Found báo hiệu rằng tài nguyên (tệp tin, trang web) mà client gửi yêu cầu không tồn tại trên máy chủ web."
+  },
+  {
+    "id": 22,
+    "exam": 1,
+    "category": "Kiến trúc Ứng Dụng",
+    "question": "Trong kiến trúc ứng dụng dạng client/server:",
+    "options": [
+      "Server luôn hoạt động và có địa chỉ IP cố định; client chỉ truyền thông với server và có địa chỉ IP có thể thay đổi",
+      "Server có địa chỉ IP cố định nhưng không phải thường xuyên hoạt động; client có địa chỉ IP cố định và chỉ truyền thông với server hoặc các client khác",
+      "Server luôn hoạt động và có địa chỉ IP cố định; client có địa chỉ IP không cố định và có thể trao đổi với client khác",
+      "Server có địa chỉ IP cố định nhưng không phải thường xuyên hoạt động; client chỉ truyền thông với server và địa chỉ IP cố định"
+    ],
+    "correct": 0,
+    "explanation": "Trong mô hình Client/Server: Server luôn thường trực trực tuyến (always-on) với địa chỉ IP tĩnh để các máy trạm có thể kết nối đến; Client chỉ liên lạc với server và địa chỉ IP của client có thể là IP động thay đổi."
+  },
+  {
+    "id": 23,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng (Application Layer)",
+    "question": "Các Web client thường được gọi là gì?",
+    "options": [
+      "Browser",
+      "HTML interpreter (trình thông dịch HTML)",
+      "Mosaic",
+      "Netscape Navigator"
+    ],
+    "correct": 0,
+    "explanation": "Các ứng dụng client dùng để truy cập dịch vụ Web được người dùng và kỹ thuật gọi chung là Trình duyệt Web (Web Browser)."
+  },
+  {
+    "id": 24,
+    "exam": 1,
+    "category": "Kiến trúc Ứng Dụng",
+    "question": "Ứng dụng nào sau đây được xây dựng theo mô hình client/server thuần túy?",
+    "options": [
+      "KaZaA, Email",
+      "Email, Web",
+      "Bit Torrent, Web",
+      "Skype, Email"
+    ],
+    "correct": 1,
+    "explanation": "Web (HTTP) và Email (SMTP, POP3, IMAP) hoạt động theo kiến trúc Client/Server truyền thống. BitTorrent, KaZaA, Skype là các hệ thống dùng kiến trúc P2P."
+  },
+  {
+    "id": 25,
+    "exam": 1,
+    "category": "Tổng quan & Mô hình Mạng",
+    "question": "Trong mô hình mạng Internet, chuẩn UNICODE (cho việc mã hoá các ký tự) sẽ nằm ở tầng nào?",
+    "options": [
+      "Liên kết dữ liệu",
+      "Ứng dụng",
+      "Giao vận",
+      "Mạng"
+    ],
+    "correct": 1,
+    "explanation": "Trong mô hình TCP/IP, các chức năng định dạng, nén và mã hóa ký tự (như UNICODE, ASCII) vốn thuộc tầng Trình diễn (Presentation) trong OSI được tích hợp trực tiếp vào Tầng Ứng dụng (Application)."
+  },
+  {
+    "id": 26,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng (Application Layer)",
+    "question": "FTP là từ viết tắt của cụm từ nào?",
+    "options": [
+      "Protocol Transfer Program",
+      "Folder Transfer Protocol",
+      "Protocol Transfer Folder",
+      "File Transfer Protocol"
+    ],
+    "correct": 3,
+    "explanation": "FTP là viết tắt của File Transfer Protocol (Giao thức truyền tệp tin)."
+  },
+  {
+    "id": 27,
+    "exam": 1,
+    "category": "Tổng quan & Hiệu năng Mạng",
+    "question": "Giả sử cần truyền một gói tin có độ dài L = 18Mb trên 2 liên kết liền nhau, thông qua một bộ chuyển mạch lưu-và-chuyển tiếp (store-and-forward) có tốc độ R = 1.5 Mbps. Thời gian để truyền gói từ đầu cuối này đến đầu cuối kia là:",
+    "options": [
+      "24s",
+      "12s",
+      "1,5s",
+      "27s"
+    ],
+    "correct": 0,
+    "explanation": "Thời gian truyền trên 1 chặng là: d = L / R = 18 Mb / 1.5 Mbps = 12 giây. Với bộ chuyển mạch store-and-forward trên 2 liên kết, router phải nhận xong toàn bộ gói mới đẩy sang liên kết 2, tổng thời gian truyền là: 2 * (L / R) = 2 * 12s = 24 giây."
+  },
+  {
+    "id": 28,
+    "exam": 1,
+    "category": "Kiến trúc Mạng & Tô-pô",
+    "question": "Mạng LAN hình sao (STAR) khi có sự cố trên đường cáp nối một máy trạm thì:",
+    "options": [
+      "Không ảnh hưởng tới hoạt động toàn bộ hệ thống",
+      "Sẽ ngừng hoạt động toàn bộ hệ thống",
+      "Chỉ ảnh hưởng đến một phần của hệ thống",
+      "Chỉ ảnh hưởng đến trạm có sự cố"
+    ],
+    "correct": 3,
+    "explanation": "Trong mạng hình sao, mỗi nút mạng kết nối độc lập với thiết bị trung tâm. Do đó khi cáp nối của một trạm có sự cố thì chỉ duy nhất trạm đó bị mất kết nối, các trạm còn lại vẫn hoạt động bình thường."
+  },
+  {
+    "id": 29,
+    "exam": 1,
+    "category": "Tầng Giao Vận & Ứng Dụng",
+    "question": "Định danh (identifier) của một tiến trình trên mạng bao gồm các thành phần nào?",
+    "options": [
+      "Địa chỉ IP của host",
+      "Địa chỉ IP nguồn, số hiệu cổng nguồn, địa chỉ IP đích, số hiệu cổng đích",
+      "Địa chỉ IP nguồn và địa chỉ IP đích",
+      "Địa chỉ IP và số hiệu cổng liên kết với tiến trình trên host"
+    ],
+    "correct": 3,
+    "explanation": "Để xác định một tiến trình chạy trên mạng, cần có Địa chỉ IP (để xác định máy chủ/host) và Số hiệu cổng Port (để phân biệt giữa các tiến trình đang chạy trên cùng host đó)."
+  },
+  {
+    "id": 30,
+    "exam": 1,
+    "category": "Tầng Ứng Dụng (Application Layer)",
+    "question": "Mục đích của kỹ thuật Web caching (Proxy server) là gì?",
+    "options": [
+      "Thỏa mãn yêu cầu HTTP của client mà không cần liên quan đến server nguồn",
+      "Giúp client lấy thông tin mà không cần gửi yêu cầu HTTP",
+      "Chứa mọi thông tin mà các client bên trong hệ thống mạng cần",
+      "Thỏa mãn yêu cầu HTTP của client bằng cách đi đến server nguồn để lấy thông tin"
+    ],
+    "correct": 0,
+    "explanation": "Web cache lưu trữ bản sao dữ liệu của các yêu cầu HTTP. Khi có yêu cầu mới trùng khớp, nó trả về dữ liệu ngay từ bộ đệm mà không cần gửi truy vấn tới server nguồn, giúp giảm thời gian phản hồi và tiết kiệm băng thông mạng."
+  }
+]

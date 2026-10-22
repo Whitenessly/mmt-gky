@@ -1,0 +1,937 @@
+[
+  {
+    "id": 601,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ipconfig & Xử lý Sự cố",
+    "difficulty": "Nhận biết",
+    "question": "Để xem thông tin chi tiết toàn diện của tất cả các giao diện mạng trên hệ điều hành Windows (bao gồm địa chỉ MAC, máy chủ DHCP, thời hạn thuê IP, DNS Server và Default Gateway), ta sử dụng lệnh nào?",
+    "options": [
+      "ipconfig",
+      "ipconfig /all",
+      "ipconfig /displaydns",
+      "ipconfig /renew"
+    ],
+    "correct": 1,
+    "explanation": "Lệnh 'ipconfig' thông thường chỉ hiển thị địa chỉ IPv4, Subnet Mask và Default Gateway cơ bản. Tùy chọn 'ipconfig /all' hiển thị đầy đủ thông số kỹ thuật chi tiết: Tên máy (Host name), Địa chỉ vật lý (Physical Address / MAC 48 bit), DHCP Enabled, thời điểm cấp/hết hạn thuê IP (Lease Obtained/Expires), DHCP Server và DNS Servers."
+  },
+  {
+    "id": 602,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ipconfig & Xử lý Sự cố",
+    "difficulty": "Thông hiểu",
+    "question": "Khi quản trị viên web vừa thay đổi địa chỉ IP của một website sang máy chủ mới, nhưng máy tính của bạn vẫn liên tục truy cập vào địa chỉ IP cũ do lưu trong bộ đệm hệ thống. Lệnh nào sau đây giúp xóa sạch cache DNS của Windows để máy tính truy vấn lại IP mới ngay lập tức?",
+    "options": [
+      "ipconfig /renew",
+      "ipconfig /release",
+      "ipconfig /flushdns",
+      "ipconfig /registerdns"
+    ],
+    "correct": 2,
+    "explanation": "Lệnh 'ipconfig /flushdns' có chức năng xóa sạch toàn bộ bộ nhớ đệm (DNS Resolver Cache) của client trên Windows. Sau khi thực hiện lệnh này, các lần truy cập website tiếp theo sẽ buộc hệ điều hành phải gửi truy vấn mới tới máy chủ DNS để nhận địa chỉ IP cập nhật."
+  },
+  {
+    "id": 603,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ipconfig & Xử lý Sự cố",
+    "difficulty": "Thông hiểu",
+    "question": "Lệnh 'ipconfig /release' thực hiện hành động kỹ thuật nào?",
+    "options": [
+      "Xóa toàn bộ mật khẩu WiFi đã lưu",
+      "Gửi thông điệp DHCP Release tới máy chủ DHCP để hủy bỏ hợp đồng thuê địa chỉ IP hiện tại và trả địa chỉ IP về giá trị 0.0.0.0",
+      "Ngắt kết nối Bluetooth trên máy tính",
+      "Khởi động lại card mạng ở chế độ bảo mật cao nhất"
+    ],
+    "correct": 1,
+    "explanation": "Lệnh 'ipconfig /release' giải phóng địa chỉ IP được cấp phát bởi DHCP server. Máy trạm gửi thông điệp DHCP Release báo cho server biết rằng nó không còn sử dụng IP này nữa. Ngay sau đó, IP của máy trạm sẽ hiển thị là 0.0.0.0 (chưa được cấu hình)."
+  },
+  {
+    "id": 604,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ipconfig & Xử lý Sự cố",
+    "difficulty": "Vận dụng",
+    "question": "Để yêu cầu máy chủ DHCP cấp lại địa chỉ IP mới hoặc gia hạn lại hợp đồng thuê IP sau khi vừa giải phóng bằng lệnh release, ta sử dụng lệnh nào?",
+    "options": [
+      "ipconfig /showclassid",
+      "ipconfig /renew",
+      "ipconfig /allcompartments",
+      "ipconfig /setclassid"
+    ],
+    "correct": 1,
+    "explanation": "Lệnh 'ipconfig /renew' kích hoạt quá trình gửi lại gói tin DHCP Request (hoặc DHCP Discover nếu đã release) tới DHCP Server để xin cấp một địa chỉ IP mới hoặc làm mới thời hạn hợp đồng thuê (Lease renewal)."
+  },
+  {
+    "id": 605,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ipconfig & Xử lý Sự cố",
+    "difficulty": "Thông hiểu",
+    "question": "Để xem danh sách toàn bộ các tên miền và bản ghi ánh xạ IP hiện đang được lưu trong bộ nhớ đệm DNS của Windows mà chưa hết hạn TTL, ta dùng lệnh:",
+    "options": [
+      "ipconfig /displaydns",
+      "ipconfig /flushdns",
+      "ipconfig /registerdns",
+      "ipconfig /showdns"
+    ],
+    "correct": 0,
+    "explanation": "Lệnh 'ipconfig /displaydns' xuất ra màn hình toàn bộ các bản ghi DNS đang lưu tạm trong cache của trình giải quyết tên miền Windows (DNS Client Service), bao gồm Record Name, Record Type (A, AAAA, CNAME), Time To Live (TTL còn lại tính bằng giây) và Data (địa chỉ IP tương ứng)."
+  },
+  {
+    "id": 606,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping & Chẩn đoán",
+    "difficulty": "Nhận biết",
+    "question": "Trong hệ điều hành Windows, tham số nào của lệnh ping được sử dụng để gửi gói tin ping liên tục không ngừng cho đến khi người dùng chủ động nhấn tổ hợp phím Ctrl + C?",
+    "options": [
+      "ping -c",
+      "ping -t",
+      "ping -l",
+      "ping -a"
+    ],
+    "correct": 1,
+    "explanation": "Tùy chọn 'ping -t' trên Windows ra lệnh cho chương trình tiếp tục gửi gói tin ICMP liên tục cho đến khi bị ngắt bởi người dùng (Ctrl+C). Muốn tạm dừng để xem thống kê mà không thoát lệnh, người dùng có thể bấm Ctrl+Break."
+  },
+  {
+    "id": 607,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping & Chẩn đoán",
+    "difficulty": "Đánh lừa",
+    "question": "Sự khác biệt về cú pháp chỉ định số lượng gói tin gửi đi giữa lệnh ping trên Windows và Linux là gì?",
+    "options": [
+      "Windows dùng tham số -c <số_gói>, còn Linux dùng -n <số_gói>",
+      "Windows dùng tham số -n <số_gói> (Number), còn Linux/macOS dùng tham số -c <số_gói> (Count)",
+      "Cả hai hệ điều hành đều bắt buộc dùng -count",
+      "Windows không giới hạn được số gói gửi đi"
+    ],
+    "correct": 1,
+    "explanation": "Đây là bẫy dòng lệnh rất phổ biến: Trên Command Prompt của Windows, tham số đặt số gói gửi là -n (ví dụ ping 8.8.8.8 -n 5); trong khi trên Terminal của Linux / macOS, tham số đặt số gói gửi là -c (ví dụ ping 8.8.8.8 -c 5)."
+  },
+  {
+    "id": 608,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping & Chẩn đoán",
+    "difficulty": "Vận dụng",
+    "question": "Để tìm giá trị MTU (Maximum Transmission Unit) lớn nhất mà đường truyền hỗ trợ không bị phân mảnh, kỹ sư mạng sử dụng lệnh ping kết hợp 2 tham số nào trên Windows?",
+    "options": [
+      "ping -a -t",
+      "ping -f -l <kích_thước_byte>",
+      "ping -r -s",
+      "ping -w -n"
+    ],
+    "correct": 1,
+    "explanation": "Tùy chọn '-l <size>' cho phép đặt kích thước phần đệm dữ liệu (payload buffer size). Tùy chọn '-f' bật cờ Don't Fragment (DF=1) trong IP header. Nếu kích thước gói vượt quá MTU của bất kỳ liên kết nào trên đường đi, router sẽ hủy gói và báo lỗi 'Packet needs to be fragmented but DF set', từ đó giúp kỹ sư dò ra MTU tối ưu."
+  },
+  {
+    "id": 609,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping & Chẩn đoán",
+    "difficulty": "Thông hiểu",
+    "question": "Khi ping một địa chỉ IP và nhận được thông báo 'Request timed out' nhưng khi ping địa chỉ IP khác vẫn bình thường, nguyên nhân có khả năng cao nhất là gì?",
+    "options": [
+      "Dây cáp mạng của máy tính người dùng bị đứt hoàn toàn",
+      "Máy đích không tồn tại, đang tắt nguồn, hoặc tường lửa (Firewall) trên máy đích/router phía trước máy đích đã cấu hình chặn gói tin ICMP Echo Request",
+      "Card mạng của máy người dùng bị hỏng",
+      "Toàn bộ mạng Internet toàn cầu bị mất kết nối"
+    ],
+    "correct": 1,
+    "explanation": "'Request timed out' nghĩa là gói tin đã được gửi đi nhưng máy gửi không nhận được bất kỳ phản hồi ICMP nào trong thời gian chờ (mặc định 4000 ms). Rất nhiều máy chủ và hệ thống tường lửa doanh nghiệp (như máy chủ Microsoft) chủ động tắt phản hồi ICMP Echo để chống lại các cuộc tấn công quét mạng và DDoS."
+  },
+  {
+    "id": 610,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping & Chẩn đoán",
+    "difficulty": "Thông hiểu",
+    "question": "Khi thực hiện lệnh ping, nhận được thông báo 'Destination host unreachable' (Máy đích không thể tiếp cận). Thông báo này phản ánh sự cố ở đâu?",
+    "options": [
+      "Máy đích đang bận xử lý ứng dụng web",
+      "Router cục bộ (Gateway) hoặc một router trung gian không tìm thấy tuyến đường (route) dẫn tới mạng của máy đích trong bảng định tuyến, hoặc lỗi phân giải ARP trong mạng LAN",
+      "Tốc độ mạng quá nhanh làm gói tin bị trôi mất",
+      "Máy tính người dùng chưa cài đặt trình duyệt web"
+    ],
+    "correct": 1,
+    "explanation": "Khác với 'Request timed out' (không ai trả lời), thông báo 'Destination host unreachable' là do chính router (thường là Default Gateway của bạn hoặc router chặn kề cận) chủ động gửi gói tin ICMP Type 3 phản hồi lại để báo rằng: 'Tôi đã tra bảng định tuyến nhưng hoàn toàn không có đường đi đến dải mạng này'."
+  },
+  {
+    "id": 611,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Tracert & Định tuyến",
+    "difficulty": "Nhận biết",
+    "question": "Cú pháp lệnh để theo dõi đường đi của gói tin tới máy chủ ptit.edu.vn trên hệ điều hành Windows là gì?",
+    "options": [
+      "traceroute ptit.edu.vn",
+      "tracert ptit.edu.vn",
+      "trace -route ptit.edu.vn",
+      "ip trace ptit.edu.vn"
+    ],
+    "correct": 1,
+    "explanation": "Trên Windows Command Prompt, tên lệnh chuẩn xác là 'tracert <hostname/IP>'. Trong khi trên Linux, macOS và Cisco IOS, tên lệnh đầy đủ là 'traceroute <hostname/IP>'."
+  },
+  {
+    "id": 612,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Tracert & Định tuyến",
+    "difficulty": "Thông hiểu",
+    "question": "Tham số '-d' trong lệnh 'tracert -d ptit.edu.vn' có tác dụng gì quan trọng giúp rút ngắn thời gian thực thi lệnh?",
+    "options": [
+      "Tự động xóa lịch sử truy cập web",
+      "Ngăn không cho chương trình phân giải ngược địa chỉ IP của các router thành tên miền (Do not resolve addresses to hostnames), giúp kết quả hiển thị ngay lập tức mà không phải chờ đợi tra cứu DNS",
+      "Tăng số hop tối đa lên 100",
+      "Chuyển đổi giao thức sang UDP"
+    ],
+    "correct": 1,
+    "explanation": "Mặc định, sau khi nhận được phản hồi IP từ mỗi hop, tracert sẽ thực hiện truy vấn phân giải ngược DNS (Reverse DNS Lookup) để lấy tên máy chủ. Việc này thường mất vài giây cho mỗi router. Tùy chọn '-d' bỏ qua bước tra tên này và chỉ in ra địa chỉ IP, giúp lệnh chạy nhanh gấp nhiều lần."
+  },
+  {
+    "id": 613,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Tracert & Định tuyến",
+    "difficulty": "Thông hiểu",
+    "question": "Khi quan sát kết quả chạy lệnh tracert, tại một bước nhảy (hop) xuất hiện biểu tượng '* * * Request timed out', nhưng các bước nhảy phía sau đó vẫn hiển thị thông tin router và RTT bình thường. Điều này có nghĩa là gì?",
+    "options": [
+      "Đường truyền đã bị đứt tại hop đó",
+      "Router tại hop đó được cấu hình bảo mật để không phản hồi thông điệp ICMP Time Exceeded (hoặc giảm độ ưu tiên xử lý ICMP), nhưng vẫn thực hiện chuyển tiếp gói tin sang hop kế tiếp bình thường",
+      "Gói tin đã bị chuyển nhầm sang một hành tinh khác",
+      "Máy tính bị hỏng card mạng tại thời điểm đó"
+    ],
+    "correct": 1,
+    "explanation": "Nhiều quản trị viên router mạng lõi tắt phản hồi ICMP Time Exceeded để bảo vệ CPU của router khỏi bị quá tải hoặc để ẩn danh cấu hình mạng. Việc hop đó hiện '* * *' không đồng nghĩa với việc mạng bị lỗi, bằng chứng là các hop tiếp theo phía sau vẫn nhận và chuyển tiếp gói tin bình thường."
+  },
+  {
+    "id": 614,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Netstat & Kiểm tra Kết nối",
+    "difficulty": "Nhận biết",
+    "question": "Lệnh netstat với các tham số '-ano' (netstat -ano) trên Windows hiển thị những thông tin gì?",
+    "options": [
+      "Tất cả kết nối (a), hiển thị địa chỉ và cổng dạng số (n), và kèm theo mã tiến trình PID của chương trình đang chạy (o)",
+      "Địa chỉ MAC của tất cả máy tính trong phòng",
+      "Mật khẩu các tài khoản quản trị",
+      "Tốc độ quạt tản nhiệt của router"
+    ],
+    "correct": 0,
+    "explanation": "Các tùy chọn trong 'netstat -ano': -a: Hiển thị tất cả kết nối và các cổng đang lắng nghe (Listening); -n: Hiển thị địa chỉ IP và Port dưới dạng số nguyên (không dịch sang tên dịch vụ); -o: Hiển thị thêm cột PID (Process ID) giúp người quản trị dễ dàng mở Task Manager để tìm ra chính xác ứng dụng hoặc virus nào đang mở cổng kết nối đó."
+  },
+  {
+    "id": 615,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Netstat & Kiểm tra Kết nối",
+    "difficulty": "Thông hiểu",
+    "question": "Trong kết quả trả về của lệnh netstat, trạng thái kết nối 'ESTABLISHED' đối với giao thức TCP có ý nghĩa là gì?",
+    "options": [
+      "Cổng đang ở trạng thái đóng hoàn toàn",
+      "Kết nối TCP đã hoàn tất quá trình bắt tay 3 bước thành công và hai đầu cuối đang trong phiên trao đổi dữ liệu hoạt động",
+      "Máy trạm vừa gửi gói tin SYN và đang chờ phản hồi",
+      "Kết nối đã bị ngắt bởi tường lửa"
+    ],
+    "correct": 1,
+    "explanation": "Trạng thái 'ESTABLISHED' là trạng thái hoạt động chính của một kết nối TCP sau khi cả hai phía đã hoàn tất 3-way handshake. Tại trạng thái này, dữ liệu tầng ứng dụng đang được truyền tải qua lại giữa hai đầu cuối một cách tin cậy."
+  },
+  {
+    "id": 616,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Netstat & Kiểm tra Kết nối",
+    "difficulty": "Vận dụng",
+    "question": "Để hiển thị tên tệp tin thực thi (.exe) của chương trình đã tạo ra kết nối mạng (cần chạy Command Prompt với quyền Administrator), ta sử dụng tham số nào của netstat?",
+    "options": [
+      "netstat -b",
+      "netstat -e",
+      "netstat -s",
+      "netstat -r"
+    ],
+    "correct": 0,
+    "explanation": "Lệnh 'netstat -b' hiển thị tên tệp thực thi (.exe như chrome.exe, svchost.exe, discord.exe) tham gia vào việc tạo kết nối hoặc mở cổng lắng nghe. Vì lý do bảo mật, lệnh này yêu cầu quyền Administrator để đọc thông tin tiến trình của hệ điều hành."
+  },
+  {
+    "id": 617,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Nslookup & Tra cứu DNS",
+    "difficulty": "Nhận biết",
+    "question": "Công cụ dòng lệnh tiêu chuẩn được tích hợp sẵn trên cả Windows và Linux chuyên dùng để truy vấn và kiểm tra hoạt động của máy chủ tên miền DNS là:",
+    "options": [
+      "ping",
+      "tracert",
+      "nslookup",
+      "netstat"
+    ],
+    "correct": 2,
+    "explanation": "Nslookup (Name Server Lookup) là tiện ích dòng lệnh kinh điển để kiểm tra và khắc phục sự cố hệ thống DNS. Nó cho phép tra cứu địa chỉ IP từ tên miền, tra cứu ngược từ IP sang tên miền, và chỉ định máy chủ DNS tùy ý để kiểm tra tính chính xác của các bản ghi."
+  },
+  {
+    "id": 618,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Nslookup & Tra cứu DNS",
+    "difficulty": "Vận dụng",
+    "question": "Để truy vấn bản ghi máy chủ thư điện tử (Mail Server - MX Record) của tên miền ptit.edu.vn bằng công cụ nslookup trong chế độ tương tác (Interactive mode), người dùng cần gõ lệnh nào?",
+    "options": [
+      "set type=mx",
+      "set query=mail",
+      "find mx ptit.edu.vn",
+      "lookup mailserver"
+    ],
+    "correct": 0,
+    "explanation": "Trong giao diện tương tác của nslookup (gõ nslookup rồi nhấn Enter), lệnh 'set type=mx' (hoặc set q=mx) đặt kiểu bản ghi truy vấn là Mail Exchange (MX). Sau đó gõ tiếp tên miền 'ptit.edu.vn', hệ thống sẽ trả về danh sách các Mail Server tiếp nhận email của PTIT kèm theo độ ưu tiên (Priority/Preference)."
+  },
+  {
+    "id": 619,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Nslookup & Tra cứu DNS",
+    "difficulty": "Thông hiểu",
+    "question": "Khi gõ lệnh 'nslookup ptit.edu.vn 8.8.8.8', ý nghĩa của đối số '8.8.8.8' ở cuối dòng lệnh là gì?",
+    "options": [
+      "Đặt thời gian chờ timeout là 8.8 giây",
+      "Chỉ định truy vấn trực tiếp tới máy chủ DNS có địa chỉ IP 8.8.8.8 (Google DNS) thay vì sử dụng máy chủ DNS mặc định của nhà mạng",
+      "Gửi 8 gói tin kiểm tra kết nối",
+      "Đặt số cổng kết nối là 8888"
+    ],
+    "correct": 1,
+    "explanation": "Cú pháp nâng cao của nslookup cho phép chỉ định máy chủ DNS đích ở tham số thứ hai: 'nslookup <tên_miền> <IP_máy_chủ_DNS>'. Lệnh này ép buộc truy vấn được gửi thẳng đến máy chủ 8.8.8.8, giúp quản trị viên kiểm tra xem lỗi phân giải tên miền là do DNS của nhà mạng cục bộ hay do cấu hình trên máy chủ quốc tế."
+  },
+  {
+    "id": 620,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Arp & Bảng MAC-IP",
+    "difficulty": "Nhận biết",
+    "question": "Để xem toàn bộ bảng lưu trữ bộ nhớ đệm ARP (ARP Cache Table) chứa danh sách các địa chỉ IP và địa chỉ MAC tương ứng trên máy tính, ta sử dụng lệnh nào?",
+    "options": [
+      "arp -show",
+      "arp -a",
+      "arp -list",
+      "arp -view"
+    ],
+    "correct": 1,
+    "explanation": "Lệnh 'arp -a' (hoặc 'arp -g') hiển thị bảng ARP cache hiện tại của tất cả các giao diện mạng trên hệ điều hành Windows và Linux. Bảng gồm 3 cột chính: Internet Address (IP), Physical Address (MAC), và Type (Dynamic - động do giao thức ARP tự học, hoặc Static - tĩnh do quản trị viên cấu hình)."
+  },
+  {
+    "id": 621,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Arp & Bảng MAC-IP",
+    "difficulty": "Vận dụng",
+    "question": "Để xóa một bản ghi ánh xạ IP-MAC bị sai lệch hoặc nghi ngờ bị đầu độc (ARP Spoofing) khỏi bảng ARP (ví dụ xóa bản ghi của IP 192.168.1.1), ta thực hiện lệnh nào với quyền Administrator?",
+    "options": [
+      "arp -clear 192.168.1.1",
+      "arp -d 192.168.1.1",
+      "arp -r 192.168.1.1",
+      "arp -clean"
+    ],
+    "correct": 1,
+    "explanation": "Tham số '-d' (Delete) dùng để xóa bản ghi khỏi bảng ARP. Cú pháp: 'arp -d <ip_address>' để xóa một địa chỉ cụ thể, hoặc 'arp -d *' để xóa toàn bộ bảng ARP. Sau khi xóa, máy tính sẽ phát thông điệp ARP Request mới để tìm lại địa chỉ MAC chuẩn xác."
+  },
+  {
+    "id": 622,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Route & Bảng Định tuyến",
+    "difficulty": "Thông hiểu",
+    "question": "Trong kết quả trả về của lệnh 'route print' trên Windows, mục nào đại diện cho tuyến đường mặc định (Default Gateway) để gửi tất cả các gói tin đi ra ngoài Internet?",
+    "options": [
+      "Network Destination: 127.0.0.1, Netmask: 255.0.0.0",
+      "Network Destination: 0.0.0.0, Netmask: 0.0.0.0",
+      "Network Destination: 255.255.255.255, Netmask: 255.255.255.255",
+      "Network Destination: 224.0.0.0, Netmask: 240.0.0.0"
+    ],
+    "correct": 1,
+    "explanation": "Tuyến đường mặc định (Default Route) được đại diện bởi cặp địa chỉ mạng và mặt nạ 0.0.0.0 / 0.0.0.0 (tương ứng với 0.0.0.0/0). Mọi gói tin có địa chỉ IP đích không khớp với bất kỳ mạng cục bộ cụ thể nào trong bảng định tuyến đều sẽ được đẩy về địa chỉ Gateway chỉ định trong dòng này."
+  },
+  {
+    "id": 623,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phần mềm Wireshark: Giao diện & Chế độ",
+    "difficulty": "Nhận biết",
+    "question": "Để Wireshark có thể bắt được toàn bộ các gói tin lưu thông trong mạng LAN (ngay cả các gói tin không gửi đích danh cho máy của mình), card mạng cần được đặt ở chế độ nào?",
+    "options": [
+      "Chế độ Tiết kiệm pin (Power Saver Mode)",
+      "Chế độ Hỗn tạp (Promiscuous Mode)",
+      "Chế độ Cầu nối (Bridge Mode)",
+      "Chế độ Đơn hướng (Simplex Mode)"
+    ],
+    "correct": 1,
+    "explanation": "Bình thường card mạng chỉ tiếp nhận các khung có địa chỉ MAC trùng với MAC của nó hoặc địa chỉ Broadcast. Chế độ Promiscuous Mode (Chế độ hỗn tạp/không phân biệt) bắt buộc card mạng phải chuyển tiếp toàn bộ mọi khung tín hiệu thu được trên đường truyền vật lý lên cho hệ điều hành và Wireshark phân tích."
+  },
+  {
+    "id": 624,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phần mềm Wireshark: Cú pháp Bộ lọc",
+    "difficulty": "Vận dụng",
+    "question": "Trong ô Display Filter của Wireshark, cú pháp chuẩn xác để chỉ lọc và hiển thị các gói tin HTTP gửi yêu cầu bằng phương thức GET là:",
+    "options": [
+      "http == GET",
+      "http.request.method == \"GET\"",
+      "tcp.port == 80 and get",
+      "http.get == true"
+    ],
+    "correct": 1,
+    "explanation": "Wireshark có cú pháp Display Filter phân cấp rất chặt chẽ: Trường kiểm tra phương thức HTTP là 'http.request.method', giá trị chuỗi được đặt trong dấu ngoặc kép. Cú pháp đúng là: http.request.method == \"GET\"."
+  },
+  {
+    "id": 625,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phần mềm Wireshark: Cú pháp Bộ lọc",
+    "difficulty": "Vận dụng",
+    "question": "Để lọc ra duy nhất gói tin đầu tiên khởi tạo bắt tay kết nối TCP (gói tin SYN) từ phía Client, biểu thức lọc nào sau đây trong Wireshark là ĐÚNG?",
+    "options": [
+      "tcp.flags == 1",
+      "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+      "tcp.syn == true",
+      "tcp.handshake == start"
+    ],
+    "correct": 1,
+    "explanation": "Gói bắt tay đầu tiên chỉ có cờ SYN được bật và chưa có cờ ACK (vì chưa có dữ liệu để xác nhận). Do đó biểu thức chuẩn xác là: tcp.flags.syn == 1 && tcp.flags.ack == 0. Nếu chỉ lọc 'tcp.flags.syn == 1', bạn sẽ bị lẫn cả gói tin thứ hai (SYN-ACK của Server) vốn cũng có cờ SYN=1."
+  },
+  {
+    "id": 626,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phần mềm Wireshark: Tính năng Follow Stream",
+    "difficulty": "Thông hiểu",
+    "question": "Tính năng 'Follow TCP Stream' trong phần mềm Wireshark mang lại lợi ích gì cho kỹ sư phân tích?",
+    "options": [
+      "Tự động tăng tốc độ mạng của phiên kết nối",
+      "Tự động thu thập, sắp xếp lại theo đúng thứ tự và ghép nối các phân đoạn TCP thành một luồng dữ liệu liên tục hoàn chỉnh ở tầng ứng dụng (hiển thị đối thoại giữa client và server dưới dạng văn bản đọc được)",
+      "Giải mã mật khẩu tài khoản ngân hàng đã mã hóa",
+      "Chặn gói tin không cho gửi tới đích"
+    ],
+    "correct": 1,
+    "explanation": "'Follow TCP Stream' loại bỏ tất cả các tiêu đề kỹ thuật rườm rà của tầng mạng/tầng giao vận, tự động ghép nối các mảnh byte stream lại và hiển thị toàn bộ nội dung trao đổi giữa hai bên (màu đỏ là dữ liệu máy khách gửi lên, màu xanh là phản hồi máy chủ trả về), cực kỳ hữu ích khi đọc nội dung HTTP, SMTP, FTP."
+  },
+  {
+    "id": 627,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phần mềm Wireshark: Phân tích HTTPS",
+    "difficulty": "Đánh lừa",
+    "question": "Khi sử dụng Wireshark bắt các gói tin của một phiên truy cập trang web HTTPS (cổng 443), tại sao người dùng chỉ thấy các gói tin ghi thông tin 'Application Data' và nội dung trong phần Packet Bytes toàn là các ký tự vô nghĩa không đọc được mã nguồn HTML?",
+    "options": [
+      "Do phần mềm Wireshark bị lỗi cài đặt thiếu driver",
+      "Do tầng ứng dụng đã được mã hóa bởi giao thức bảo mật TLS/SSL (Transport Layer Security) trước khi đưa xuống tầng TCP, dữ liệu truyền đi đã biến thành bản mã (Ciphertext)",
+      "Do máy chủ web từ chối gửi mã HTML cho Wireshark",
+      "Do cáp mạng cáp quang tự động che giấu văn bản"
+    ],
+    "correct": 1,
+    "explanation": "Đây là tính năng cốt lõi của HTTPS: Toàn bộ dữ liệu tầng ứng dụng (HTTP request và response) được mã hóa bằng thuật toán mã hóa khóa đối xứng (như AES-GCM) của phiên TLS. Bất kỳ ai bắt gói tin trên đường truyền chỉ thấy các byte ngẫu nhiên không có ý nghĩa, bảo vệ an toàn tuyệt đối thông tin người dùng khỏi tấn công Packet Sniffing."
+  },
+  {
+    "id": 628,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Thực hành FTP Server & Client",
+    "difficulty": "Nhận biết",
+    "question": "Khi cấu hình máy chủ Quick'n Easy FTP Server chạy cục bộ, số hiệu cổng mặc định mà máy chủ lắng nghe kết nối điều khiển (Control Connection) là cổng nào?",
+    "options": [
+      "Cổng 20",
+      "Cổng 21",
+      "Cổng 80",
+      "Cổng 22"
+    ],
+    "correct": 1,
+    "explanation": "Giao thức FTP tiêu chuẩn sử dụng cổng TCP 21 cho Kết nối điều khiển (Control Connection) để tiếp nhận lệnh đăng nhập, điều hướng thư mục. Cổng 20 chỉ được dùng cho Kết nối dữ liệu (Data Connection) trong chế độ Active FTP."
+  },
+  {
+    "id": 629,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Thực hành FTP Server & Client",
+    "difficulty": "Thông hiểu",
+    "question": "Khi người dùng sử dụng FileZilla Client kết nối tới FTP Server ở chế độ Active Mode, thông điệp điều khiển nào được Client gửi tới Server để thông báo địa chỉ IP và số hiệu cổng mà Client đang mở chờ nhận dữ liệu?",
+    "options": [
+      "Lệnh PASV",
+      "Lệnh PORT",
+      "Lệnh RETR",
+      "Lệnh USER"
+    ],
+    "correct": 1,
+    "explanation": "Trong Active Mode: Client mở một cổng ngẫu nhiên và gửi lệnh 'PORT h1,h2,h3,h4,p1,p2' qua kênh điều khiển (cổng 21) để thông báo IP và số hiệu cổng (Port = p1*256 + p2) của Client cho Server biết. Sau đó FTP Server sẽ từ cổng 20 chủ động khởi tạo kết nối tới cổng này của Client."
+  },
+  {
+    "id": 630,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Thực hành Web Server Cục bộ",
+    "difficulty": "Thông hiểu",
+    "question": "Khi cài đặt một máy chủ Web cục bộ (như XAMPP / Apache, IIS, hoặc Python http.server), khái niệm 'Document Root' (Thư mục gốc) có nghĩa là gì?",
+    "options": [
+      "Thư mục chứa mã nguồn của hệ điều hành Windows",
+      "Thư mục trên ổ đĩa máy tính được cấu hình làm nơi lưu trữ các tệp tin web (HTML, CSS, JS, ảnh), khi người dùng truy cập vào trang chủ website thì web server sẽ tìm và phục vụ các tệp từ thư mục này",
+      "Thư mục chứa các driver của card mạng",
+      "Thư mục lưu trữ tạm thời các file virus bị cách ly"
+    ],
+    "correct": 1,
+    "explanation": "Document Root (ví dụ thư mục 'htdocs' trong XAMPP hoặc 'C:\\inetpub\\wwwroot' trong IIS) là thư mục gốc xuất bản web. Mọi đường dẫn URL dạng 'http://localhost/about.html' sẽ được máy chủ ánh xạ trực tiếp tới tệp tương ứng nằm trong thư mục Document Root này."
+  },
+  {
+    "id": 631,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Thực hành Web Server Cục bộ",
+    "difficulty": "Nhận biết",
+    "question": "Để truy cập vào chính máy chủ Web đang chạy trên máy tính của mình thông qua trình duyệt, người dùng có thể sử dụng địa chỉ nào sau đây?",
+    "options": [
+      "http://localhost hoặc http://127.0.0.1",
+      "http://255.255.255.255",
+      "http://0.0.0.0",
+      "http://192.168.0.0"
+    ],
+    "correct": 0,
+    "explanation": "Địa chỉ vòng lặp Loopback (127.0.0.1) và tên miền cục bộ tương ứng 'localhost' được quy ước trỏ thẳng vào chính ngăn xếp mạng của máy tính hiện tại mà không cần truyền tín hiệu ra card mạng vật lý ra ngoài."
+  },
+  {
+    "id": 632,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Các chế độ CLI",
+    "difficulty": "Nhận biết",
+    "question": "Trong giao diện dòng lệnh (CLI) của thiết bị mạng Cisco trên phần mềm Packet Tracer, dấu nhắc lệnh 'Router#' cho biết người dùng đang ở chế độ làm việc nào?",
+    "options": [
+      "Chế độ Người dùng (User EXEC Mode)",
+      "Chế độ Đặc quyền (Privileged EXEC Mode)",
+      "Chế độ Cấu hình toàn cục (Global Configuration Mode)",
+      "Chế độ Cấu hình cổng giao tiếp (Interface Configuration Mode)"
+    ],
+    "correct": 1,
+    "explanation": "Các cấp độ dấu nhắc lệnh chuẩn của Cisco IOS: (1) 'Router>' là User EXEC mode (chỉ xem thông tin cơ bản); gõ lệnh 'enable' chuyển sang (2) 'Router#' là Privileged EXEC mode (toàn quyền xem thông tin, gõ lệnh show, debug); gõ 'configure terminal' chuyển sang (3) 'Router(config)#' là Global Config mode."
+  },
+  {
+    "id": 633,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cấu hình Cổng Router",
+    "difficulty": "Thông hiểu",
+    "question": "Sau khi gán địa chỉ IP cho một cổng giao tiếp của Router Cisco bằng lệnh 'ip address 192.168.1.1 255.255.255.0', tại sao cổng đó vẫn ở trạng thái đèn đỏ (tắt) và lệnh nào bắt buộc phải thực thi để bật cổng hoạt động?",
+    "options": [
+      "Do cổng bị hỏng phần cứng",
+      "Mặc định các cổng của Cisco Router đều ở trạng thái tắt nguồn (Administratively down), bắt buộc phải thực thi lệnh 'no shutdown' để bật cổng",
+      "Cần khởi động lại máy tính",
+      "Phải gõ lệnh 'enable interface'"
+    ],
+    "correct": 1,
+    "explanation": "Vì lý do an toàn, toàn bộ các cổng giao tiếp vật lý trên Router Cisco khi mới khởi tạo đều bị đặt ở trạng thái 'shutdown' (tắt). Sau khi cấu hình địa chỉ IP, kỹ sư mạng bắt buộc phải gõ lệnh 'no shutdown' bên trong chế độ config-if để kích hoạt cổng chuyển sang trạng thái UP (đèn xanh)."
+  },
+  {
+    "id": 634,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cấu hình VLAN",
+    "difficulty": "Vận dụng",
+    "question": "Để gán cổng mạng FastEthernet 0/5 trên Switch Cisco 2960 vào VLAN 10 (phòng Kế toán) ở chế độ Access, chuỗi lệnh chuẩn xác trong chế độ Global Configuration là:",
+    "options": [
+      "interface fa0/5 -> vlan 10 enable",
+      "interface fa0/5 -> switchport mode access -> switchport access vlan 10",
+      "vlan 10 -> add port fa0/5",
+      "port fa0/5 mode vlan 10"
+    ],
+    "correct": 1,
+    "explanation": "Trình tự cấu hình cổng Access thuộc VLAN trên Cisco IOS: Đầu tiên vào interface: 'interface fa0/5' -> Chuyển chế độ hoạt động sang Access: 'switchport mode access' -> Gán cổng vào số VLAN mong muốn: 'switchport access vlan 10'."
+  },
+  {
+    "id": 635,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cấu hình Đường Trunk",
+    "difficulty": "Thông hiểu",
+    "question": "Để cấu hình cổng GigabitEthernet 0/1 của Switch thành đường liên kết Trunk kết nối sang một Switch khác nhằm truyền tải lưu lượng của tất cả các VLAN, ta thực hiện lệnh nào?",
+    "options": [
+      "switchport mode trunk",
+      "switchport mode access",
+      "switchport trunk open all",
+      "trunk enable"
+    ],
+    "correct": 0,
+    "explanation": "Bên trong giao diện interface (config-if)#, câu lệnh 'switchport mode trunk' thiết lập cổng đó thành cổng Trunk hoạt động theo chuẩn đóng gói IEEE 802.1Q, cho phép các khung gắn thẻ của nhiều VLAN đi qua."
+  },
+  {
+    "id": 636,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cấu hình Định tuyến Tĩnh",
+    "difficulty": "Vận dụng",
+    "question": "Cú pháp lệnh chuẩn trong Cisco IOS để cấu hình một tuyến đường tĩnh (Static Route) đi tới mạng đích 192.168.20.0/24 thông qua địa chỉ của bước nhảy kế tiếp (Next-hop IP) là 10.0.0.2 là:",
+    "options": [
+      "route 192.168.20.0 to 10.0.0.2",
+      "ip route 192.168.20.0 255.255.255.0 10.0.0.2",
+      "static-route 192.168.20.0/24 via 10.0.0.2",
+      "ip route 10.0.0.2 255.255.255.0 192.168.20.0"
+    ],
+    "correct": 1,
+    "explanation": "Cú pháp chuẩn của lệnh định tuyến tĩnh trên Router Cisco trong chế độ (config)# là: 'ip route <địa_chỉ_mạng_đích> <subnet_mask> <ip_next_hop_hoặc_cổng_ra>'. Do đó câu lệnh chính xác là: 'ip route 192.168.20.0 255.255.255.0 10.0.0.2'."
+  },
+  {
+    "id": 637,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Lưu trữ Cấu hình",
+    "difficulty": "Thông hiểu",
+    "question": "Sau khi hoàn tất việc cấu hình thiết bị Cisco, nếu không lưu lại thì khi khởi động lại thiết bị (Reload) toàn bộ cấu hình sẽ bị mất. Lệnh nào trong Privileged EXEC mode (Router#) được dùng để lưu cấu hình từ RAM vào bộ nhớ cố định NVRAM?",
+    "options": [
+      "save config",
+      "copy running-config startup-config (hoặc lệnh tắt: write memory / wr)",
+      "backup to nvram",
+      "store configuration"
+    ],
+    "correct": 1,
+    "explanation": "Cấu hình đang chạy nằm trên RAM (running-config) sẽ bị mất khi mất điện. Để cấu hình có hiệu lực vĩnh viễn, kỹ sư phải sao chép nó vào bộ nhớ flash NVRAM (startup-config) bằng câu lệnh: 'copy running-config startup-config' hoặc câu lệnh tắt phổ biến 'write' (wr)."
+  },
+  {
+    "id": 638,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Kiểm tra Trạng thái Cổng",
+    "difficulty": "Nhận biết",
+    "question": "Lệnh kiểm tra nhanh nhất và hay được sử dụng nhất trên Cisco Router để xem bảng tóm tắt danh sách tất cả các cổng, địa chỉ IP tương ứng và trạng thái hoạt động (Status UP/Down) là:",
+    "options": [
+      "show interfaces",
+      "show ip interface brief",
+      "show ip route",
+      "show status all"
+    ],
+    "correct": 1,
+    "explanation": "Lệnh 'show ip interface brief' (viết tắt 'sh ip int br') xuất ra một bảng tóm tắt cực kỳ trực quan gồm các cột: Interface, IP-Address, OK?, Method, Status (trạng thái lớp vật lý) và Protocol (trạng thái lớp liên kết dữ liệu)."
+  },
+  {
+    "id": 639,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Chế độ Mô phỏng (Simulation)",
+    "difficulty": "Thông hiểu",
+    "question": "Chế độ mô phỏng (Simulation Mode) trong phần mềm Cisco Packet Tracer cung cấp khả năng trực quan nào mà chế độ Realtime không có?",
+    "options": [
+      "Cho phép kết nối trực tiếp với Internet thật",
+      "Cho phép 'đóng băng thời gian', quan sát từng gói tin PDU di chuyển từng bước (Step-by-step) qua các thiết bị mạng và mở xem chi tiết cấu trúc header ở từng tầng theo mô hình OSI",
+      "Tự động giải bài tập hộ sinh viên",
+      "Chuyển đổi giao diện sang tiếng Việt"
+    ],
+    "correct": 1,
+    "explanation": "Simulation Mode là tính năng giáo dục đắt giá nhất của Packet Tracer: Bạn có thể nhấn 'Capture/Forward' để cho gói tin di chuyển từng hop một, bấm vào biểu tượng gói tin để xem bảng phân tích 7 tầng OSI (Inbound PDU Details và Outbound PDU Details), thấy rõ gói tin bị đổi MAC như thế nào hay tại sao bị router hủy bỏ."
+  },
+  {
+    "id": 640,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Công cụ Nmap: Kỹ thuật Quét Cổng (Port Scan)",
+    "difficulty": "Thông hiểu",
+    "question": "Kỹ thuật quét cổng 'TCP SYN Scan' (tùy chọn -sS trong công cụ Nmap) được gọi là 'Stealth Scan' (Quét lén lút / Half-open scan) vì nguyên nhân kỹ thuật nào?",
+    "options": [
+      "Nó làm ẩn hoàn toàn địa chỉ IP của kẻ tấn công",
+      "Nó chỉ gửi gói tin SYN; nếu nhận được SYN-ACK từ máy chủ thì nó gửi ngay gói RST để hủy kết nối mà KHÔNG BAO GIỜ hoàn tất bước bắt tay thứ ba (không gửi ACK), khiến tầng ứng dụng trên máy chủ không ghi nhận được nhật ký (log) kết nối",
+      "Nó sử dụng mạng ngầm Tor để quét",
+      "Nó chỉ quét các cổng chạy giao thức UDP"
+    ],
+    "correct": 1,
+    "explanation": "TCP SYN Scan (-sS) là kỹ thuật quét mặc định và nguy hiểm của Nmap: Bằng cách gửi RST ngay khi vừa nhận SYN-ACK, kết nối TCP không bao giờ đạt tới trạng thái ESTABLISHED. Do đó, hầu hết các dịch vụ ứng dụng (như Web server, FTP server) không hề ghi log một phiên làm việc nào, giúp người quét thu thập được danh sách cổng mở mà ít bị lộ dấu vết."
+  },
+  {
+    "id": 641,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Công cụ Nmap: Trạng thái Cổng",
+    "difficulty": "Thông hiểu",
+    "question": "Khi Nmap trả về trạng thái của một cổng mạng là 'Filtered' (Bị lọc), điều đó có nghĩa là gì?",
+    "options": [
+      "Cổng đó chắc chắn đang mở và chạy ứng dụng web",
+      "Gói tin thăm dò gửi tới cổng đó đã bị một thiết bị lọc gói tin (như Firewall, Router ACL hoặc phần mềm diệt virus) chặn lại, khiến Nmap không nhận được bất kỳ phản hồi nào để xác định cổng đang đóng hay mở",
+      "Cổng đó đã bị quá nhiệt",
+      "Cổng đó chỉ chấp nhận kết nối từ mạng nội bộ"
+    ],
+    "correct": 1,
+    "explanation": "Trạng thái 'Filtered' trong Nmap chỉ ra rằng có một bức tường lửa (Firewall) đang che chắn cho cổng đó. Firewall âm thầm vứt bỏ (Drop) gói tin quét mà không trả về phản hồi nào (hoặc trả lời bằng thông điệp ICMP Type 3 lỗi), khiến Nmap không thể suy đoán được dịch vụ phía sau đang đóng hay mở."
+  },
+  {
+    "id": 642,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Pathping & Chẩn đoán",
+    "difficulty": "Thông hiểu",
+    "question": "Lệnh 'pathping' trên Windows có ưu điểm vượt trội gì so với việc chỉ sử dụng riêng rẽ lệnh ping hoặc tracert?",
+    "options": [
+      "Có thể đo được độ dài của dây cáp mạng",
+      "Kết hợp chức năng dò đường của tracert với việc theo dõi định kỳ liên tục trong một khoảng thời gian (khoảng 5 phút) để tính toán chính xác TỈ LỆ MẤT GÓI TIN (Packet Loss %) tại từng router trên đường đi, giúp chỉ điểm chính xác nút mạng nào đang bị quá tải",
+      "Tự động sửa chữa các liên kết bị đứt",
+      "Chỉ dùng cho hệ điều hành di động"
+    ],
+    "correct": 1,
+    "explanation": "'pathping' là công cụ chẩn đoán mạng nâng cao của Windows: Bước 1 nó liệt kê tất cả các hop giống như tracert; Bước 2 nó gửi hàng trăm gói tin kiểm tra tới từng router trong khoảng 250 giây. Kết quả cuối cùng hiển thị tỷ lệ phần trăm mất gói (Lost/Sent = %) tại từng nút, giúp xác định nút thắt cổ chai hoặc liên kết bị lỗi chập chờn."
+  },
+  {
+    "id": 643,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phân tích Log Wireshark: Tấn công Mạng",
+    "difficulty": "Vận dụng",
+    "question": "Khi mở Wireshark phân tích lưu lượng mạng, bạn thấy xuất hiện hàng nghìn gói tin TCP SYN từ hàng trăm địa chỉ IP nguồn ngẫu nhiên khác nhau dồn dập gửi tới cổng 80 của Web Server trong vòng vài giây, nhưng không có bất kỳ gói tin ACK nào hoàn tất bắt tay. Đây là dấu hiệu của cuộc tấn công mạng nào?",
+    "options": [
+      "Tấn công từ chối dịch vụ SYN Flood (DoS / DDoS)",
+      "Tấn công giải mã mật khẩu Brute Force",
+      "Tấn công nghe lén Packet Sniffing",
+      "Tấn công chèn mã độc SQL Injection"
+    ],
+    "correct": 0,
+    "explanation": "Đặc điểm nhận dạng điển hình của tấn công TCP SYN Flood: Lưu lượng ngập tràn các gói SYN (tcp.flags.syn == 1 && tcp.flags.ack == 0) gửi tới một cổng dịch vụ duy nhất từ các IP nguồn giả mạo (spoofed IPs), và không bao giờ có gói ACK thứ ba hoàn tất phiên, nhằm làm cạn kiệt hàng đợi kết nối (backlog queue) của máy chủ."
+  },
+  {
+    "id": 644,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping: Thông báo TTL expired",
+    "difficulty": "Thông hiểu",
+    "question": "Khi ping một máy chủ nội bộ nhưng màn hình liên tục trả về thông điệp 'TTL expired in transit' (TTL hết hạn trên đường truyền), nguyên nhân kỹ thuật chắc chắn nhất là gì?",
+    "options": [
+      "Máy đích bị lỗi tràn bộ nhớ",
+      "Đang tồn tại một vòng lặp định tuyến (Routing Loop) giữa hai hoặc nhiều router trên mạng khiến gói tin bị đẩy qua đẩy lại liên tục cho đến khi trường TTL bị trừ giảm dần về 0",
+      "Dây cáp mạng bị chuột cắn",
+      "Độ trễ ping vượt quá 10 giây"
+    ],
+    "correct": 1,
+    "explanation": "'TTL expired in transit' là thông điệp ICMP Type 11 do router gửi về khi nó nhận được gói tin có TTL = 1 và trừ đi còn 0. Khi có vòng lặp định tuyến (ví dụ Router A trỏ sang B, Router B lại cấu hình trỏ ngược về A), gói tin bị đá bóng qua lại giữa hai router cho đến khi TTL cạn sạch."
+  },
+  {
+    "id": 645,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Thực hành Web Server: Mã phản hồi HTTP",
+    "difficulty": "Thông hiểu",
+    "question": "Trong tệp nhật ký truy cập (Access Log) của máy chủ Web cục bộ Apache (XAMPP), bạn thấy dòng ghi nhận: 'GET /secret.pdf HTTP/1.1' 404 196. Con số '404' và '196' trong dòng nhật ký đại diện cho:",
+    "options": [
+      "Địa chỉ IP của người dùng và số hiệu cổng",
+      "Mã trạng thái phản hồi HTTP là 404 Not Found (không tìm thấy tệp) và kích thước dữ liệu phản hồi trả về là 196 byte",
+      "Thời gian tải trang là 404 giây",
+      "Số lượng người đang cùng xem tệp"
+    ],
+    "correct": 1,
+    "explanation": "Cấu trúc định dạng chuẩn Common Log Format của Web server: Client IP - [Thời gian] 'Request Line' Status_Code Bytes_Sent. Số 404 là HTTP Status Code (Not Found - tệp secret.pdf không tồn tại trong thư mục Document Root), và 196 là dung lượng của thông điệp HTML báo lỗi trả về cho trình duyệt (tính bằng byte)."
+  },
+  {
+    "id": 646,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cáp kết nối Thiết bị",
+    "difficulty": "Nhận biết",
+    "question": "Trong thực hành thiết kế mạng với Cisco Packet Tracer, để kết nối trực tiếp giữa hai thiết bị cùng loại là Router với Router (hoặc giữa PC với Router), loại cáp mạng nào được sử dụng theo quy chuẩn truyền thống?",
+    "options": [
+      "Cáp thẳng (Copper Straight-Through)",
+      "Cáp chéo (Copper Cross-Over)",
+      "Cáp quang đa mốt (Fiber Multi-mode)",
+      "Cáp nguồn điện xoay chiều"
+    ],
+    "correct": 1,
+    "explanation": "Quy tắc bấm cáp truyền thống: Kết nối hai thiết bị CÙNG LOẠI (Router - Router, Switch - Switch, PC - PC, hoặc PC - Router vì card mạng của PC và cổng Router đều phát tín hiệu trên chân 1,2 và nhận trên chân 3,6) sử dụng Cáp chéo (Cross-Over). Kết nối hai thiết bị KHÁC LOẠI (PC - Switch, Switch - Router) sử dụng Cáp thẳng (Straight-Through)."
+  },
+  {
+    "id": 647,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cáp Console",
+    "difficulty": "Thông hiểu",
+    "question": "Dây cáp Console (màu xanh dương nhạt trong Packet Tracer) được sử dụng để làm gì?",
+    "options": [
+      "Truyền dữ liệu Internet tốc độ cao giữa hai switch",
+      "Kết nối từ cổng COM / RS-232 (hoặc USB) của máy tính quản trị vào cổng Console chuyên dụng của Router/Switch để cấu hình thiết bị ban đầu khi thiết bị chưa có địa chỉ IP",
+      "Cấp nguồn điện dự phòng cho router",
+      "Kết nối điện thoại bàn vào tổng đài"
+    ],
+    "correct": 1,
+    "explanation": "Cáp Console (Rollover cable) là đường kết nối vật lý Out-of-band: Khi một thiết bị mạng mới bóc hộp chưa được cấu hình IP hay mật khẩu, người quản trị phải cắm cáp Console từ máy tính vào cổng Console của thiết bị và sử dụng phần mềm Terminal (như PuTTY, SecureCRT) để gõ lệnh thiết lập cấu hình ban đầu."
+  },
+  {
+    "id": 648,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Cấu hình DHCP Pool",
+    "difficulty": "Vận dụng",
+    "question": "Khi cấu hình Router Cisco làm máy chủ DHCP, để loại trừ dải địa chỉ IP từ 192.168.1.1 đến 192.168.1.10 không bị cấp phát tự động cho các máy con (dành riêng đặt IP tĩnh cho Router và Máy in), câu lệnh chuẩn xác là:",
+    "options": [
+      "no dhcp 192.168.1.1 192.168.1.10",
+      "ip dhcp excluded-address 192.168.1.1 192.168.1.10",
+      "ip dhcp pool exclude 192.168.1.1 - 192.168.1.10",
+      "deny ip 192.168.1.1 192.168.1.10"
+    ],
+    "correct": 1,
+    "explanation": "Câu lệnh 'ip dhcp excluded-address <start-ip> [end-ip]' được thực hiện trong chế độ Global Configuration (config)# TRƯỚC KHI tạo pool, nhằm chỉ định các địa chỉ IP tĩnh quan trọng mà DHCP server tuyệt đối không được phép cấp phát tự động cho các máy trạm trong mạng LAN."
+  },
+  {
+    "id": 649,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phân tích Wireshark: Giao thức ARP",
+    "difficulty": "Thông hiểu",
+    "question": "Khi bắt gói tin ARP Request trong Wireshark, trường 'Target MAC Address' bên trong nội dung thông điệp ARP mang giá trị gì?",
+    "options": [
+      "FF:FF:FF:FF:FF:FF",
+      "00:00:00:00:00:00",
+      "Địa chỉ MAC của máy gửi",
+      "Địa chỉ IP của router"
+    ],
+    "correct": 1,
+    "explanation": "Cần phân biệt rõ: Trong tiêu đề khung Ethernet ở tầng 2, Destination MAC là FF:FF:FF:FF:FF:FF (broadcast để mọi card mạng cùng nhận); nhưng bên trong nội dung gói tin ARP (ARP Payload), vì người gửi chưa biết MAC của máy đích nên trường 'Target MAC Address' được điền mặc định là toàn số 0: 00:00:00:00:00:00."
+  },
+  {
+    "id": 650,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Phân tích Wireshark: Giao thức DNS",
+    "difficulty": "Thông hiểu",
+    "question": "Để lọc riêng các gói tin phản hồi DNS (DNS Responses) trả về địa chỉ IP của tên miền được hỏi, bộ lọc nào trong Wireshark là chuẩn xác nhất?",
+    "options": [
+      "dns.flags.response == 1",
+      "dns.flags.response == 0",
+      "dns.type == answer",
+      "udp.dns.reply"
+    ],
+    "correct": 0,
+    "explanation": "Trong tiêu đề của giao thức DNS, bit đầu tiên của trường Flags là cờ QR (Query/Response Flag): QR = 0 biểu thị thông điệp truy vấn (DNS Query); QR = 1 biểu thị thông điệp phản hồi kết quả (DNS Response). Do đó bộ lọc chuẩn xác trong Wireshark là: dns.flags.response == 1."
+  },
+  {
+    "id": 651,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Ping & Tham số Kích thước Payload",
+    "difficulty": "Vận dụng",
+    "question": "Khi thực hiện lệnh 'ping 192.168.1.1 -l 1000' trên Windows, tổng kích thước của gói tin IPv4 thực tế lưu thông trên đường truyền (chưa tính tiêu đề Ethernet) là bao nhiêu byte?",
+    "options": [
+      "1000 byte",
+      "1028 byte (gồm 20B IP header + 8B ICMP header + 1000B payload dữ liệu)",
+      "972 byte",
+      "1040 byte"
+    ],
+    "correct": 1,
+    "explanation": "Tham số '-l 1000' chỉ định kích thước của phần dữ liệu đệm (data payload) của thông điệp ICMP. Để tạo thành gói tin IPv4 hoàn chỉnh, hệ điều hành cộng thêm 8 byte tiêu đề ICMP (Type, Code, Checksum, ID, Seq) và 20 byte tiêu đề IPv4 chuẩn. Tổng kích thước gói tin IP = 1000 + 8 + 20 = 1028 byte."
+  },
+  {
+    "id": 652,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Bảng Chuyển mạch MAC",
+    "difficulty": "Nhận biết",
+    "question": "Để xem toàn bộ bảng địa chỉ MAC mà Switch Cisco đã học được qua các cổng giao tiếp, câu lệnh nào được thực thi trong chế độ Privileged EXEC (Switch#)?",
+    "options": [
+      "show mac address-table (hoặc show mac-address-table)",
+      "show arp table",
+      "show switch ports",
+      "display mac"
+    ],
+    "correct": 0,
+    "explanation": "Câu lệnh 'show mac address-table' (trên một số phiên bản IOS cũ viết là 'show mac-address-table') hiển thị danh sách các địa chỉ MAC đã học, số VLAN tương ứng, loại học (DYNAMIC hoặc STATIC) và cổng vật lý (Port) tương ứng gắn liền với địa chỉ MAC đó."
+  },
+  {
+    "id": 653,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Thực hành Web Server: Lập trình Socket",
+    "difficulty": "Thông hiểu",
+    "question": "Để nhanh chóng khởi tạo một máy chủ Web tĩnh đơn giản tại thư mục hiện tại để chia sẻ tệp tin trong mạng LAN mà không cần cài đặt phần mềm phức tạp, câu lệnh Python 3 nào được sử dụng?",
+    "options": [
+      "python -m http.server 8080",
+      "python run webserver",
+      "python --start-http",
+      "python -socket listen 8080"
+    ],
+    "correct": 0,
+    "explanation": "Python 3 tích hợp sẵn module máy chủ web: Câu lệnh 'python -m http.server 8080' sẽ mở một máy chủ HTTP lắng nghe trên cổng 8080 và xuất bản toàn bộ tệp tin trong thư mục hiện hành, cho phép các máy tính khác trong cùng mạng LAN truy cập qua đường dẫn 'http://<IP_máy>:8080'."
+  },
+  {
+    "id": 654,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Lệnh Netstat & Trạng thái TIME_WAIT",
+    "difficulty": "Thông hiểu",
+    "question": "Khi gõ lệnh netstat, bạn nhận thấy có rất nhiều kết nối TCP đang ở trạng thái 'TIME_WAIT'. Hiện tượng này thường xảy ra khi nào và có phải là dấu hiệu lỗi phần mềm không?",
+    "options": [
+      "Đây là lỗi tràn bộ nhớ nghiêm trọng của card mạng cần khởi động lại máy",
+      "Đây là hoạt động bình thường của giao thức TCP tại bên vừa chủ động đóng kết nối (Active Close); socket tạm giữ trạng thái này trong khoảng thời gian 2 MSL (thường từ 60s đến 120s) để đảm bảo gói ACK cuối cùng đến đích và dọn dẹp các gói tin còn trôi nổi trên mạng",
+      "Do cáp mạng bị tuột",
+      "Do người dùng bị nhiễm virus theo dõi"
+    ],
+    "correct": 1,
+    "explanation": "Trạng thái TIME_WAIT hoàn toàn không phải lỗi, mà là cơ chế bảo vệ bắt buộc của chuẩn TCP RFC 793. Bên chủ động đóng kết nối (ví dụ Web client sau khi tải xong ảnh) sẽ giữ socket ở trạng thái này trong 2 MSL trước khi giải phóng hoàn toàn cổng mạng để tránh làm lẫn lộn gói tin của các phiên kết nối mở lại sau đó."
+  },
+  {
+    "id": 655,
+    "exam_type": "nang_cao",
+    "chapter": 6,
+    "chapter_title": "Chuyên đề: Công Cụ & Thực Hành Mạng",
+    "category": "Cisco Packet Tracer: Xử lý Lỗi Kết nối",
+    "difficulty": "Vận dụng",
+    "question": "Hai máy tính PC1 và PC2 nối vào hai cổng khác nhau của cùng một Switch Cisco nhưng không thể ping thấy nhau. Bạn kiểm tra thấy cả hai cổng đều sáng đèn xanh (Up). Nguyên nhân kỹ thuật nào sau đây là giải thích hợp lý nhất?",
+    "options": [
+      "Hai máy tính thuộc về hai VLAN khác nhau trên Switch và chưa có thiết bị định tuyến Layer 3 (Router/L3 Switch) để chuyển tiếp lưu lượng giữa các VLAN",
+      "Switch bị mất nguồn điện",
+      "Dây cáp mạng bị ngắn quá 1 mét",
+      "Địa chỉ MAC của hai máy trùng nhau hoàn toàn"
+    ],
+    "correct": 0,
+    "explanation": "Khi hai máy nối cùng switch và cổng đều sáng đèn nhưng không ping được: Nguyên nhân số 1 trong thực hành là hai cổng switch đã bị gán vào hai VLAN khác nhau (ví dụ PC1 thuộc VLAN 10, PC2 thuộc VLAN 20). Vì mỗi VLAN là một miền quảng bá độc lập, switch tầng 2 sẽ chặn hoàn toàn mọi lưu lượng giữa chúng; muốn thông nhau bắt buộc phải cấu hình định tuyến liên VLAN (Inter-VLAN routing)."
+  }
+]

@@ -1,0 +1,597 @@
+[
+  {
+    "id": 501,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Dịch vụ Tầng Liên kết",
+    "difficulty": "Nhận biết",
+    "question": "Chức năng nào sau đây KHÔNG THUỘC phạm vi trách nhiệm của Tầng Liên kết dữ liệu (Data Link Layer)?",
+    "options": [
+      "Đóng khung dữ liệu (Framing) từ gói tin IP",
+      "Điều khiển truy nhập đường truyền vật lý dùng chung (MAC protocol)",
+      "Tìm đường đi tối ưu xuyên qua nhiều hệ thống tự trị trên Internet toàn cầu",
+      "Phát hiện lỗi bit trong khung dữ liệu bằng mã kiểm tra dư thừa tuần hoàn (CRC)"
+    ],
+    "correct": 2,
+    "explanation": "Tìm đường đi xuyên mạng Internet toàn cầu (Routing) là chức năng cốt lõi của Tầng Mạng (Network Layer). Tầng Liên kết dữ liệu chỉ chịu trách nhiệm chuyển giao các khung (frames) giữa hai nút kề nhau trên cùng một liên kết truyền thông trực tiếp."
+  },
+  {
+    "id": 502,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Kỹ thuật Kiểm tra lỗi CRC",
+    "difficulty": "Vận dụng",
+    "question": "Cho chuỗi dữ liệu D = 101110. Đa thức sinh được sử dụng là G(x) = x^3 + 1 (tương ứng với chuỗi bit G = 1001). Số lượng bit kiểm tra CRC (r bit) cần thêm vào và mã CRC tính được bằng phép chia modulo-2 XOR là:",
+    "options": [
+      "3 bit; CRC = 011",
+      "4 bit; CRC = 1001",
+      "3 bit; CRC = 110",
+      "2 bit; CRC = 01"
+    ],
+    "correct": 0,
+    "explanation": "Đa thức G có bậc r = 3 (chuỗi 1001 có 4 bit) -> Mã CRC có r = 3 bit. Thêm 3 số 0 vào đuôi D: D' = 101110000. Thực hiện chia modulo-2 (XOR) với 1001:\n101110000 / 1001:\n1011 XOR 1001 = 0010\nHạ 1: 0101 (bỏ qua), hạ 1: 1011 XOR 1001 = 0010\nHạ 0: 0100 (bỏ qua), hạ 0: 1000 XOR 1001 = 0001\nHạ 0: 0010 (bỏ qua). Dư cuối cùng là 011. Do đó mã CRC = 011, khung phát đi trên đường truyền là 101110011."
+  },
+  {
+    "id": 503,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Kỹ thuật Kiểm tra lỗi Parity",
+    "difficulty": "Thông hiểu",
+    "question": "Ưu điểm vượt trội của kỹ thuật kiểm tra bit chẵn lẻ hai chiều (Two-Dimensional Parity) so với kiểm tra chẵn lẻ một chiều đơn giản (One-Dimensional Parity) là gì?",
+    "options": [
+      "Không cần gửi thêm bất kỳ bit thừa nào",
+      "Không chỉ phát hiện được lỗi mà còn CÓ THỂ ĐỊNH VỊ CHÍNH XÁC VÀ SỬA ĐƯỢC 1 bit lỗi đơn lẻ (Single-bit Error Correction) tại giao điểm của hàng và cột bị sai",
+      "Hoàn toàn thay thế được giao thức TCP",
+      "Tăng tốc độ đường truyền lên gấp đôi"
+    ],
+    "correct": 1,
+    "explanation": "Trong 2D Parity, dữ liệu được xếp thành ma trận hàng và cột, mỗi hàng và mỗi cột đều có 1 bit parity riêng. Khi có 1 bit đơn lẻ bị đảo ngược (0 thành 1 hoặc 1 thành 0), cả hàng và cột chứa bit đó đều bị vi phạm kiểm tra chẵn lẻ. Điểm giao giữa hàng sai và cột sai chỉ ra chính xác vị trí bit lỗi, cho phép bên nhận tự động sửa bit đó ngay lập tức."
+  },
+  {
+    "id": 504,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức Đa truy nhập (ALOHA)",
+    "difficulty": "Thông hiểu",
+    "question": "Hiệu suất tối đa (Maximum Throughput) của giao thức Slotted ALOHA (chia khe thời gian) và Pure ALOHA (ALOHA thuần tự do) lần lượt đạt giá trị lý thuyết xấp xỉ là bao nhiêu?",
+    "options": [
+      "100% và 50%",
+      "36.8% (1/e) và 18.4% (1 / (2e))",
+      "50% và 25%",
+      "75% và 37.5%"
+    ],
+    "correct": 1,
+    "explanation": "Theo lý thuyết hàng đợi và xác suất Poisson: Pure ALOHA cho phép gửi tự do bất cứ lúc nào nên khoảng thời gian dễ bị va chạm (Vulnerable period) dài gấp đôi (2 * T), hiệu suất cực đại chỉ đạt S = G * e^(-2G) = 1/(2e) ≈ 0.184 (18.4%). Slotted ALOHA bắt buộc các nút chỉ được phát ở đầu mỗi khe thời gian, giảm nửa vùng va chạm, nâng hiệu suất lên gấp đôi: S = G * e^(-G) = 1/e ≈ 0.368 (36.8%)."
+  },
+  {
+    "id": 505,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức CSMA/CD",
+    "difficulty": "Thông hiểu",
+    "question": "Trong giao thức CSMA/CD (Carrier Sense Multiple Access with Collision Detection) của mạng Ethernet, quy tắc 'Listen while transmitting' (Lắng nghe trong khi truyền) có ý nghĩa gì?",
+    "options": [
+      "Máy trạm liên tục đo điện áp/năng lượng trên đường truyền trong khi đang phát; nếu phát hiện mức năng lượng tăng vọt bất thường (xảy ra xung đột với trạm khác), nó lập tức ngừng truyền gói tin ngay",
+      "Máy trạm bật loa ngoài để nghe tín hiệu âm thanh từ dây cáp",
+      "Máy trạm chỉ truyền khi có lệnh của quản trị viên",
+      "Máy trạm kiểm tra xem router có đang online không"
+    ],
+    "correct": 0,
+    "explanation": "CSMA/CD cải tiến vượt trội so với ALOHA: Không chỉ lắng nghe trước khi nói (Carrier Sense), trạm còn liên tục đo tín hiệu trên đường truyền trong suốt quá trình phát (Collision Detection). Khi phát hiện có xung đột (xung điện áp tăng vọt do 2 tín hiệu đè lên nhau), trạm ngừng phát ngay lập tức thay vì tiếp tục truyền hết gói tin vô ích, giúp tiết kiệm băng thông kênh truyền."
+  },
+  {
+    "id": 506,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Kích thước Khung Ethernet tối thiểu",
+    "difficulty": "Đánh lừa",
+    "question": "Tại sao trong chuẩn mạng Ethernet 10 Mbps (IEEE 802.3 cáp đồng chia sẻ), kích thước khung tối thiểu bắt buộc phải là 64 byte (512 bit)?",
+    "options": [
+      "Để tiêu đề khung chứa đủ địa chỉ MAC và IP",
+      "Để đảm bảo thời gian truyền khung (T_trans = L/R) phải lớn hơn hoặc bằng hai lần thời gian trễ lan truyền cực đại giữa hai trạm xa nhất trên mạng (T_trans >= 2 * T_prop), giúp trạm phát kịp thời phát hiện va chạm trước khi truyền xong khung",
+      "Do giới hạn bộ nhớ của chip xử lý thời kỳ đầu",
+      "Để phù hợp với kích thước một cung từ trên đĩa mềm"
+    ],
+    "correct": 1,
+    "explanation": "Đây là nguyên lý cơ bản của CSMA/CD: Nếu gói tin quá ngắn, trạm phát có thể đã truyền xong toàn bộ khung trước khi tín hiệu va chạm từ đầu kia cáp quay trở lại; khi đó trạm sẽ tưởng lầm là khung đã truyền thành công. Để đảm bảo mọi va chạm tình huống xấu nhất (2 * T_prop) đều được phát hiện trong lúc máy vẫn đang phát, kích thước khung nhỏ nhất bắt buộc phải là 512 bit (64 byte)."
+  },
+  {
+    "id": 507,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Thuật toán Binary Exponential Backoff",
+    "difficulty": "Vận dụng",
+    "question": "Trong mạng Ethernet CSMA/CD, sau khi xảy ra va chạm lần thứ 3 (k = 3), thuật toán Lùi thời gian hàm mũ nhị phân (Binary Exponential Backoff) sẽ chọn ngẫu nhiên giá trị số khe thời gian chờ R trong tập hợp nào?",
+    "options": [
+      "{0, 1}",
+      "{0, 1, 2, 3}",
+      "{0, 1, 2, 3, 4, 5, 6, 7}",
+      "{0, 1, ..., 15}"
+    ],
+    "correct": 2,
+    "explanation": "Quy tắc Binary Exponential Backoff: Sau lần va chạm thứ k (với k <= 10), máy trạm chọn ngẫu nhiên một số nguyên R trong tập {0, 1, 2, ..., 2^k - 1} và chờ một khoảng thời gian bằng R * 512 bit-time trước khi thử phát lại. Sau va chạm lần thứ 3 (k = 3), tập giá trị là {0, 1, ..., 2^3 - 1} = {0, 1, 2, 3, 4, 5, 6, 7}."
+  },
+  {
+    "id": 508,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Mạng không dây CSMA/CA & RTS/CTS",
+    "difficulty": "Thông hiểu",
+    "question": "Tại sao mạng không dây WiFi (IEEE 802.11) sử dụng cơ chế CSMA/CA (Tránh va chạm) kết hợp bắt tay RTS/CTS thay vì dùng CSMA/CD như Ethernet?",
+    "options": [
+      "Vì sóng WiFi truyền nhanh hơn ánh sáng",
+      "Vì trạm phát WiFi không thể vừa phát sóng vừa nghe đồng thời (tín hiệu phát đi có năng lượng quá lớn lấn át hoàn toàn tín hiệu nhận về) và để giải quyết bài toán nút ẩn (Hidden Terminal Problem)",
+      "Vì chuẩn WiFi cấm dùng dây cáp",
+      "Vì giao thức CSMA/CD yêu cầu bản quyền đắt tiền"
+    ],
+    "correct": 1,
+    "explanation": "Trên môi trường vô tuyến: (1) Năng lượng tín hiệu phát tại ăng-ten cực mạnh so với tín hiệu suy hao nhận về, card mạng không thể vừa phát vừa phát hiện va chạm; (2) Vấn đề nút ẩn (Hidden Terminal): hai máy ở hai đầu xa nhau không nghe thấy nhau nhưng cùng phát tới một Access Point ở giữa gây va chạm. Cơ chế đặt trước kênh truyền bằng khung ngắn RTS/CTS (Request to Send / Clear to Send) giải quyết triệt để vấn đề này."
+  },
+  {
+    "id": 509,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Địa chỉ MAC (LAN Address)",
+    "difficulty": "Nhận biết",
+    "question": "Địa chỉ vật lý MAC (Media Access Control) có độ dài bao nhiêu bit và 24 bit đầu tiên đại diện cho thông tin gì?",
+    "options": [
+      "32 bit; đại diện cho quốc gia của máy tính",
+      "48 bit (6 byte); 24 bit đầu là mã OUI (Organizationally Unique Identifier) do tổ chức IEEE gán cho nhà sản xuất card mạng",
+      "64 bit; 24 bit đầu là số serial của CPU",
+      "128 bit; 24 bit đầu là phiên bản hệ điều hành"
+    ],
+    "correct": 1,
+    "explanation": "Địa chỉ MAC dài 48 bit (6 byte), biểu diễn bằng 12 chữ số Hex (ví dụ 00:1A:2B:3C:4D:5E). 24 bit đầu (3 byte đầu) là mã định danh nhà sản xuất OUI do IEEE quản lý (như Intel, Cisco, Realtek); 24 bit sau (3 byte sau) là số thứ tự duy nhất do nhà sản xuất tự gán cho từng chiếc card mạng (NIC)."
+  },
+  {
+    "id": 510,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức Phân giải Địa chỉ ARP",
+    "difficulty": "Thông hiểu",
+    "question": "Trong giao thức ARP (Address Resolution Protocol), thông điệp ARP Request và ARP Reply được truyền tương ứng dưới dạng phương thức gửi nào ở tầng liên kết dữ liệu?",
+    "options": [
+      "Cả hai đều là Broadcast",
+      "ARP Request gửi dạng Quảng bá (Broadcast FF:FF:FF:FF:FF:FF); ARP Reply gửi dạng Đơn hướng (Unicast trực tiếp về MAC của máy hỏi)",
+      "ARP Request là Multicast; ARP Reply là Anycast",
+      "Cả hai đều là Unicast"
+    ],
+    "correct": 1,
+    "explanation": "Khi máy A cần biết địa chỉ MAC của IP 192.168.1.5, vì chưa biết máy đó ở đâu nên A phải gửi ARP Request ở chế độ Broadcast tầng 2 (Dest MAC: FF:FF:FF:FF:FF:FF) để tất cả các máy trong mạng LAN đều nhận được. Máy mang đúng IP 192.168.1.5 đọc được sẽ phản hồi bằng thông điệp ARP Reply ở chế độ Unicast trực tiếp về địa chỉ MAC của máy A (vì A đã kèm sẵn MAC của mình trong gói request)."
+  },
+  {
+    "id": 511,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức ARP & Bảng Cache",
+    "difficulty": "Đánh lừa",
+    "question": "Nếu máy tính nguồn Host A muốn gửi gói tin cho Host B nằm ở một MẠNG CON KHÁC (khác Subnet IP, đi qua một Router trung gian), thì địa chỉ MAC đích (Destination MAC) trong khung Ethernet mà Host A gửi đi sẽ là địa chỉ MAC của thiết bị nào?",
+    "options": [
+      "Địa chỉ MAC của Host B đích",
+      "Địa chỉ MAC của cổng vào trên Default Gateway (Router)",
+      "Địa chỉ MAC quảng bá FF:FF:FF:FF:FF:FF",
+      "Địa chỉ MAC của máy chủ DNS"
+    ],
+    "correct": 1,
+    "explanation": "Đây là câu hỏi kinh điển hay bẫy nhất: Tầng IP giữ nguyên Destination IP = IP của Host B trong suốt hành trình; nhưng ở Tầng 2, khung Ethernet chỉ có giá trị cục bộ trong mạng LAN. Vì Host B ở mạng khác, Host A không thể gửi trực tiếp tới MAC của B mà bắt buộc phải gửi khung tới cổng Default Gateway (Router) của mạng LAN cục bộ. Do đó Dest MAC = MAC của Router Interface!"
+  },
+  {
+    "id": 512,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cấu trúc Khung Ethernet (IEEE 802.3)",
+    "difficulty": "Nhận biết",
+    "question": "Trường Type (2 byte) trong tiêu đề khung Ethernet II có vai trò gì?",
+    "options": [
+      "Xác định độ dài của dây cáp mạng",
+      "Xác định giao thức tầng mạng nào đang được đóng gói bên trong phần dữ liệu payload (ví dụ 0x0800 cho IPv4, 0x0806 cho ARP, 0x86DD cho IPv6)",
+      "Quy định tốc độ truyền dẫn của cổng mạng",
+      "Chỉ định số lượng switch trên đường đi"
+    ],
+    "correct": 1,
+    "explanation": "Trường Type (EtherType - 2 byte) đóng vai trò giải ghép kênh (Demultiplexing) tại tầng liên kết dữ liệu, thông báo cho hệ điều hành biết khi mở khung Ethernet thì phải chuyển giao gói dữ liệu bên trong lên cho giao thức tầng mạng tương ứng xử lý (0x0800: IPv4; 0x0806: ARP; 0x86DD: IPv6)."
+  },
+  {
+    "id": 513,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cơ chế Tự học của Switch (Self-learning)",
+    "difficulty": "Thông hiểu",
+    "question": "Một bộ chuyển mạch (Switch) vừa mới bật nguồn có Bảng địa chỉ MAC (Switch Table / CAM Table) hoàn toàn rỗng. Khi nhận được một khung Ethernet đầu tiên đi vào cổng 1, switch sẽ học được thông tin gì?",
+    "options": [
+      "Địa chỉ MAC đích và cổng đến",
+      "Địa chỉ MAC NGUỒN của khung dữ liệu và ghi nhận nó gắn liền với cổng số 1",
+      "Toàn bộ địa chỉ IP của mạng LAN",
+      "Tên đăng nhập Windows của người gửi"
+    ],
+    "correct": 1,
+    "explanation": "Cơ chế tự học (Self-learning) của Switch: Switch LUÔN LUÔN đọc địa chỉ MAC NGUỒN (Source MAC) của khung tin đến để học. Khi thấy một frame vào cổng 1 có Source MAC là X, switch lập tức ghi vào bảng: 'Muốn gửi cho thiết bị X thì chuyển ra cổng số 1', kèm theo một đồng hồ đếm lùi thời gian TTL (thường 300 giây)."
+  },
+  {
+    "id": 514,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cơ chế Chuyển tiếp của Switch (Forwarding)",
+    "difficulty": "Thông hiểu",
+    "question": "Khi Switch nhận một khung Ethernet mà địa chỉ MAC ĐÍCH chưa từng xuất hiện trong Bảng MAC (Unknown Unicast Frame), switch sẽ xử lý khung này như thế nào?",
+    "options": [
+      "Hủy bỏ khung ngay lập tức (Drop)",
+      "Ngập lụt (Flooding) - sao chép và chuyển tiếp khung ra TẤT CẢ các cổng còn lại của switch, ngoại trừ chính cổng vừa nhận vào",
+      "Gửi khung về máy chủ Google để tra cứu",
+      "Khởi động lại switch"
+    ],
+    "correct": 1,
+    "explanation": "Khi chưa biết thiết bị đích nằm ở cổng nào (Unknown Unicast), hành vi mặc định an toàn của Switch là Flooding (Làm tràn/Ngập lụt): đẩy khung ra tất cả các cổng khác (trừ cổng nhận vào). Khi thiết bị đích thật nhận được khung và phản hồi lại, switch sẽ đọc Source MAC của gói phản hồi và học được vị trí cổng của thiết bị đó."
+  },
+  {
+    "id": 515,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "So sánh Hub, Switch và Router",
+    "difficulty": "Thông hiểu",
+    "question": "Một mạng gồm 1 Switch có 24 cổng, tất cả các cổng đều được cắm vào các máy tính hoạt động ở chế độ Full-Duplex. Mạng này có bao nhiêu Miền xung đột (Collision Domain) và bao nhiêu Miền quảng bá (Broadcast Domain)?",
+    "options": [
+      "1 Collision Domain và 1 Broadcast Domain",
+      "24 Collision Domains và 1 Broadcast Domain",
+      "24 Collision Domains và 24 Broadcast Domains",
+      "1 Collision Domain và 24 Broadcast Domains"
+    ],
+    "correct": 1,
+    "explanation": "Đặc trưng cốt lõi của Switch: Mỗi cổng của Switch là một Miền xung đột (Collision Domain) độc lập (ở đây có 24 cổng = 24 collision domains, chạy Full-duplex hoàn toàn không có va chạm). Tuy nhiên, vì Switch hoạt động ở tầng 2 và không chia VLAN, nên tất cả 24 cổng này vẫn nằm chung trong DUY NHẤT 1 Miền quảng bá (Broadcast Domain)."
+  },
+  {
+    "id": 516,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "So sánh Hub, Switch và Router",
+    "difficulty": "Đánh lừa",
+    "question": "Thiết bị mạng nào sau đây có khả năng chia nhỏ (cô lập) cả Miền xung đột (Collision Domain) VÀ Miền quảng bá (Broadcast Domain) trên từng cổng của nó?",
+    "options": [
+      "Bộ tập trung (Hub)",
+      "Bộ chuyển mạch mạng LAN thông thường không chia VLAN (Switch)",
+      "Bộ định tuyến (Router)",
+      "Bộ lặp tín hiệu (Repeater)"
+    ],
+    "correct": 2,
+    "explanation": "Bảng so sánh kinh điển: (1) Hub / Repeater (Layer 1): 1 Collision Domain, 1 Broadcast Domain; (2) Switch / Bridge (Layer 2): Mỗi cổng là 1 Collision Domain riêng, nhưng chung 1 Broadcast Domain; (3) Router (Layer 3): Mỗi cổng là 1 Collision Domain riêng VÀ mỗi cổng là 1 Broadcast Domain riêng (Router chặn không cho các khung broadcast tầng 2 tràn sang các mạng khác)."
+  },
+  {
+    "id": 517,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức Cây khung (STP - 802.1D)",
+    "difficulty": "Thông hiểu",
+    "question": "Giao thức Spanning Tree Protocol (STP - IEEE 802.1D) được triển khai trên các hệ thống Switch mạng doanh nghiệp nhằm giải quyết vấn đề nguy hiểm nào?",
+    "options": [
+      "Tăng tốc độ truy cập Internet",
+      "Ngăn chặn hiện tượng Vòng lặp chuyển mạch ở tầng 2 (Layer 2 Switching Loops) gây ra bão quảng bá (Broadcast Storm) làm tê liệt toàn mạng khi có đường dây đấu nối dự phòng",
+      "Mã hóa mật khẩu người dùng",
+      "Thay thế hoàn toàn giao thức định tuyến OSPF"
+    ],
+    "correct": 1,
+    "explanation": "Vì khung Ethernet không có trường TTL như gói tin IP, nếu các switch đấu nối có đường vòng dự phòng, một khung broadcast đơn lẻ sẽ bị nhân bản và quay vòng lặp vô tận giữa các switch (Broadcast Storm), làm bảng MAC bị đảo lộn liên tục và làm sập hoàn toàn mạng trong vài giây. STP tự động tính toán khóa các cổng dự phòng (chuyển sang trạng thái Blocking) để tạo cây không vòng lặp."
+  },
+  {
+    "id": 518,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Mạng Cục bộ Ảo VLAN (IEEE 802.1Q)",
+    "difficulty": "Nhận biết",
+    "question": "Mục đích cơ bản nhất của việc cấu hình Mạng cục bộ ảo (VLAN) trên một bộ chuyển mạch vật lý là gì?",
+    "options": [
+      "Chia một Switch vật lý thành nhiều mạng LAN logic độc lập, giúp cô lập lưu lượng quảng bá (Broadcast Domain) và tăng cường an ninh mạng giữa các phòng ban",
+      "Tăng công suất nguồn điện của switch",
+      "Nâng băng thông cáp mạng từ 100 Mbps lên 10 Gbps",
+      "Tự động cài đặt phần mềm diệt virus cho các máy trạm"
+    ],
+    "correct": 0,
+    "explanation": "VLAN cho phép quản trị viên chia một thiết bị switch vật lý dùng chung thành nhiều mạng LAN ảo tách biệt về mặt logic (ví dụ VLAN 10 Ban Giám Đốc, VLAN 20 Kế Toán). Mỗi VLAN là một Broadcast Domain riêng; các máy thuộc VLAN 10 không thể nhìn thấy lưu lượng broadcast của VLAN 20 và không thể giao tiếp trực tiếp với nhau nếu không có thiết bị định tuyến Layer 3."
+  },
+  {
+    "id": 519,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cổng Access vs Cổng Trunk trong VLAN",
+    "difficulty": "Thông hiểu",
+    "question": "Sự khác biệt kỹ thuật giữa cổng Access (Access Port) và cổng Trunk (Trunk Port) trên Switch hỗ trợ VLAN là gì?",
+    "options": [
+      "Cổng Access dùng cáp quang, cổng Trunk dùng cáp đồng",
+      "Cổng Access chỉ thuộc về MỘT VLAN duy nhất và truyền khung không gắn thẻ (Untagged frame) tới máy tính người dùng; trong khi cổng Trunk cho phép lưu lượng của NHIỀU VLAN cùng đi qua (thường kết nối giữa các switch) và sử dụng thẻ gắn nhãn IEEE 802.1Q (Tagged frame)",
+      "Cổng Trunk chỉ hoạt động vào ban đêm",
+      "Cổng Access có tốc độ cao hơn cổng Trunk gấp 10 lần"
+    ],
+    "correct": 1,
+    "explanation": "Cổng Access nối vào End system (PC, máy in) - các thiết bị này không hiểu thẻ VLAN nên switch sẽ gỡ thẻ (untagged) khi phát ra cổng access. Cổng Trunk là đường cao tốc liên kết giữa các Switch (hoặc nối Switch với Router), truyền khung của tất cả các VLAN được cấp phép, có gắn thêm thẻ 802.1Q (4 byte tag) để switch đầu bên kia phân biệt khung này thuộc VLAN nào."
+  },
+  {
+    "id": 520,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Tiêu chuẩn Gắn thẻ 802.1Q (VLAN Tagging)",
+    "difficulty": "Thông hiểu",
+    "question": "Thẻ nhận diện VLAN theo chuẩn IEEE 802.1Q có kích thước bao nhiêu byte và trường VID (VLAN Identifier) có bao nhiêu bit, cho phép tạo tối đa bao nhiêu VLAN?",
+    "options": [
+      "Thẻ 2 byte; VID 8 bit, tạo tối đa 256 VLAN",
+      "Thẻ 4 byte; VID 12 bit, cho phép đánh số từ 1 đến 4094 (tối đa 4094 VLAN khả dụng)",
+      "Thẻ 8 byte; VID 16 bit, tạo 65536 VLAN",
+      "Thẻ 1 byte; VID 4 bit, tạo 16 VLAN"
+    ],
+    "correct": 1,
+    "explanation": "Thẻ 802.1Q được chèn trực tiếp vào giữa trường Source MAC và trường Type của khung Ethernet với kích thước 4 byte (gồm 2B TPID 0x8100 và 2B TCI). Trường VLAN ID (VID) có độ dài 12 bit (2^12 = 4096 giá trị). Trừ giá trị 0 và 4095 được dành riêng cho hệ thống, các VLAN hợp lệ được đánh số từ 1 đến 4094."
+  },
+  {
+    "id": 521,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Định tuyến Liên VLAN (Inter-VLAN Routing)",
+    "difficulty": "Vận dụng",
+    "question": "Mô hình định tuyến liên VLAN 'Router-on-a-Stick' thực hiện chuyển tiếp gói tin giữa các VLAN khác nhau bằng cách nào?",
+    "options": [
+      "Nối mỗi VLAN bằng một sợi dây cáp riêng cắm vào các cổng vật lý khác nhau của router",
+      "Sử dụng một đường liên kết Trunk duy nhất kết nối giữa Switch và một cổng vật lý của Router, trên cổng đó của router được cấu hình chia thành các giao diện con logic (Sub-interfaces) tương ứng với từng VLAN",
+      "Nâng cấp tất cả các cổng của switch thành cổng Trunk",
+      "Tắt tính năng bảo mật của các máy trạm"
+    ],
+    "correct": 1,
+    "explanation": "Mô hình Router-on-a-Stick tiết kiệm cổng vật lý của Router: Chỉ cần 1 cổng vật lý (ví dụ GigabitEthernet 0/0) nối với đường Trunk của switch. Trên router, kỹ sư tạo các sub-interfaces logic (ví dụ g0/0.10, g0/0.20), đóng gói encapsulation dot1Q và gán IP làm Default Gateway cho từng VLAN tương ứng."
+  },
+  {
+    "id": 522,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Tấn công Mạng LAN: ARP Spoofing",
+    "difficulty": "Thông hiểu",
+    "question": "Kẻ tấn công thực hiện kỹ thuật 'ARP Spoofing' (Đầu độc bảng ARP) nhằm mục đích gì trong mạng LAN?",
+    "options": [
+      "Làm đứt đường dây điện thoại",
+      "Liên tục gửi các gói tin ARP Reply giả mạo để lừa máy tính nạn nhân liên kết địa chỉ IP của Default Gateway (Router) với địa chỉ MAC của kẻ tấn công, từ đó chuyển hướng toàn bộ lưu lượng của nạn nhân đi qua máy của hacker (tấn công Man-in-the-Middle)",
+      "Đổi mật khẩu truy cập BIOS của máy tính",
+      "Tăng tốc độ tải file của hacker"
+    ],
+    "correct": 1,
+    "explanation": "Giao thức ARP nguyên bản không có cơ chế xác thực danh tính. Kẻ tấn công gửi các gói tin ARP Reply không yêu cầu (Gratuitous/Unsolicited ARP) tới nạn nhân nói rằng 'Tôi có IP của Gateway và MAC của tôi là X'. Nạn nhân cập nhật bảng ARP của mình; từ đó mọi lưu lượng gửi ra Internet đều chạy thẳng vào máy hacker để bị nghe lén hoặc sửa đổi."
+  },
+  {
+    "id": 523,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cơ chế Chống Tấn công: Dynamic ARP Inspection (DAI)",
+    "difficulty": "Vận dụng",
+    "question": "Tính năng Dynamic ARP Inspection (DAI) trên các Switch hiện đại ngăn chặn tấn công ARP Spoofing bằng cách đối chiếu thông điệp ARP với cơ sở dữ liệu tin cậy nào?",
+    "options": [
+      "Bảng DNS Cache của Google",
+      "Bảng liên kết DHCP Snooping Binding Table (chứa ánh xạ hợp lệ giữa IP, MAC, Port do máy chủ DHCP cấp phát)",
+      "Danh bạ điện thoại của cơ quan",
+      "Bảng định tuyến tĩnh của router"
+    ],
+    "correct": 1,
+    "explanation": "Khi bật tính năng DAI, switch chặn mọi gói tin ARP trước khi chuyển tiếp. Switch đối chiếu thông tin [IP, MAC] trong gói ARP với bảng cơ sở dữ liệu tin cậy được tạo tự động bởi tính năng DHCP Snooping. Nếu gói ARP đến từ một cổng không đáng tin cậy mà chứa thông tin IP giả mạo không khớp với hợp đồng DHCP, switch sẽ tiêu hủy gói tin và cảnh báo quản trị viên."
+  },
+  {
+    "id": 524,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Tấn công Làm tràn Bảng MAC (MAC Flooding)",
+    "difficulty": "Thông hiểu",
+    "question": "Kỹ thuật tấn công MAC Flooding gửi hàng nghìn khung tin chứa địa chỉ MAC nguồn giả mạo liên tục vào switch nhằm mục đích biến switch hoạt động tương tự như thiết bị nào?",
+    "options": [
+      "Biến Switch thành Router",
+      "Làm tràn bộ nhớ bảng CAM/MAC của Switch, khiến Switch rơi vào chế độ 'Fail-open' và bắt buộc phải Flooding (ngập lụt) tất cả các khung tin ra mọi cổng như một chiếc Hub, cho phép kẻ tấn công nghe lén toàn bộ mạng",
+      "Biến Switch thành máy chủ Web",
+      "Biến Switch thành modem cáp quang"
+    ],
+    "correct": 1,
+    "explanation": "Bảng CAM của switch có dung lượng giới hạn (ví dụ vài nghìn bản ghi). Khi kẻ tấn công bơm ngập hàng triệu địa chỉ MAC rác, bảng CAM bị đầy hoàn toàn và không thể học thêm. Lúc này, switch không thể tra được cổng cho các khung tin hợp lệ của người dùng khác nên buộc phải Flooding ra tất cả các cổng (hành xử giống hệt như một chiếc Hub), giúp hacker dễ dàng bắt trọn lưu lượng nhạy cảm."
+  },
+  {
+    "id": 525,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Chế độ Truyền Song công (Duplex)",
+    "difficulty": "Thông hiểu",
+    "question": "Tại sao trong mạng Ethernet hiện đại kết nối hình sao bằng cáp xoắn đôi (Twisted Pair) cắm vào Switch hoạt động ở chế độ Song công toàn phần (Full-Duplex), giao thức phát hiện va chạm CSMA/CD lại được tắt bỏ hoàn toàn?",
+    "options": [
+      "Vì người dùng không cần kiểm tra lỗi nữa",
+      "Vì mỗi cặp dây đồng riêng biệt được dành riêng cho việc truyền (TX) và nhận (RX) độc lập, đồng thời mỗi cổng switch tạo thành một phân đoạn mạng riêng biệt hoàn toàn không thể xảy ra va chạm xung đột tín hiệu vật lý",
+      "Vì cáp xoắn đôi tự động hấp thụ các va chạm",
+      "Do hệ điều hành Windows tự xử lý va chạm ở tầng ứng dụng"
+    ],
+    "correct": 1,
+    "explanation": "Trong môi trường cáp chia sẻ cổ xưa (cáp đồng trục 10BASE2/5), mọi máy dùng chung 1 dây đồng nên bắt buộc phải có CSMA/CD. Trong mạng hiện đại với Switch và cáp xoắn đôi Cat5e/Cat6 chạy Full-Duplex: Kênh truyền có 2 đường riêng biệt (1 cặp truyền TX, 1 cặp nhận RX), không còn hiện tượng tranh chấp môi trường dùng chung, va chạm bằng 0, do đó CSMA/CD được vô hiệu hóa hoàn toàn."
+  },
+  {
+    "id": 526,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Địa chỉ MAC Đặc biệt",
+    "difficulty": "Nhận biết",
+    "question": "Địa chỉ MAC nào sau đây là địa chỉ Quảng bá (Broadcast) hợp lệ ở tầng liên kết dữ liệu?",
+    "options": [
+      "00:00:00:00:00:00",
+      "FF:FF:FF:FF:FF:FF",
+      "255.255.255.255",
+      "01:00:5E:00:00:01"
+    ],
+    "correct": 1,
+    "explanation": "Địa chỉ Broadcast tầng 2 là chuỗi 48 bit đều bằng 1, được viết dưới dạng thập lục phân là FF:FF:FF:FF:FF:FF (hoặc FF-FF-FF-FF-FF-FF). Lưu ý 255.255.255.255 là địa chỉ Broadcast ở tầng 3 (IP), không phải địa chỉ MAC tầng 2."
+  },
+  {
+    "id": 527,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cơ chế Chuyển mạch: Cut-Through vs Store-and-Forward",
+    "difficulty": "Thông hiểu",
+    "question": "Cơ chế chuyển mạch Cut-Through Switching trên Switch khác biệt như thế nào so với cơ chế Store-and-Forward truyền thống?",
+    "options": [
+      "Cut-Through cắt nhỏ khung tin thành 2 nửa",
+      "Cut-Through bắt đầu chuyển tiếp khung tin ngay khi vừa đọc xong địa chỉ MAC đích (Destination MAC) ở 6 byte đầu tiên mà không cần chờ nhận hết khung và không kiểm tra mã CRC, giúp giảm tối đa độ trễ chuyển mạch",
+      "Cut-Through lưu khung trong RAM suốt 5 giây trước khi gửi",
+      "Cut-Through chỉ dùng cho giao thức FTP"
+    ],
+    "correct": 1,
+    "explanation": "Store-and-Forward nhận đủ 100% khung và kiểm tra lỗi CRC trước khi chuyển tiếp (độ trễ cao hơn nhưng chặn khung lỗi). Cut-Through (thường dùng trong trung tâm dữ liệu tài chính tốc độ cao) đọc ngay 6 byte đầu chứa Destination MAC rồi tức tốc đẩy ra cổng tương ứng ngay cả khi phần thân khung vẫn đang được nạp vào, giảm độ trễ xuống mức nano-giây."
+  },
+  {
+    "id": 528,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức Đa truy nhập (Taking-turns)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong giao thức Chuyền thẻ bài (Token Passing - ví dụ chuẩn IEEE 802.5 Token Ring), một nút mạng được phép truyền dữ liệu khi nào?",
+    "options": [
+      "Bất cứ khi nào nó có dữ liệu cần gửi",
+      "Khi và chỉ khi nó đang nắm giữ khung thẻ bài đặc biệt (Token) đang luân chuyển tuần hoàn trên vòng mạng",
+      "Khi được máy chủ cấp phát quyền qua cổng 80",
+      "Khi không có máy nào khác bật nguồn"
+    ],
+    "correct": 1,
+    "explanation": "Giao thức lần lượt (Taking-turns) bằng Token: Một khung nhỏ đặc biệt gọi là Thẻ bài (Token) di chuyển tuần hoàn từ nút này sang nút khác theo chiều kim đồng hồ. Một nút chỉ được phát dữ liệu khi nó bắt được chiếc Token rảnh rỗi. Khi truyền xong, nó nhả Token cho nút kế tiếp, triệt tiêu hoàn toàn nguy cơ va chạm xung đột tín hiệu."
+  },
+  {
+    "id": 529,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Kỹ thuật Bổ sung Byte (Byte Stuffing)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong kỹ thuật đóng khung ở tầng liên kết, quy tắc Byte Stuffing (Nhồi byte / Character Stuffing) được sử dụng để làm gì?",
+    "options": [
+      "Tăng kích thước tệp tin để tải lâu hơn",
+      "Chèn một byte thoát đặc biệt (Escape Byte - ESC) vào ngay trước các byte dữ liệu người dùng tình cờ trùng khớp với ký tự cờ biên giới hạn khung (Flag Byte), ngăn ngừa bên nhận hiểu nhầm đó là điểm kết thúc khung",
+      "Mã hóa mật khẩu tầng 2",
+      "Tự động ngắt kết nối khi hết dung lượng"
+    ],
+    "correct": 1,
+    "explanation": "Khi tầng liên kết dùng ký tự cờ đặc biệt (Flag Byte, ví dụ 01111110) để đánh dấu đầu và đuôi của khung, nếu trong dữ liệu người dùng tình cờ xuất hiện chuỗi bit giống hệt Flag, bên nhận sẽ tưởng khung đã kết thúc sớm. Byte Stuffing chèn thêm byte ESC vào trước chuỗi đó tại bên gửi, và bên nhận sẽ gỡ bỏ byte ESC để khôi phục dữ liệu gốc."
+  },
+  {
+    "id": 530,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Bảo mật Cổng Switch: Port Security",
+    "difficulty": "Thông hiểu",
+    "question": "Tính năng Port Security trên Switch Cisco được dùng để làm gì?",
+    "options": [
+      "Quét virus trên các cổng mạng",
+      "Giới hạn số lượng và danh sách các địa chỉ MAC cụ thể được phép kết nối vào một cổng switch vật lý; nếu có thiết bị lạ cắm vào, cổng sẽ tự động khóa (Err-disable) hoặc loại bỏ gói tin",
+      "Tự động tăng băng thông cổng lên 1 Gbps",
+      "Yêu cầu người dùng cắm thẻ thông minh trước khi cắm dây cáp"
+    ],
+    "correct": 1,
+    "explanation": "Port Security ngăn chặn việc người dùng tự ý cắm switch phụ hoặc thiết bị lạ vào mạng nội bộ. Quản trị viên cấu hình: 'Cổng Fa0/1 chỉ chấp nhận đúng địa chỉ MAC của máy kế toán; nếu phát hiện MAC lạ thì lập tức tắt cổng (Action: Shutdown) và gửi cảnh báo SNMP'."
+  },
+  {
+    "id": 531,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Giao thức STP: Bầu chọn Root Bridge",
+    "difficulty": "Thông hiểu",
+    "question": "Trong giao thức Spanning Tree Protocol (STP), Switch nào trong mạng sẽ được bầu chọn làm 'Cầu gốc' (Root Bridge)?",
+    "options": [
+      "Switch có nhiều cổng kết nối nhất",
+      "Switch có giá trị Cầu định danh (Bridge ID = Priority + MAC Address) NHỎ NHẤT trong toàn mạng",
+      "Switch có địa chỉ IP lớn nhất",
+      "Switch được bật nguồn đầu tiên"
+    ],
+    "correct": 1,
+    "explanation": "Quy tắc bầu Root Bridge trong STP: Switch có Bridge ID (BID) nhỏ nhất sẽ chiến thắng. BID gồm 2 phần: Bridge Priority (mặc định là 32768) và địa chỉ MAC của switch. Quản trị viên muốn chọn switch trung tâm mạnh nhất làm Root Bridge thường chủ động hạ độ ưu tiên Priority của nó xuống thấp hơn các switch khác (ví dụ 4096 hoặc 0)."
+  },
+  {
+    "id": 532,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Ghép kênh Phân chia Mã (CDMA)",
+    "difficulty": "Thông hiểu",
+    "question": "Giao thức đa truy nhập phân chia theo mã (CDMA - Code Division Multiple Access) cho phép các trạm truyền dữ liệu đồng thời như thế nào?",
+    "options": [
+      "Mỗi trạm phát ở một khe thời gian khác nhau",
+      "Tất cả các trạm cùng phát đồng thời trên cùng một dải tần số nhưng mỗi trạm được gán một chuỗi mã trực giao (Orthogonal Code / Chipping Sequence) độc nhất vô nhị để giải mã tại bên nhận",
+      "Mỗi trạm sử dụng một loại cáp mạng riêng",
+      "Chỉ cho phép một trạm phát tại một thời điểm"
+    ],
+    "correct": 1,
+    "explanation": "Trong CDMA (nền tảng của mạng di động 3G), các máy đồng thời phát trên cùng băng tần. Tín hiệu của mỗi máy được nhân với một mã trực giao (Chipping code). Nhờ tính chất toán học của các vectơ trực giao (tích vô hướng của 2 mã khác nhau bằng 0), trạm thu có thể tách chiết chuẩn xác tín hiệu của từng người dùng mà không bị nhiễu bởi các người dùng khác."
+  },
+  {
+    "id": 533,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Cấu trúc Khung Ethernet: Preamble",
+    "difficulty": "Đánh lừa",
+    "question": "Phần mở đầu (Preamble) dài 8 byte của khung Ethernet II gồm 7 byte có mẫu bit 10101010 và 1 byte cuối cùng SFD có giá trị là 10101011 nhằm mục đích gì?",
+    "options": [
+      "Chứa thông tin kiểm tra lỗi CRC",
+      "Đồng bộ hóa đồng hồ xung nhịp (Clock Synchronization) của bộ thu tín hiệu và cảnh báo rằng các byte tiếp theo chính là địa chỉ MAC đích của khung dữ liệu",
+      "Chứa địa chỉ IP của router",
+      "Được dùng để mã hóa mật khẩu tầng 2"
+    ],
+    "correct": 1,
+    "explanation": "Preamble không chứa dữ liệu mà đóng vai trò 'đánh thức' và đồng bộ đồng hồ nhịp (clock synchronization) giữa bộ phát và bộ thu bằng chuỗi bit xen kẽ 10101010. Byte thứ 8 đặc biệt kết thúc bằng hai bit 11 liên tiếp (Start Frame Delimiter - SFD = 10101011) báo hiệu cho card mạng: 'Ngay sau đây là byte đầu tiên của địa chỉ Destination MAC!'."
+  },
+  {
+    "id": 534,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Native VLAN trong IEEE 802.1Q",
+    "difficulty": "Thông hiểu",
+    "question": "Khái niệm 'Native VLAN' (VLAN bản địa - mặc định thường là VLAN 1) trên đường kết nối Trunk của switch có đặc điểm gì đặc biệt?",
+    "options": [
+      "Là VLAN có tốc độ cao nhất",
+      "Các khung dữ liệu thuộc Native VLAN khi đi qua đường liên kết Trunk sẽ KHÔNG ĐƯỢC GẮN THẺ 802.1Q (Untagged), nhằm duy trì khả năng tương thích ngược với các thiết bị mạng cũ không hiểu chuẩn gắn thẻ",
+      "Là VLAN chỉ chứa các máy chủ của hãng Cisco",
+      "Là VLAN không thể xóa bỏ tên"
+    ],
+    "correct": 1,
+    "explanation": "Chuẩn 802.1Q định nghĩa Native VLAN: Mọi khung của các VLAN khác khi qua đường Trunk đều bị chèn thẻ tag 4 byte; riêng khung thuộc Native VLAN thì truyền nguyên bản không gắn tag. Khi switch đầu bên kia nhận được một khung không có thẻ trên đường Trunk, nó tự động hiểu khung đó thuộc về Native VLAN."
+  },
+  {
+    "id": 535,
+    "exam_type": "nang_cao",
+    "chapter": 5,
+    "chapter_title": "Chương 5: Tầng Liên kết dữ liệu & Mạng LAN",
+    "category": "Tính toán Hiệu suất CSMA/CD",
+    "difficulty": "Vận dụng",
+    "question": "Hiệu suất lý thuyết (Efficiency) của giao thức CSMA/CD trên mạng LAN được biểu diễn xấp xỉ bởi công thức nào, với d_prop là trễ lan truyền cực đại và d_trans là thời gian truyền một khung dữ liệu?",
+    "options": [
+      "Efficiency = 1 / (1 + 5 * d_prop / d_trans)",
+      "Efficiency = d_prop / d_trans",
+      "Efficiency = 1 - (d_prop * d_trans)",
+      "Efficiency = 1 / (1 + d_trans / d_prop)"
+    ],
+    "correct": 0,
+    "explanation": "Công thức hiệu suất thực nghiệm chuẩn của CSMA/CD: Efficiency = 1 / (1 + 5 * t_prop / t_trans). Từ công thức này rút ra 2 kết luận kinh điển: (1) Khi khoảng cách giữa các máy d_prop tiến tới 0 (mạng LAN nhỏ gọn), hiệu suất tiệm cận 100%; (2) Khi kích thước khung dữ liệu lớn (t_trans >> t_prop), hiệu suất cũng tiệm cận 100%."
+  }
+]

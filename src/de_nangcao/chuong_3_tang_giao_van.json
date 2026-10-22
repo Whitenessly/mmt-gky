@@ -1,0 +1,597 @@
+[
+  {
+    "id": 301,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Ghép kênh & Phân kênh (Demux)",
+    "difficulty": "Thông hiểu",
+    "question": "Để phân kênh (Demultiplexing) chính xác một gói tin TCP đến đúng tiến trình ứng dụng nhận, hệ điều hành dựa vào bộ 4 thông tin (4-tuple) nào?",
+    "options": [
+      "Source MAC, Destination MAC, IP nguồn, IP đích",
+      "Source IP, Source Port, Destination IP, Destination Port",
+      "Destination IP, Destination Port, Window Size, Sequence Number",
+      "Source IP, Destination IP, Giao thức tầng ứng dụng, Checksum"
+    ],
+    "correct": 1,
+    "explanation": "Khác với UDP chỉ dùng 2 thông tin (Dest IP, Dest Port), một kết nối TCP được định danh duy nhất bởi bộ 4 thông số: (Source IP, Source Port, Dest IP, Dest Port). Điều này cho phép một máy chủ Web lắng nghe trên cổng 80 có thể phục vụ đồng thời hàng nghìn client khác nhau qua các socket riêng biệt."
+  },
+  {
+    "id": 302,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Giao thức UDP",
+    "difficulty": "Nhận biết",
+    "question": "Phần tiêu đề (Header) của gói tin UDP có kích thước cố định là bao nhiêu byte và bao gồm những trường nào?",
+    "options": [
+      "20 byte, gồm Sequence Number, Ack Number, Flags, Window Size",
+      "8 byte, gồm Source Port (2B), Destination Port (2B), Length (2B), Checksum (2B)",
+      "4 byte, gồm Port nguồn và Port đích",
+      "12 byte, gồm Source Port, Dest Port, Checksum, Options"
+    ],
+    "correct": 1,
+    "explanation": "Header của UDP cực kỳ tinh gọn, chỉ có 8 byte cố định được chia thành 4 trường (mỗi trường 16 bit = 2 byte): Cổng nguồn (Source Port), Cổng đích (Destination Port), Chiều dài gói tin (Length = Header + Payload) và Mã kiểm tra lỗi (Checksum)."
+  },
+  {
+    "id": 303,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Nguyên lý Truyền tin cậy (RDT)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong quá trình phát triển giao thức truyền dữ liệu tin cậy (rdt), tại sao phiên bản rdt 2.1 lại cần bổ sung trường số thứ tự gói tin (Sequence number 0 và 1)?",
+    "options": [
+      "Để sắp xếp lại dữ liệu khi truyền qua nhiều đường khác nhau",
+      "Để giải quyết trường hợp thông điệp phản hồi ACK hoặc NAK bị lỗi bit khiến bên gửi gửi lại gói tin cũ, giúp bên nhận phát hiện và loại bỏ gói tin trùng lặp (Duplicate Packet)",
+      "Để tăng tốc độ truyền dẫn gấp đôi",
+      "Để thông báo cho router biết kích thước bộ đệm"
+    ],
+    "correct": 1,
+    "explanation": "Trong rdt 2.0, nếu thông điệp ACK/NAK gửi về bị lỗi bit (corrupted), bên gửi không biết bên nhận đã nhận được hay chưa nên bắt buộc phải gửi lại. Nhưng bên nhận không thể phân biệt gói gửi lại này là dữ liệu mới hay gói cũ bị trùng! Số sequence 0 và 1 trong rdt 2.1 giải quyết triệt để vấn đề nhận diện gói tin trùng lặp này."
+  },
+  {
+    "id": 304,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Nguyên lý Truyền tin cậy (RDT)",
+    "difficulty": "Thông hiểu",
+    "question": "Giao thức rdt 2.2 có cải tiến quan trọng nào so với rdt 2.1?",
+    "options": [
+      "Bổ sung đồng hồ bấm giờ (Timer)",
+      "Loại bỏ hoàn toàn thông điệp NAK (Negative Acknowledgment), chỉ sử dụng thông điệp ACK có kèm theo số thứ tự (ACK 0 hoặc ACK 1)",
+      "Chuyển từ cơ chế Stop-and-Wait sang cơ chế cửa sổ trượt Pipelining",
+      "Tăng kích thước gói tin lên 64 KB"
+    ],
+    "correct": 1,
+    "explanation": "rdt 2.2 là giao thức không cần NAK (NAK-free). Thay vì gửi NAK khi phát hiện gói tin lỗi, bên nhận chỉ việc gửi lại thông điệp ACK cho gói tin hợp lệ cuối cùng mà nó đã nhận (kèm số seq). Khi bên gửi nhận được 2 lần ACK giống nhau (Duplicate ACK), nó tự hiểu là gói tin kế tiếp đã bị lỗi và cần gửi lại."
+  },
+  {
+    "id": 305,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tính toán Hiệu suất Kênh truyền (RDT 3.0)",
+    "difficulty": "Vận dụng",
+    "question": "Một liên kết có tốc độ R = 1 Gbps, trễ truyền khứ hồi RTT = 30 ms. Gói tin có kích thước L = 1000 Byte (8000 bit). Nếu sử dụng giao thức dừng và đợi (Stop-and-Wait - rdt 3.0), hiệu suất sử dụng kênh truyền (Sender Utilization - U_sender) là xấp xỉ bao nhiêu?",
+    "options": [
+      "0.027% (khoảng 0.00027)",
+      "27%",
+      "99%",
+      "2.7%"
+    ],
+    "correct": 0,
+    "explanation": "Thời gian đẩy gói tin vào đường truyền: d_trans = L / R = 8000 bit / 10^9 bps = 0.008 ms. Hiệu suất kênh truyền: U_sender = d_trans / (RTT + d_trans) = 0.008 / (30 + 0.008) ≈ 0.000266 (tức là 0.027%). Đường truyền 1 Gbps cực nhanh nhưng máy gửi bị lãng phí hơn 99.97% thời gian chỉ để chờ gói ACK! Đây là lý do bắt buộc phải chuyển sang kỹ thuật truyền đường ống Pipelining."
+  },
+  {
+    "id": 306,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Cơ chế Pipelining: Go-Back-N (GBN)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong giao thức Go-Back-N (GBN), khi bên nhận nhận được một gói tin đúng (không lỗi) nhưng ĐẾN NGOÀI THỨ TỰ (Out-of-order, ví dụ đang đợi gói 3 nhưng gói 4 lại đến trước), bên nhận sẽ làm gì?",
+    "options": [
+      "Lưu gói 4 vào bộ đệm và đợi gói 3",
+      "Hủy bỏ hoàn toàn gói 4 và gửi lại thông điệp ACK cho gói tin hợp lệ đúng thứ tự cao nhất vừa nhận trước đó (Cumulative ACK)",
+      "Đóng ngay lập tức kết nối mạng",
+      "Gửi gói tin RST về cho bên gửi"
+    ],
+    "correct": 1,
+    "explanation": "Đặc trưng lớn nhất của GBN là: Bên nhận KHÔNG CÓ BỘ ĐỆM cho các gói đến ngoài thứ tự (Receive window = 1). Bất kỳ gói nào đến sai thứ tự đều bị vứt bỏ, và bên nhận chỉ gửi lại ACK cho gói đúng thứ tự cao nhất trước đó. Khi bên gửi bị timeout ở gói 3, nó sẽ phải truyền lại toàn bộ các gói từ 3 trở đi (Go Back N)."
+  },
+  {
+    "id": 307,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Cơ chế Pipelining: Selective Repeat (SR)",
+    "difficulty": "Thông hiểu",
+    "question": "Sự khác biệt cốt lõi giữa Selective Repeat (SR) và Go-Back-N (GBN) là gì?",
+    "options": [
+      "SR không sử dụng số thứ tự Sequence Number",
+      "Trong SR, bên nhận có bộ đệm để lưu các gói đến ngoài thứ tự và gửi ACK riêng cho từng gói (Individual ACK); bên gửi chỉ truyền lại DUY NHẤT gói tin bị mất (mỗi gói có một timer riêng)",
+      "SR chỉ chạy được trên mạng không dây WiFi",
+      "GBN có tốc độ chậm hơn UDP nhưng nhanh hơn SR"
+    ],
+    "correct": 1,
+    "explanation": "Trong Selective Repeat (Lặp lại có chọn lọc): Bên nhận có bộ đệm chứa các gói ngoài thứ tự và gửi ACK độc lập cho từng gói một. Bên gửi duy trì bộ đếm thời gian riêng cho từng gói tin chưa được xác nhận, và khi một timer hết hạn, bên gửi chỉ phát lại duy nhất một gói tin bị mất đó mà không cần gửi lại toàn bộ cửa sổ như GBN."
+  },
+  {
+    "id": 308,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tính toán Cửa sổ Selective Repeat",
+    "difficulty": "Đánh lừa",
+    "question": "Nếu số thứ tự gói tin được đánh số bằng trường k bit (không gian số thứ tự từ 0 đến 2^k - 1), để tránh hiện tượng nhập nhằng (nhầm lẫn giữa gói tin mới và gói tin cũ bị truyền lại), kích thước cửa sổ cực đại N của giao thức Selective Repeat phải thỏa mãn điều kiện nào?",
+    "options": [
+      "N <= 2^k - 1",
+      "N <= 2^(k - 1) (tức là không quá một nửa không gian số thứ tự)",
+      "N <= k",
+      "N có thể lớn tùy ý"
+    ],
+    "correct": 1,
+    "explanation": "Trong Selective Repeat, nếu kích thước cửa sổ N > 2^(k-1), cửa sổ của bên nhận và cửa sổ của bên gửi sẽ bị gối đầu lên nhau. Khi toàn bộ các ACK của một cửa sổ bị mất trên đường về, bên gửi sẽ gửi lại gói tin cũ, nhưng bên nhận sẽ nhầm lẫn gói đó là gói tin mới của chu kỳ kế tiếp! Do đó, quy tắc vàng: Window Size <= (Sequence Number Space) / 2 = 2^(k-1)."
+  },
+  {
+    "id": 309,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Đặc điểm Giao thức TCP",
+    "difficulty": "Nhận biết",
+    "question": "Đặc tính nào sau đây KHÔNG PHẢI là đặc tính của giao thức TCP?",
+    "options": [
+      "Hướng kết nối (Connection-oriented)",
+      "Truyền dữ liệu dạng dòng byte liên tục không phân ranh giới bản ghi (Byte-stream)",
+      "Hỗ trợ truyền đa hướng từ một nguồn tới nhiều đích đồng thời (Multicasting)",
+      "Truyền song công toàn phần (Full-duplex)"
+    ],
+    "correct": 2,
+    "explanation": "TCP là giao thức Point-to-Point (Điểm - Điểm) nghiêm ngặt giữa chính xác một bên gửi và một bên nhận (1-to-1). TCP KHÔNG hỗ trợ truyền đa hướng (Multicast) hay quảng bá (Broadcast). Nếu muốn truyền Multicast (như truyền hình IPTV), bắt buộc phải sử dụng giao thức UDP ở tầng giao vận."
+  },
+  {
+    "id": 310,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tính toán Số thứ tự (Seq & Ack) trong TCP",
+    "difficulty": "Vận dụng",
+    "question": "Host A gửi cho Host B một TCP segment có Sequence Number = 1000 và mang theo 500 byte dữ liệu payload. Host B nhận được gói tin này đầy đủ và không có lỗi. Thông điệp ACK mà Host B gửi trả lại cho Host A sẽ có trường Acknowledgment Number bằng bao nhiêu?",
+    "options": [
+      "1000",
+      "1500",
+      "1501",
+      "500"
+    ],
+    "correct": 1,
+    "explanation": "Trong TCP, Sequence Number là số thứ tự của byte đầu tiên (ở đây là byte 1000). Gói mang 500 byte dữ liệu sẽ chiếm các byte từ 1000 đến 1499. Trường Acknowledgment Number trong TCP là 'số thứ tự của byte tiếp theo mà bên nhận mong đợi nhận được'. Vì đã nhận trọn vẹn đến byte 1499, byte tiếp theo mong đợi là 1500 (Ack = 1500)."
+  },
+  {
+    "id": 311,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tiêu đề TCP (TCP Header)",
+    "difficulty": "Thông hiểu",
+    "question": "Trường Data Offset (hay Header Length) trong tiêu đề TCP có độ dài 4 bit. Nếu giá trị của trường này là nhị phân 0101 (giá trị thập phân là 5), thì tiêu đề TCP có độ dài thực tế là bao nhiêu byte?",
+    "options": [
+      "5 byte",
+      "20 byte",
+      "40 byte",
+      "60 byte"
+    ],
+    "correct": 1,
+    "explanation": "Trường Data Offset quy định độ dài của TCP header tính theo đơn vị 'từ 32-bit' (tức 1 đơn vị = 4 byte). Khi Data Offset = 5, độ dài header là 5 * 4 byte = 20 byte. Đây chính là độ dài tối thiểu của một TCP header tiêu chuẩn (khi không có trường Options mở rộng)."
+  },
+  {
+    "id": 312,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Bắt tay 3 bước (3-way Handshake)",
+    "difficulty": "Thông hiểu",
+    "question": "Trong bước thứ hai của quá trình thiết lập kết nối TCP 3 bước (gói tin từ Server trả về cho Client), các cờ (flags) nào trong tiêu đề TCP được bật lên giá trị 1?",
+    "options": [
+      "Chỉ có cờ SYN = 1",
+      "Chỉ có cờ ACK = 1",
+      "Cả hai cờ SYN = 1 và ACK = 1",
+      "Cờ SYN = 1 và FIN = 1"
+    ],
+    "correct": 2,
+    "explanation": "Trình tự bắt tay 3 bước TCP: (1) Client -> Server: gửi SYN (SYN=1, Seq=client_isn); (2) Server -> Client: gửi SYN-ACK (SYN=1 để yêu cầu đồng bộ phía server, đồng thời ACK=1 để xác nhận gói SYN của client, Ack=client_isn + 1); (3) Client -> Server: gửi ACK (ACK=1, Ack=server_isn + 1)."
+  },
+  {
+    "id": 313,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Giải phóng Kết nối TCP",
+    "difficulty": "Đánh lừa",
+    "question": "Khi một bên chủ động đóng kết nối TCP (gửi FIN và nhận đủ các ACK), tại sao nó không đóng socket ngay mà phải chuyển sang trạng thái TIME_WAIT (thường kéo dài 2 MSL - khoảng 1 đến 2 phút)?",
+    "options": [
+      "Để máy chủ có thời gian khởi động lại card mạng",
+      "Để gửi lại gói tin ACK cuối cùng nếu gói ACK đó bị mất trên đường truyền (giúp bên kia giải phóng kết nối bình thường), đồng thời đảm bảo tất cả các gói tin cũ của kết nối này đã biến mất hoàn toàn trên mạng",
+      "Để tiếp tục tải dữ liệu còn lại bằng giao thức UDP",
+      "Do lỗi của hệ điều hành Windows"
+    ],
+    "correct": 1,
+    "explanation": "Trạng thái TIME_WAIT (2 MSL - Maximum Segment Lifetime) có 2 mục đích sống còn: (1) Nếu gói ACK cuối cùng bị thất lạc, bên kia sẽ gửi lại FIN; trạng thái TIME_WAIT cho phép gửi lại ACK để bên kia đóng kết nối an toàn; (2) Ngăn ngừa các gói tin 'lang thang' (stray segments) của kết nối cũ bị nhầm lẫn vào một kết nối mới mở trùng cổng sau đó."
+  },
+  {
+    "id": 314,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Ước lượng RTT & Timeout trong TCP",
+    "difficulty": "Vận dụng",
+    "question": "TCP ước lượng thời gian khứ hồi (EstimatedRTT) theo công thức trung bình trượt指数 (EWMA): EstimatedRTT = (1 - alpha) * EstimatedRTT + alpha * SampleRTT. Theo khuyến nghị RFC 6298, giá trị alpha chuẩn thường được chọn là:",
+    "options": [
+      "0.5",
+      "0.125 (tức 1/8)",
+      "0.875",
+      "0.01"
+    ],
+    "correct": 1,
+    "explanation": "Theo chuẩn RFC, alpha thường bằng 0.125 (1/8). Trọng số 87.5% dành cho quá khứ và 12.5% dành cho mẫu RTT đo mới nhất (SampleRTT) giúp đường ước lượng EstimatedRTT ổn định, không bị dao động đột ngột bởi một vài gói tin bị trễ bất thường trên mạng."
+  },
+  {
+    "id": 315,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Ước lượng RTT & Thuật toán Karn",
+    "difficulty": "Thông hiểu",
+    "question": "Thuật toán Karn (Karn's Algorithm) đưa ra nguyên tắc nào sau đây khi tính toán giá trị SampleRTT của kết nối TCP?",
+    "options": [
+      "Không bao giờ đo SampleRTT đối với các segment đã bị truyền lại (Retransmitted segments), đồng thời nhân đôi giá trị Timeout sau mỗi lần xảy ra timeout liên tiếp",
+      "Nhân đôi giá trị SampleRTT khi truyền qua mạng WiFi",
+      "Lấy giá trị SampleRTT nhỏ nhất trong 100 gói gần nhất",
+      "Bắt buộc đo RTT bằng giao thức ping ICMP"
+    ],
+    "correct": 0,
+    "explanation": "Khi một gói tin bị truyền lại và sau đó nhận được ACK, ta không thể biết ACK này là phản hồi cho gói truyền ban đầu hay gói truyền lại (gọi là Ack Ambiguity). Thuật toán Karn giải quyết bằng cách: Bỏ qua không lấy mẫu SampleRTT cho các gói phải truyền lại; và áp dụng cơ chế Exponential Backoff: mỗi lần timeout liên tiếp thì nhân đôi giá trị TimeoutInterval."
+  },
+  {
+    "id": 316,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Điều khiển Luồng (Flow Control)",
+    "difficulty": "Thông hiểu",
+    "question": "Cơ chế điều khiển luồng (Flow Control) của TCP bảo vệ đối tượng nào?",
+    "options": [
+      "Bảo vệ các bộ định tuyến (Routers) ở lõi mạng không bị nghẽn",
+      "Bảo vệ bộ đệm máy nhận (Receive Buffer) không bị tràn do bên gửi truyền dữ liệu quá nhanh so với tốc độ ứng dụng bên nhận đọc dữ liệu ra",
+      "Bảo vệ địa chỉ IP không bị kẻ xấu đánh cắp",
+      "Bảo vệ dây cáp mạng không bị quá nhiệt"
+    ],
+    "correct": 1,
+    "explanation": "Cần phân biệt rõ hai cơ chế: Điều khiển tắc nghẽn (Congestion Control) là bảo vệ mạng lõi và các router; còn Điều khiển luồng (Flow Control) là cơ chế điểm-điểm giữa 2 đầu cuối, dùng trường Receive Window (rwnd) để bên nhận báo cho bên gửi biết dung lượng bộ đệm còn trống, ngăn bên gửi làm tràn bộ nhớ nhận."
+  },
+  {
+    "id": 317,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Điều khiển Luồng (Flow Control)",
+    "difficulty": "Đánh lừa",
+    "question": "Khi bên nhận gửi thông điệp ACK với trường rwnd = 0 (bộ đệm nhận đã đầy 100%), bên gửi TCP sẽ làm gì để tránh rơi vào trạng thái bế tắc (Deadlock)?",
+    "options": [
+      "Đóng ngay lập tức kết nối TCP và gửi thông báo lỗi",
+      "Ngừng truyền và định kỳ gửi các segment thăm dò (Probe segments) kích thước 1 byte dữ liệu để kích thích bên nhận phản hồi ACK cập nhật lại giá trị rwnd mới",
+      "Tự động tăng gấp đôi dung lượng RAM của máy nhận",
+      "Chuyển toàn bộ dữ liệu còn lại sang giao thức UDP"
+    ],
+    "correct": 1,
+    "explanation": "Nếu bên gửi chỉ đứng chờ bên nhận thông báo rwnd > 0, rủi ro là gói tin thông báo mở cửa sổ của bên nhận có thể bị mất trên đường truyền, dẫn đến cả hai bên cùng ngồi chờ nhau mãi mãi (Deadlock). Để chống bế tắc, TCP quy định bên gửi tiếp tục gửi các segment thăm dò 1 byte để ép bên nhận phải gửi ACK trả về trạng thái bộ đệm hiện tại."
+  },
+  {
+    "id": 318,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Điều khiển Tắc nghẽn (Congestion Control)",
+    "difficulty": "Nhận biết",
+    "question": "Nguyên lý điều khiển tắc nghẽn AIMD (Additive Increase Multiplicative Decrease) của TCP hoạt động như thế nào?",
+    "options": [
+      "Tăng kích thước cửa sổ gấp đôi mỗi RTT khi mạng tốt; giảm về 0 khi có mất gói",
+      "Tăng tuyến tính cửa sổ tắc nghẽn cwnd thêm 1 MSS sau mỗi RTT khi không có mất gói; và giảm một nửa cwnd khi phát hiện có mất gói tin",
+      "Nhân đôi cửa sổ mỗi giây và chia ba khi bị lỗi mạng",
+      "Giữ nguyên kích thước cửa sổ cố định trong suốt phiên truyền"
+    ],
+    "correct": 1,
+    "explanation": "AIMD là triết lý cốt lõi tạo nên sự ổn định của Internet: Cẩn trọng thăm dò băng thông bằng cách tăng tuyến tính (Additive Increase: +1 MSS mỗi RTT); nhưng khi phát hiện dấu hiệu tắc nghẽn thì phản ứng quyết liệt bằng cách giảm nhân (Multiplicative Decrease: cắt giảm 50% kích thước cửa sổ)."
+  },
+  {
+    "id": 319,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Khởi động chậm (Slow Start)",
+    "difficulty": "Vận dụng",
+    "question": "Trong pha Khởi động chậm (Slow Start) của TCP, kích thước cửa sổ tắc nghẽn (cwnd) tăng trưởng theo quy luật nào?",
+    "options": [
+      "Tăng tuyến tính: mỗi RTT tăng thêm đúng 1 MSS",
+      "Tăng theo hàm mũ: cwnd tăng gấp đôi sau mỗi RTT (tương ứng với việc tăng thêm 1 MSS cho mỗi thông điệp ACK hợp lệ nhận được)",
+      "Tăng ngẫu nhiên tùy thuộc vào tải của CPU",
+      "Tăng gấp ba sau mỗi 2 RTT"
+    ],
+    "correct": 1,
+    "explanation": "Dù có tên là 'Slow Start' (Khởi động chậm) vì bắt đầu từ giá trị nhỏ cwnd = 1 MSS, nhưng tốc độ tăng trưởng của nó thực chất là hàm mũ (Exponential growth). Cứ mỗi gói tin được ACK thì cwnd tăng thêm 1 MSS; do đó sau mỗi RTT (khi toàn bộ gói trong cửa sổ được xác nhận), cwnd sẽ tăng gấp đôi (1 -> 2 -> 4 -> 8 -> 16...)."
+  },
+  {
+    "id": 320,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Điều khiển Tắc nghẽn (Congestion Control)",
+    "difficulty": "Vận dụng",
+    "question": "Một kết nối TCP Reno đang ở pha Tránh tắc nghẽn (Congestion Avoidance) với cwnd = 32 MSS. Ngưỡng ssthresh hiện tại là 16 MSS. Nếu tại thời điểm này xảy ra hiện tượng TIMEOUT, các giá trị ssthresh và cwnd mới sẽ là:",
+    "options": [
+      "ssthresh = 16 MSS, cwnd = 16 MSS",
+      "ssthresh = 16 MSS, cwnd = 1 MSS",
+      "ssthresh = 32 MSS, cwnd = 1 MSS",
+      "ssthresh = 8 MSS, cwnd = 8 MSS"
+    ],
+    "correct": 1,
+    "explanation": "Khi xảy ra sự kiện Timeout (dấu hiệu tắc nghẽn nặng, mất gói hoàn toàn): (1) Ngưỡng ssthresh mới được đặt bằng một nửa cwnd hiện tại: ssthresh = 32 / 2 = 16 MSS; (2) cwnd lập tức bị kéo sập về 1 MSS (áp dụng cho cả TCP Tahoe lẫn TCP Reno) và bắt đầu lại từ pha Slow Start cho đến khi chạm mốc ssthresh 16 MSS."
+  },
+  {
+    "id": 321,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Truyền lại nhanh (Fast Retransmit)",
+    "difficulty": "Thông hiểu",
+    "question": "Cơ chế Truyền lại nhanh (Fast Retransmit) của TCP được kích hoạt khi bên gửi nhận được sự kiện nào?",
+    "options": [
+      "Hết hạn bộ đếm thời gian Timeout",
+      "Nhận được liên tiếp 3 thông điệp ACK trùng lặp (3 Duplicate ACKs) cho cùng một gói tin",
+      "Nhận được gói tin ICMP Source Quench",
+      "Router gửi thông điệp RST về"
+    ],
+    "correct": 1,
+    "explanation": "Khi một gói tin bị mất nhưng các gói sau đó vẫn tới được máy nhận, máy nhận sẽ liên tục gửi các ACK lặp lại chỉ đích danh gói tin còn thiếu. Khi bên gửi nhận được 3 Duplicate ACKs (tổng cộng 4 ACK giống nhau), TCP kết luận gói đó đã bị mất và lập tức truyền lại ngay gói bị thiếu mà không cần chờ hết hạn Timeout (Fast Retransmit)."
+  },
+  {
+    "id": 322,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "TCP Tahoe vs TCP Reno",
+    "difficulty": "Đánh lừa",
+    "question": "Sự khác biệt quan trọng nhất giữa phiên bản TCP Tahoe và TCP Reno khi nhận được 3 Duplicate ACKs là gì?",
+    "options": [
+      "TCP Tahoe không hỗ trợ bắt tay 3 bước",
+      "TCP Tahoe kéo cwnd về 1 MSS và quay lại Slow Start; trong khi TCP Reno kích hoạt Phục hồi nhanh (Fast Recovery): đặt ssthresh = cwnd/2, đặt cwnd xấp xỉ ssthresh và tiếp tục tăng tuyến tính ở pha Congestion Avoidance",
+      "TCP Reno chuyển sang sử dụng UDP để tăng tốc",
+      "TCP Tahoe chỉ dùng cho mạng không dây"
+    ],
+    "correct": 1,
+    "explanation": "Khi nhận 3 dup ACKs, mạng vẫn còn khả năng chuyển tiếp dữ liệu (chưa tắc nghẽn hoàn toàn). TCP Tahoe cứng nhắc đưa cwnd về 1 MSS làm giảm mạnh hiệu năng; còn TCP Reno thông minh hơn: áp dụng Fast Recovery, chỉ giảm cwnd xuống một nửa (cwnd = ssthresh) rồi tiếp tục tăng tuyến tính (Congestion Avoidance), tránh bị tụt thông lượng vô ích."
+  },
+  {
+    "id": 323,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tính toán TCP Checksum",
+    "difficulty": "Thông hiểu",
+    "question": "Khi tính toán trường Checksum trong tiêu đề TCP và UDP, thuật toán thực hiện trên phần nào của gói tin?",
+    "options": [
+      "Chỉ tính trên 20 byte tiêu đề TCP",
+      "Tính trên toàn bộ Tiêu đề (Header) + Phần dữ liệu (Data) + Một tiêu đề giả (Pseudo-header) chứa địa chỉ IP nguồn, IP đích và số hiệu giao thức từ tầng mạng",
+      "Chỉ tính trên phần dữ liệu payload",
+      "Chỉ tính trên địa chỉ MAC của card mạng"
+    ],
+    "correct": 1,
+    "explanation": "Để phát hiện các lỗi định tuyến sai (như gói tin bị chuyển nhầm địa chỉ IP), cả TCP và UDP đều tính Checksum trên: Tiêu đề + Dữ liệu + Tiêu đề giả (Pseudo-Header gồm 12 byte: Source IP 4B, Dest IP 4B, Zero 1B, Protocol 1B [TCP=6, UDP=17], TCP/UDP Length 2B). Đây là sự vi phạm nguyên tắc phân tầng có chủ ý nhằm tăng tính toàn vẹn."
+  },
+  {
+    "id": 324,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tấn công SYN Flood",
+    "difficulty": "Thông hiểu",
+    "question": "Kẻ tấn công thực hiện kỹ thuật tấn công SYN Flood bằng cách liên tục gửi hàng triệu gói tin TCP SYN với địa chỉ IP nguồn giả mạo nhằm mục đích gì?",
+    "options": [
+      "Làm tràn hàng đợi kết nối nửa mở (SYN Backlog Queue) của server khiến máy chủ cạn kiệt tài nguyên bộ nhớ và từ chối các kết nối hợp pháp mới",
+      "Giải mã mật khẩu tài khoản root của máy chủ",
+      "Tắt card mạng của router trung gian",
+      "Thay đổi địa chỉ MAC của cổng kết nối"
+    ],
+    "correct": 0,
+    "explanation": "Trong TCP 3-way handshake, khi nhận gói SYN, server cấp phát bộ nhớ tạo một khối điều khiển kết nối nửa mở (half-open connection) và gửi SYN-ACK chờ gói ACK thứ 3. Khi kẻ tấn công gửi ngập lụt hàng nghìn gói SYN giả mạo và không bao giờ gửi ACK, hàng đợi SYN backlog bị đầy tràn, máy chủ bị tê liệt (tấn công DoS)."
+  },
+  {
+    "id": 325,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Cơ chế SYN Cookies",
+    "difficulty": "Vận dụng",
+    "question": "Cơ chế SYN Cookies được thiết kế để chống lại tấn công SYN Flood như thế nào?",
+    "options": [
+      "Chặn tất cả các kết nối từ nước ngoài",
+      "Máy chủ không cấp phát bộ nhớ (state) khi nhận gói SYN, mà tính toán một số Sequence khởi tạo đặc biệt (Initial Sequence Number) chứa mã hóa thông tin kết nối gửi về trong gói SYN-ACK; chỉ khi client gửi lại ACK hợp lệ thì server mới cấp phát tài nguyên",
+      "Yêu cầu người dùng gõ mã CAPTCHA trước khi bắt tay TCP",
+      "Tự động chuyển toàn bộ kết nối sang mạng ngang hàng P2P"
+    ],
+    "correct": 1,
+    "explanation": "SYN Cookies là giải pháp xuất sắc phòng chống SYN Flood: Server không lưu bất kỳ trạng thái nào trong RAM khi nhận SYN. Thay vào đó, trường ISN của gói SYN-ACK được mã hóa bằng hàm băm bí mật từ (Source IP, Port, Secret key). Nếu client là người dùng thật, gói ACK thứ 3 sẽ mang Ack = ISN + 1. Server kiểm tra giải mã nếu hợp lệ mới chính thức cấp phát socket."
+  },
+  {
+    "id": 326,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "MSS (Maximum Segment Size)",
+    "difficulty": "Thông hiểu",
+    "question": "MSS (Maximum Segment Size) trong giao thức TCP đại diện cho kích thước của:",
+    "options": [
+      "Toàn bộ gói tin bao gồm cả IP Header, TCP Header và Dữ liệu",
+      "Kích thước tối đa của phần DỮ LIỆU TẦNG ỨNG DỤNG (Application Payload) có thể đóng trong một TCP segment (thường bằng MTU - 40 byte)",
+      "Kích thước bộ đệm của card mạng máy tính",
+      "Dung lượng tối đa của một tệp tin tải xuống"
+    ],
+    "correct": 1,
+    "explanation": "Cần phân biệt rõ: MTU (Maximum Transmission Unit) là kích thước tối đa của khung tầng 2 (ví dụ Ethernet MTU = 1500 byte). Còn MSS (Maximum Segment Size) chỉ tính riêng phần DỮ LIỆU của TCP segment. Với IPv4 header chuẩn 20B và TCP header chuẩn 20B, ta có MSS = MTU - 20 (IP) - 20 (TCP) = 1460 byte."
+  },
+  {
+    "id": 327,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Cờ điều khiển TCP (Flags)",
+    "difficulty": "Nhận biết",
+    "question": "Khi một máy trạm gửi yêu cầu kết nối TCP tới một cổng dịch vụ đang ĐÓNG (không có tiến trình nào lắng nghe) trên máy chủ, máy chủ sẽ phản hồi bằng một TCP segment có bật cờ nào?",
+    "options": [
+      "Cờ FIN = 1",
+      "Cờ RST = 1 (Reset)",
+      "Cờ URG = 1",
+      "Cờ SYN = 1"
+    ],
+    "correct": 1,
+    "explanation": "Khi nhận được gói tin gửi tới một cổng không hoạt động, máy chủ sẽ trả về gói tin TCP có cờ RST (Reset = 1) để thông báo cho bên gửi biết rằng kết nối bị từ chối và yêu cầu hủy kết nối ngay lập tức. Đây cũng là phản hồi mà lệnh nmap nhận được khi quét một cổng đóng."
+  },
+  {
+    "id": 328,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tính toán Thông lượng TCP trung bình",
+    "difficulty": "Vận dụng",
+    "question": "Bỏ qua pha khởi động chậm, nếu kết nối TCP hoạt động trong pha AIMD với kích thước cửa sổ cực đại đạt W (tính bằng byte) trước khi có mất gói, kích thước cửa sổ trung bình và thông lượng trung bình xấp xỉ của kết nối là:",
+    "options": [
+      "Cửa sổ trung bình bằng W/2; Thông lượng = W / (2 * RTT)",
+      "Cửa sổ trung bình bằng 0.75 * W; Thông lượng = (3/4 * W) / RTT",
+      "Cửa sổ trung bình bằng W; Thông lượng = W / RTT",
+      "Cửa sổ trung bình bằng W/4; Thông lượng = W / (4 * RTT)"
+    ],
+    "correct": 1,
+    "explanation": "Trong cơ chế AIMD hình răng cưa (Sawtooth): Cửa sổ dao động tuyến tính từ W/2 lên đến W rồi lại bị cắt giảm về W/2. Giá trị trung bình của hình răng cưa là (W/2 + W) / 2 = 0.75 * W (hay 3/4 W). Do đó thông lượng trung bình lý thuyết của kết nối TCP là (0.75 * W) / RTT."
+  },
+  {
+    "id": 329,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Trì hoãn xác nhận (Delayed ACK)",
+    "difficulty": "Thông hiểu",
+    "question": "Kỹ thuật 'Trì hoãn xác nhận' (Delayed ACK - RFC 1122) trong TCP có mục đích gì?",
+    "options": [
+      "Làm chậm tốc độ mạng để tiết kiệm điện",
+      "Bên nhận chờ đợi tối đa một khoảng thời gian ngắn (thường 200 ms hoặc chờ gói tin kế tiếp) trước khi gửi ACK nhằm gửi một ACK gộp chung cho 2 segment hoặc ghép ACK vào gói dữ liệu phản hồi (Piggybacking)",
+      "Trì hoãn việc gửi dữ liệu khi người dùng chưa thanh toán cước",
+      "Bắt buộc máy gửi phải gửi lại gói tin cũ"
+    ],
+    "correct": 1,
+    "explanation": "Nếu mỗi khi nhận 1 gói tin TCP đều gửi ngay 1 gói ACK thì số lượng gói tin nhỏ trên mạng sẽ tăng gấp đôi, gây lãng phí băng thông. Delayed ACK cho phép bên nhận chờ tối đa 200-500 ms; nếu gói thứ hai đến thì gửi 1 ACK xác nhận cả hai gói; hoặc nếu ứng dụng có dữ liệu cần trả lời (ví dụ HTTP response) thì ghép luôn cờ ACK vào gói dữ liệu đó (Piggybacking)."
+  },
+  {
+    "id": 330,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Giao thức UDP vs TCP",
+    "difficulty": "Thông hiểu",
+    "question": "Ứng dụng gọi thoại qua Internet (VoIP) và Hội thảo trực tuyến (Video Conference) thường ưu tiên chọn UDP thay vì TCP vì lý do căn bản nào?",
+    "options": [
+      "UDP có khả năng mã hóa dữ liệu mạnh hơn TCP",
+      "Các ứng dụng thời gian thực chịu được một tỉ lệ mất gói nhỏ nhưng cực kỳ nhạy cảm với độ trễ (delay) và độ biến động trễ (jitter); cơ chế truyền lại và kiểm soát tắc nghẽn của TCP có thể làm âm thanh/hình ảnh bị đông cứng (lag)",
+      "UDP bắt buộc phải có máy chủ đắt tiền",
+      "TCP không thể truyền được tín hiệu âm thanh"
+    ],
+    "correct": 1,
+    "explanation": "Trong đàm thoại thời gian thực (VoIP, livestream, game online), một gói âm thanh bị trễ vài trăm mili-giây do cơ chế truyền lại của TCP sẽ hoàn toàn vô giá trị (tiếng bị giật). Người dùng thà chấp nhận mất một tiếng 'lẹt xẹt' nhỏ (packet loss) còn hơn là cuộc gọi bị ngắt quãng, vì vậy UDP là lựa chọn tối ưu."
+  },
+  {
+    "id": 331,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Thuật toán Nagle (Nagle's Algorithm)",
+    "difficulty": "Vận dụng",
+    "question": "Thuật toán Nagle trong TCP giải quyết vấn đề 'gói tin kích thước quá nhỏ' (như người dùng gõ từng ký tự trong Telnet sinh ra gói tin 41 byte chỉ chứa 1 byte dữ liệu) bằng cách nào?",
+    "options": [
+      "Từ chối không gửi ký tự của người dùng",
+      "Nếu có dữ liệu đang truyền chưa được ACK, bên gửi sẽ tích lũy các byte dữ liệu mới vào bộ đệm cho đến khi gom đủ 1 MSS hoặc cho đến khi nhận được ACK của gói tin trước đó mới phát đi",
+      "Nén 1 byte dữ liệu thành 1 bit",
+      "Tự động chuyển phiên làm việc sang giao thức FTP"
+    ],
+    "correct": 1,
+    "explanation": "Thuật toán Nagle gom các mẩu dữ liệu nhỏ (small packets) lại để giảm tải tiêu đề header cho mạng. Tuy nhiên, trong các game online phản xạ nhanh hoặc ứng dụng cần phản hồi tức thì, lập trình viên thường tắt thuật toán này bằng tùy chọn socket: TCP_NODELAY."
+  },
+  {
+    "id": 332,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Tính toán Cửa sổ truyền TCP",
+    "difficulty": "Vận dụng",
+    "question": "Tại một thời điểm, máy gửi TCP đo được kích thước cửa sổ tắc nghẽn cwnd = 40 KB và kích thước cửa sổ nhận thông báo từ máy nhận rwnd = 24 KB. Kích thước cửa sổ truyền dữ liệu thực tế (Send Window) mà bên gửi được phép gửi mà chưa cần nhận ACK là:",
+    "options": [
+      "40 KB",
+      "24 KB",
+      "64 KB (tổng cả hai)",
+      "16 KB (hiệu số)"
+    ],
+    "correct": 1,
+    "explanation": "Bên gửi TCP bị ràng buộc đồng thời bởi hai yếu tố: khả năng chịu tải của mạng lõi (cwnd) và dung lượng bộ nhớ trống của máy nhận (rwnd). Do đó, giới hạn cửa sổ gửi thực tế luôn được tính bằng giá trị nhỏ hơn giữa hai thông số: Send Window = min(cwnd, rwnd) = min(40, 24) = 24 KB."
+  },
+  {
+    "id": 333,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Bắt tay 3 bước (3-way Handshake)",
+    "difficulty": "Đánh lừa",
+    "question": "Trong gói tin SYN đầu tiên mà Client gửi cho Server để bắt đầu kết nối TCP, Sequence Number có giá trị bằng bao nhiêu?",
+    "options": [
+      "Luôn luôn bằng 0",
+      "Luôn luôn bằng 1",
+      "Một số ngẫu nhiên gọi là ISN (Initial Sequence Number) do hệ điều hành lựa chọn",
+      "Bằng số hiệu cổng của Client"
+    ],
+    "correct": 2,
+    "explanation": "Theo chuẩn RFC, TCP không bao giờ cố định số thứ tự ban đầu bằng 0. Hệ điều hành sinh ra một số thứ tự ngẫu nhiên ban đầu ISN (Initial Sequence Number) dựa trên đồng hồ hệ thống và thuật toán băm bảo mật nhằm tránh việc kẻ tấn công đoán trước số Sequence để chèn gói tin giả mạo (TCP Connection Hijacking)."
+  },
+  {
+    "id": 334,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Thông báo Tắc nghẽn Tường minh (ECN)",
+    "difficulty": "Thông hiểu",
+    "question": "Cơ chế ECN (Explicit Congestion Notification - RFC 3168) cho phép các router thông báo tình trạng tắc nghẽn cho các host đầu cuối như thế nào?",
+    "options": [
+      "Gửi email cảnh báo cho quản trị viên",
+      "Router đánh dấu vào 2 bit ECN trong tiêu đề IP của gói tin khi hàng đợi bắt đầu đầy (thay vì vứt bỏ gói), bên nhận sau đó phản hồi lại cờ ECE/CWR trong TCP header để bên gửi chủ động giảm tốc độ",
+      "Router gửi thông điệp ICMP Echo Request liên tục",
+      "Router tự động tắt một cổng mạng"
+    ],
+    "correct": 1,
+    "explanation": "Thay vì phải đợi gói tin bị vứt bỏ (packet drop) rồi mới biết có nghẽn mạng, cơ chế ECN phối hợp giữa tầng mạng và tầng giao vận: Router đánh dấu bit trong IP header khi bộ đệm sắp tràn; máy nhận đọc được sẽ bật cờ ECE (ECN-Echo) trong TCP ACK; máy gửi nhận được sẽ giảm cwnd tương tự như khi có mất gói nhưng không làm mất bất kỳ dữ liệu nào."
+  },
+  {
+    "id": 335,
+    "exam_type": "nang_cao",
+    "chapter": 3,
+    "chapter_title": "Chương 3: Tầng Giao vận (Transport Layer)",
+    "category": "Giao thức QUIC (HTTP/3)",
+    "difficulty": "Thông hiểu",
+    "question": "Giao thức hiện đại QUIC (nền tảng của HTTP/3 được chuẩn hóa bởi IETF) được thiết kế chạy trên nền giao thức truyền vận nào?",
+    "options": [
+      "TCP cải tiến",
+      "UDP",
+      "IPsec trực tiếp",
+      "SCTP"
+    ],
+    "correct": 1,
+    "explanation": "Do ngăn xếp TCP đã bị 'hóa thạch' (ossified) trong nhân hệ điều hành và các thiết bị phần cứng mạng toàn cầu, Google và IETF đã thiết kế giao thức QUIC chạy trên nền UDP ở không gian người dùng (User space). QUIC tích hợp sẵn mã hóa TLS 1.3, giảm thời gian bắt tay xuống 0-RTT và triệt tiêu hoàn toàn hiện tượng Head-of-Line Blocking của TCP."
+  }
+]

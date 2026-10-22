@@ -22,7 +22,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
 
@@ -88,35 +88,43 @@
   </header>
 
   <!-- FILTER & SEARCH TOOLBAR -->
-  <section class="bg-white dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 py-3">
+  <section class="bg-white dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 py-3.5 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 items-center">
         
-        <!-- Select Exam -->
-        <div class="lg:col-span-4">
-          <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">CHỌN BỘ ĐỀ</label>
-          <select id="examSelect" class="w-full text-sm font-semibold rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
-            <option value="all">📚 Tất cả câu hỏi (55 câu)</option>
-            <option value="1">📋 Đề 1: Lý Thuyết MMT Tổng Hợp (30 câu)</option>
-            <option value="2">🛠️ Đề 2: Công Cụ & Lệnh Mạng Thực Hành (25 câu)</option>
+        <!-- Dropdown 1: Select Group (Đề gốc / Đề nâng cao / Tất cả) -->
+        <div class="lg:col-span-3">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 tracking-wider uppercase">1. CHỌN MỤC / BỘ ĐỀ</label>
+          <select id="groupSelect" class="w-full text-sm font-semibold rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+            <option value="all">🌐 Tất cả bộ đề (290 câu)</option>
+            <option value="de_goc">📜 Bộ đề gốc PTIT (55 câu)</option>
+            <option value="de_nangcao">🚀 Bộ đề nâng cao theo chương (235 câu)</option>
             <option value="saved">⭐ Các câu đã đánh dấu xem lại</option>
             <option value="wrong">❌ Các câu làm sai cần luyện lại</option>
           </select>
         </div>
 
-        <!-- Select Topic / Category -->
-        <div class="lg:col-span-4">
-          <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">CHUYÊN ĐỀ KIẾN THỨC</label>
-          <select id="categoryFilter" class="w-full text-sm rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
-            <option value="all">Tất cả chuyên đề</option>
+        <!-- Dropdown 2: Select Chapter / Module -->
+        <div class="lg:col-span-3">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 tracking-wider uppercase">2. HỌC PHẦN / CHƯƠNG</label>
+          <select id="chapterSelect" class="w-full text-sm font-semibold rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+            <option value="all">Tất cả chương / học phần</option>
           </select>
         </div>
 
-        <!-- Search Bar -->
-        <div class="lg:col-span-4">
-          <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">TÌM KIẾM CÂU HỎI</label>
+        <!-- Dropdown 3: Select Subtopic / Category -->
+        <div class="lg:col-span-3">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 tracking-wider uppercase">3. CHUYÊN ĐỀ KIẾN THỨC</label>
+          <select id="categoryFilter" class="w-full text-sm rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+            <option value="all">Tất cả chuyên đề kiến thức</option>
+          </select>
+        </div>
+
+        <!-- Input 4: Search Bar -->
+        <div class="lg:col-span-3">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 tracking-wider uppercase">4. TÌM KIẾM CÂU HỎI</label>
           <div class="relative">
-            <input type="text" id="searchInput" placeholder="Nhập từ khóa (vd: UDP, SYN, tracert, RTT...)" class="w-full text-sm rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 pl-9 pr-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+            <input type="text" id="searchInput" placeholder="Tìm theo từ khóa (CIDR, VLAN, SYN...)" class="w-full text-sm rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 pl-9 pr-3 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
             <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </div>
         </div>
@@ -126,7 +134,7 @@
   </section>
 
   <!-- MAIN BODY LAYOUT -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full main-quiz-area">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       
       <!-- LEFT / CENTER: QUIZ CONTENT -->
@@ -135,7 +143,7 @@
         <!-- Progress Bar & Score Status -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm mb-6">
           <div class="flex items-center justify-between text-sm font-semibold mb-2">
-            <span id="progressText" class="text-slate-600 dark:text-slate-300">0 / 55 câu đã làm (0%)</span>
+            <span id="progressText" class="text-slate-600 dark:text-slate-300">0 / 290 câu đã làm (0%)</span>
             <span id="scoreBadge" class="hidden px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs font-bold">
               Điểm: 0.0/10
             </span>
@@ -150,15 +158,15 @@
           <!-- Rendered via JS -->
         </div>
 
-        <!-- Paged Navigation Buttons (Prev / Flag / Next) -->
+        <!-- Paged Navigation Buttons (Prev / Counter / Next) -->
         <div id="pagedControls" class="flex items-center justify-between gap-3 mt-2 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
           <button id="prevBtn" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 font-semibold text-sm transition flex items-center disabled:opacity-40 disabled:cursor-not-allowed">
             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Câu trước
           </button>
 
-          <button id="flagBtn" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium text-sm transition flex items-center text-slate-700 dark:text-slate-300">
-            <svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> Đánh dấu xem lại
-          </button>
+          <span id="pagedIndicator" class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg">
+            Câu 1 / 290
+          </span>
 
           <button id="nextBtn" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition flex items-center shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">
             Câu tiếp <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -215,10 +223,10 @@
         <div class="bg-blue-50/70 dark:bg-blue-950/20 rounded-2xl p-4 border border-blue-100 dark:border-blue-900/40 text-xs text-blue-900 dark:text-blue-300">
           <h4 class="font-bold flex items-center gap-1.5 mb-1.5 text-blue-800 dark:text-blue-200">
             <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-            Tài liệu ôn thi MMT PTIT
+            Tài liệu ôn thi MMT PTIT (290 câu)
           </h4>
           <p class="leading-relaxed opacity-90">
-            Toàn bộ 55 câu hỏi được trích xuất chính xác 100% từ 2 bộ đề thi giữa kỳ LMS, kèm đáp án chuẩn và lời giải thích dựa trên slide bài giảng của khoa ATTT / CNTT PTIT.
+            Hệ thống ngân hàng đề thi chuẩn hóa gồm <strong>55 câu đề gốc</strong> và <strong>235 câu đề nâng cao</strong> bám sát đề cương bài giảng 5 chương và giáo trình thực hành mạng (Wireshark, Packet Tracer, lệnh IP).
           </p>
         </div>
 
@@ -243,6 +251,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="src/questions_bundle.js?v=2.2"></script>
+  <script src="script.js?v=2.2"></script>
 </body>
 </html>
