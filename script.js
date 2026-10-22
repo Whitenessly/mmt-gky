@@ -55,8 +55,8 @@ function initDom() {
 
     pagedControls: document.getElementById('pagedControls'),
     prevBtn: document.getElementById('prevBtn'),
-    nextBtn: document.getElementById('nextBtn'),
-    pagedIndicator: document.getElementById('pagedIndicator')
+    flagBtn: document.getElementById('flagBtn'),
+    nextBtn: document.getElementById('nextBtn')
   };
 }
 
@@ -81,7 +81,34 @@ function getOptionsPermutation(q) {
   return state.optionsPermutation[q.id];
 }
 
-// Tải dữ liệu câu hỏi từ bundle hoặc fetch JSON files
+// Lấy nhãn badge chương / đề thi ngắn gọn, đẹp mắt (chuẩn theo phong cách giao diện gốc)
+function getChapterBadge(q) {
+  if (q.chapter_code === 'goc_1' || q.exam === 1) {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300">Đề 1: Lý Thuyết MMT</span>';
+  }
+  if (q.chapter_code === 'goc_2' || q.exam === 2) {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Đề 2: Công Cụ & Lệnh Mạng</span>';
+  }
+  if (q.chapter_code === 'ch1') {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Chương 1: Tổng Quan</span>';
+  }
+  if (q.chapter_code === 'ch2') {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Chương 2: Tầng Ứng Dụng</span>';
+  }
+  if (q.chapter_code === 'ch3') {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Chương 3: Tầng Giao Vận</span>';
+  }
+  if (q.chapter_code === 'ch4') {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Chương 4: Tầng Mạng</span>';
+  }
+  if (q.chapter_code === 'ch5') {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Chương 5: Tầng Liên Kết</span>';
+  }
+  if (q.chapter_code === 'practice') {
+    return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Thực Hành & Lệnh Mạng</span>';
+  }
+  return '<span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">MMT PTIT</span>';
+}
 async function loadAllQuestions() {
   let loadedQuestions = [];
 
@@ -420,6 +447,14 @@ function bindEvents() {
     }
   });
 
+  if (dom.flagBtn) {
+    dom.flagBtn.addEventListener('click', () => {
+      const currentQ = state.filteredQuestions[state.currentIndex];
+      if (!currentQ) return;
+      toggleQuestionFlag(currentQ.id);
+    });
+  }
+
   dom.nextBtn.addEventListener('click', () => {
     if (state.currentIndex < state.filteredQuestions.length - 1) {
       state.currentIndex++;
@@ -712,6 +747,17 @@ function renderPagedView() {
 
   dom.prevBtn.disabled = state.currentIndex === 0;
   dom.nextBtn.disabled = state.currentIndex === state.filteredQuestions.length - 1;
+
+  if (dom.flagBtn) {
+    const isFlagged = state.flaggedQuestions.has(q.id);
+    if (isFlagged) {
+      dom.flagBtn.className = 'px-4 py-2 rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 font-semibold text-sm transition flex items-center shadow-xs';
+      dom.flagBtn.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-amber-500 fill-current" fill="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> ★ Đã đánh dấu`;
+    } else {
+      dom.flagBtn.className = 'px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium text-sm transition flex items-center text-slate-700 dark:text-slate-300';
+      dom.flagBtn.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> ☆ Đánh dấu xem lại`;
+    }
+  }
 }
 
 function renderListView() {
@@ -727,19 +773,18 @@ function renderListView() {
   dom.mainQuizContainer.innerHTML = state.filteredQuestions.map((q, idx) => createQuestionCardHtml(q, idx)).join('');
 }
 
-// Tạo HTML cho thẻ câu hỏi
-// ĐẶC BIỆT: Nút đánh dấu xem lại được đưa lên góc trên bên phải CÙNG HÀNG với chữ "Câu XX"
+// Tạo HTML cho thẻ câu hỏi theo chuẩn giao diện sạch đẹp, tinh gọn (1 hàng duy nhất)
 function createQuestionCardHtml(q, displayIdx) {
   const selectedOrigIdx = state.userAnswers[q.id];
   const isAnswered = selectedOrigIdx !== undefined;
   const isStudy = state.mode === 'study';
   const showFeedback = isStudy || state.examSubmitted;
   const isFlagged = state.flaggedQuestions.has(q.id);
+  const isList = state.viewType === 'list';
 
   const letters = ['A', 'B', 'C', 'D'];
-  const perm = getOptionsPermutation(q); // Hoán vị hiển thị [p0, p1, p2, p3]
+  const perm = getOptionsPermutation(q);
 
-  // Render các đáp án A, B, C, D
   const optionsHtml = perm.map((origOptIdx, visualIdx) => {
     const optText = q.options[origOptIdx];
     let optionClass = 'option-label';
@@ -751,10 +796,10 @@ function createQuestionCardHtml(q, displayIdx) {
     if (showFeedback && isAnswered) {
       if (isThisCorrect) {
         optionClass += ' correct';
-        checkIcon = `<span class="ml-auto text-green-600 font-bold text-xs flex items-center shrink-0 pl-2"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Đáp án đúng</span>`;
+        checkIcon = `<span class="ml-auto text-green-600 dark:text-green-400 font-bold text-xs flex items-center shrink-0 pl-2"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Đáp án đúng</span>`;
       } else if (isThisSelected) {
         optionClass += ' incorrect';
-        checkIcon = `<span class="ml-auto text-red-600 font-bold text-xs flex items-center shrink-0 pl-2"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg> Lựa chọn của bạn</span>`;
+        checkIcon = `<span class="ml-auto text-red-600 dark:text-red-400 font-bold text-xs flex items-center shrink-0 pl-2"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg> Lựa chọn của bạn</span>`;
       }
     } else if (isThisSelected) {
       optionClass += ' selected';
@@ -775,85 +820,54 @@ function createQuestionCardHtml(q, displayIdx) {
     `;
   }).join('');
 
-  // Lời giải thích và nút Làm lại câu này
   let explanationHtml = '';
   if (showFeedback && isAnswered) {
     const isCorrect = selectedOrigIdx === q.correct;
-    // Tìm chữ cái hiển thị của đáp án đúng theo bảng hoán vị hiện tại
     const visualCorrectIdx = perm.indexOf(q.correct);
     const correctLetter = visualCorrectIdx >= 0 ? letters[visualCorrectIdx] : letters[q.correct];
 
     explanationHtml = `
-      <div class="mt-4 p-4.5 rounded-2xl border ${isCorrect ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/80 text-emerald-900 dark:text-emerald-200' : 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/80 text-rose-900 dark:text-rose-200'} fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-2 pb-2 border-b ${isCorrect ? 'border-emerald-200/60 dark:border-emerald-800/60' : 'border-rose-200/60 dark:border-rose-800/60'}">
-          <div class="flex items-center font-bold text-sm">
-            ${isCorrect
-              ? '<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Chính xác!'
-              : '<svg class="w-5 h-5 text-rose-600 dark:text-rose-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg> Chưa chính xác!'
-            }
-            <span class="ml-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-slate-800 border ${isCorrect ? 'border-emerald-300 text-emerald-800 dark:text-emerald-300' : 'border-rose-300 text-rose-800 dark:text-rose-300'}">
-              Đáp án đúng: ${correctLetter}
-            </span>
-          </div>
-
+      <div class="mt-4 p-4 rounded-xl border ${isCorrect ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200' : 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800 text-red-900 dark:text-red-200'} fade-in">
+        <div class="flex items-center font-bold mb-1.5">
+          ${isCorrect
+            ? '<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Chính xác!'
+            : '<svg class="w-5 h-5 text-red-600 dark:text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg> Chưa chính xác!'
+          }
+          <span class="ml-2 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-300">
+            Đáp án đúng: ${correctLetter}
+          </span>
+        </div>
+        <p class="text-sm leading-relaxed mt-2">
+          <strong class="font-semibold">Giải thích chi tiết:</strong> ${q.explanation}
           ${isStudy ? `
-            <button onclick="retryQuestion(${q.id})" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition shadow-2xs flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-              Làm lại câu này
+            <button onclick="retryQuestion(${q.id})" class="inline-flex items-center text-xs text-blue-600 dark:text-blue-400 hover:underline font-semibold ml-2">
+              <svg class="w-3 h-3 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Làm lại câu này
             </button>
           ` : ''}
-        </div>
-        <p class="text-sm leading-relaxed"><strong class="font-bold">Giải thích chi tiết:</strong> ${q.explanation}</p>
+        </p>
       </div>
     `;
   }
 
-  // Nhãn badge chương / bộ đề
-  const groupBadge = q.exam_type === 'goc'
-    ? '<span class="px-2 py-0.5 text-xs font-semibold rounded-md bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300">Đề Gốc</span>'
-    : '<span class="px-2 py-0.5 text-xs font-semibold rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">Đề Nâng Cao</span>';
-
-  const chapterBadge = q.chapter_title
-    ? `<span class="px-2 py-0.5 text-xs font-medium rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hidden sm:inline-block">${q.chapter_title}</span>`
-    : '';
-
-  const difficultyBadge = q.difficulty
-    ? `<span class="px-2 py-0.5 text-xs font-bold rounded-md ${
-        q.difficulty === 'Nhận biết' ? 'bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300' :
-        q.difficulty === 'Thông hiểu' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300' :
-        q.difficulty === 'Vận dụng' ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300' :
-        'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300'
-      }">${q.difficulty}</span>`
-    : '';
+  const examBadge = getChapterBadge(q);
 
   return `
-    <div id="q-card-${q.id}" class="bg-white dark:bg-slate-800 rounded-3xl p-5 sm:p-7 border border-slate-200 dark:border-slate-700 shadow-sm mb-6 fade-in">
-      
-      <!-- HÀNG TIÊU ĐỀ: CÂU XX VÀ NÚT ĐÁNH DẤU XEM LẠI CÙNG HÀNG Ở GÓC TRÊN BÊN PHẢI -->
-      <div class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-100 dark:border-slate-700/60">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="px-3 py-1 rounded-xl bg-blue-600 text-white font-extrabold text-sm shadow-xs">
-            Câu ${displayIdx + 1}
-          </span>
-          ${groupBadge}
-          ${chapterBadge}
-          <span class="px-2 py-0.5 text-xs font-medium rounded-md bg-slate-100 dark:bg-slate-700/80 text-slate-600 dark:text-slate-300">
-            ${q.category || 'Tổng hợp'}
-          </span>
-          ${difficultyBadge}
+    <div id="q-card-${q.id}" class="bg-white dark:bg-slate-800 rounded-2xl p-5 md:p-7 border border-slate-200 dark:border-slate-700 shadow-sm mb-6 fade-in">
+      <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100 dark:border-slate-700/60">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold text-sm">Câu ${displayIdx + 1}</span>
+          ${examBadge}
+          <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">${q.category || 'Tổng hợp'}</span>
         </div>
-
-        <!-- Nút đánh dấu xem lại đặt ở góc trên bên phải cùng hàng -->
-        <button onclick="toggleQuestionFlag(${q.id})" id="cardFlagBtn-${q.id}" title="${isFlagged ? 'Bỏ đánh dấu' : 'Đánh dấu xem lại'}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition border shrink-0 ${isFlagged ? 'bg-amber-500 text-white border-amber-500 shadow-sm shadow-amber-500/20' : 'bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:bg-slate-200 dark:hover:bg-slate-600'}">
-          <svg class="w-4 h-4 ${isFlagged ? 'fill-current text-white' : 'text-amber-500'}" fill="${isFlagged ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
-          </svg>
-          <span class="hidden sm:inline">${isFlagged ? 'Đã đánh dấu' : 'Đánh dấu'}</span>
-        </button>
+        ${isList ? `
+          <button onclick="toggleQuestionFlag(${q.id})" class="text-xs font-semibold flex items-center px-2.5 py-1 rounded-md border ${isFlagged ? 'border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300' : 'border-slate-200 dark:border-slate-700 text-slate-500'}">
+            ${isFlagged ? '★ Đã lưu' : '☆ Đánh dấu'}
+          </button>
+        ` : ''}
       </div>
 
       <!-- Nội dung câu hỏi -->
-      <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-5 leading-relaxed">
+      <h3 class="text-base md:text-lg font-semibold text-slate-900 dark:text-white mb-5 leading-snack">
         ${q.question}
       </h3>
 
