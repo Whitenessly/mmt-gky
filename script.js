@@ -752,10 +752,10 @@ function renderPagedView() {
     const isFlagged = state.flaggedQuestions.has(q.id);
     if (isFlagged) {
       dom.flagBtn.className = 'px-4 py-2 rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 font-semibold text-sm transition flex items-center shadow-xs';
-      dom.flagBtn.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-amber-500 fill-current" fill="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> ★ Đã đánh dấu`;
+      dom.flagBtn.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-amber-500 fill-current" fill="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> <span id="flagBtnText">Đã đánh dấu</span>`;
     } else {
       dom.flagBtn.className = 'px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium text-sm transition flex items-center text-slate-700 dark:text-slate-300';
-      dom.flagBtn.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> ☆ Đánh dấu xem lại`;
+      dom.flagBtn.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg> <span id="flagBtnText">Đánh dấu xem lại</span>`;
     }
   }
 }
@@ -861,7 +861,8 @@ function createQuestionCardHtml(q, displayIdx) {
         </div>
         ${isList ? `
           <button onclick="toggleQuestionFlag(${q.id})" class="text-xs font-semibold flex items-center px-2.5 py-1 rounded-md border ${isFlagged ? 'border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300' : 'border-slate-200 dark:border-slate-700 text-slate-500'}">
-            ${isFlagged ? '★ Đã lưu' : '☆ Đánh dấu'}
+            <svg class="w-3.5 h-3.5 mr-1 ${isFlagged ? 'text-amber-500 fill-current' : 'text-slate-400'}" fill="${isFlagged ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+            ${isFlagged ? 'Đã lưu' : 'Đánh dấu'}
           </button>
         ` : ''}
       </div>
